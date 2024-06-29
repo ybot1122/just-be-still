@@ -23,7 +23,7 @@ export default function About() {
 
       <div className="text-center w-full max-w-[1024px] ">
         <div className="px-5 md:px-20">
-          <div className="relative float-right ml-20 w-[250px] h-[350px]">
+          <div className="relative m-auto mt-10 md:mt-0 md:float-right md:ml-20 w-[250px] h-[350px]">
             <div className="absolute left-0 top-0 w-full bg-forest -translate-x-6 -translate-y-3 h-full z-10" />
             <Image
               src="/about_highlight.jpg"
@@ -33,7 +33,7 @@ export default function About() {
               className="z-20 absolute left-0 top-0"
             />
           </div>
-          <p className="text-xl md:text-2xl color-text md:leading-loose mt-20 px-5 m-auto">
+          <p className="text-xl md:text-2xl color-text md:leading-loose mt-5 md:mt-20 px-5 m-auto">
             We are a group of doctoral-level psychologists and psychiatrists who
             provide quality mental health care. As a mental health collective,
             we assist members by providing therapy, medication management,
@@ -51,7 +51,7 @@ export default function About() {
 
       <div className="text-center w-full max-w-[1024px]">
         <div className="px-5 md:px-20">
-          <div className="relative float-left mr-20 w-[250px] h-[250px]">
+          <div className="relative m-auto mt-10 md:mt-0 md:float-right md:ml-20 w-[250px] h-[250px]">
             <div className="absolute left-0 top-0 w-full bg-forest -translate-x-6 -translate-y-3 h-full z-10" />
             <Image
               src="/about_highlight2.jpg"
@@ -61,7 +61,7 @@ export default function About() {
               className="z-20 absolute left-0 top-0"
             />
           </div>
-          <p className="text-xl md:text-2xl color-text md:leading-loose mt-20 mb-20 px-5 m-auto">
+          <p className="text-xl md:text-2xl color-text md:leading-loose mt-5 md:mt-20 px-5 m-auto">
             We are a group of doctoral-level psychologists and psychiatrists who
             provide quality mental health care. As a mental health collective,
             we assist members by providing therapy, medication management,
