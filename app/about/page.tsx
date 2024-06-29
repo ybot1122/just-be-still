@@ -21,19 +21,47 @@ export default function About() {
         </div>
       </div>
 
-      <div className="text-center w-full">
-        <div className="px-20">
-          <div className="relative float-right ml-20">
-            <div className="absolute left-0  top-0 w-full bg-forest -translate-x-6 -translate-y-6 h-full z-10" />
+      <div className="text-center w-full max-w-[1024px] ">
+        <div className="px-5 md:px-20">
+          <div className="relative float-right ml-20 w-[250px] h-[350px]">
+            <div className="absolute left-0 top-0 w-full bg-forest -translate-x-6 -translate-y-3 h-full z-10" />
             <Image
               src="/about_highlight.jpg"
               alt="Just Be Still Teacher"
               width="250"
-              height="250"
-              className="z-20"
+              height="350"
+              className="z-20 absolute left-0 top-0"
             />
           </div>
-          <p className="text-2xl color-text max-w-[1024px] leading-loose mt-20 mb-20 px-5 m-auto">
+          <p className="text-xl md:text-2xl color-text md:leading-loose mt-20 px-5 m-auto">
+            We are a group of doctoral-level psychologists and psychiatrists who
+            provide quality mental health care. As a mental health collective,
+            we assist members by providing therapy, medication management,
+            coaching, and more. Let us help you connect with one of our doctors
+            who meets your needs and is available to see you, online or
+            in-person. We are a group of doctoral-level psychologists and
+            psychiatrists who provide quality mental health care. As a mental
+            health collective, we assist members by providing therapy,
+            medication management, coaching, and more. Let us help you connect
+            with one of our doctors who meets your needs and is available to see
+            you, online or in-person.
+          </p>
+        </div>
+      </div>
+
+      <div className="text-center w-full max-w-[1024px]">
+        <div className="px-5 md:px-20">
+          <div className="relative float-left mr-20 w-[250px] h-[250px]">
+            <div className="absolute left-0 top-0 w-full bg-forest -translate-x-6 -translate-y-3 h-full z-10" />
+            <Image
+              src="/about_highlight2.jpg"
+              alt="Just Be Still Teacher"
+              width="250"
+              height="350"
+              className="z-20 absolute left-0 top-0"
+            />
+          </div>
+          <p className="text-xl md:text-2xl color-text md:leading-loose mt-20 mb-20 px-5 m-auto">
             We are a group of doctoral-level psychologists and psychiatrists who
             provide quality mental health care. As a mental health collective,
             we assist members by providing therapy, medication management,
