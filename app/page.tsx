@@ -4,15 +4,17 @@ export default function Home() {
   return (
     <>
       <div className="relative w-full h-[100vh] items-center justify-between text-sm lg:flex">
-        <Image
-          src="/tresleches_slice.png"
-          alt="cake"
-          fill
-          sizes="100vw"
-          objectFit="cover"
-        />
-        <div className="absolute bottom-0 max-w-[720px] pb-10 pl-10">
-          <h1 className="text-6xl mb-10">
+        <div className="relative w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
+          <Image
+            src="/home_Bg.jpg"
+            alt="cake"
+            fill
+            sizes="100vw"
+            objectFit="cover"
+          />
+        </div>
+        <div className="absolute bottom-0 max-w-[720px] pb-10 pl-10 text-white z-20">
+          <h1 className="text-6xl mb-10 italic">
             Just Be Still,
             <br />
             Sewing and Classes.
@@ -32,9 +34,9 @@ export default function Home() {
           your needs and is available to see you, online or in-person.
         </p>
       </div>
-      <div className="text-center bg-forest w-full pb-20">
+      <div className="text-center bg-forest w-full pb-10">
         <h2 className="text-white text-6xl mt-20 mb-20">Our Services</h2>
-        <div className="inline-block mx-20">
+        <div className="inline-block mx-20 mb-20">
           <Image
             src="/fabric-pattern.png"
             alt="Fabric pattern"
@@ -43,11 +45,11 @@ export default function Home() {
           />
           <p className="text-white text-2xl mt-5">Stitching</p>
         </div>
-        <div className="inline-block mx-20">
+        <div className="inline-block mx-20 mb-20">
           <Image src="/needle.png" alt="Needle" width="150" height="150" />
           <p className="text-white text-2xl mt-5">Needling</p>
         </div>
-        <div className="inline-block mx-20">
+        <div className="inline-block mx-20 mb-20">
           <Image
             src="/sewing-machine.png"
             alt="Sewing Machine"
@@ -56,7 +58,7 @@ export default function Home() {
           />
           <p className="text-white text-2xl mt-5">Machine</p>
         </div>
-        <div className="inline-block mx-20">
+        <div className="inline-block mx-20 mb-20">
           <Image src="/sewing.png" alt="Sewing" width="150" height="150" />
           <p className="text-white text-2xl mt-5">Hand Sewn</p>
         </div>
