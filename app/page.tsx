@@ -3,11 +3,11 @@ import Image from "next/image";
 export default function Home() {
   return (
     <>
-      <div className="relative w-full h-[100vh] items-center justify-between text-sm lg:flex">
+      <div className="relative w-full h-[100vh] items-center justify-between text-sm">
         <div className="relative w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image
             src="/home_Bg.jpg"
-            alt="cake"
+            alt="Just Be Still"
             fill
             sizes="100vw"
             objectFit="cover"
