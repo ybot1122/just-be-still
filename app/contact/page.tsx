@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Contact() {
   return (
@@ -18,6 +19,16 @@ export default function Contact() {
             Want to reach us sooner?
             <br />
             Please call us: <span className="font-bold">123-456-7890</span>
+          </div>
+          <div className="text-xl md:text-2xl text-white mb-5">
+            Reach us on{" "}
+            <Link
+              href={"https://www.facebook.com/profile.php?id=61550921396070"}
+              className="underline"
+            >
+              Facebook
+            </Link>
+            !
           </div>
         </div>
       </div>
