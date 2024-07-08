@@ -15,6 +15,9 @@ export default function Navigation() {
           <Link href="/events">Events</Link>
         </li>
         <li className="inline-block ml-5">
+          <Link href="/services">Services</Link>
+        </li>
+        <li className="inline-block ml-5">
           <Link href="/contact">Contact</Link>
         </li>
       </ul>

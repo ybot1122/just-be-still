@@ -12,6 +12,7 @@ const config: Config = {
         white: "#FFFFFF",
         forest: "#495a58",
         text: "#3f4a49",
+        transparentBlack: "rgba(0,0,0,0.25)",
       },
       backgroundImage: {
         recipeHeroScrim: "linear-gradient(90deg,rgba(0,0,0,.5) 0,transparent)",

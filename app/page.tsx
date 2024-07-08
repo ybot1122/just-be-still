@@ -1,10 +1,20 @@
 import Image from "next/image";
+import Link from "next/link";
+import logo from "@/public/logo.jpg";
+
+import { Indie_Flower } from "next/font/google";
+
+const poppins = Indie_Flower({
+  subsets: ["latin"],
+  weight: ["400"],
+  style: ["normal"],
+});
 
 export default function Home() {
   return (
     <>
       <div className="relative w-full h-[100vh] items-center justify-between text-sm">
-        <div className="relative w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
+        <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image
             src="/home_Bg.jpg"
             alt="Just Be Still"
@@ -12,16 +22,16 @@ export default function Home() {
             sizes="100vw"
             objectFit="cover"
           />
-        </div>
-        <div className="absolute bottom-0 max-w-[720px] pb-10 pl-10 text-white z-20">
-          <h1 className="text-6xl mb-10 italic">
-            Just Be Still,
-            <br />
-            Sewing and Classes.
-          </h1>
-          <h2 className="text-3xl">
-            Introducing all new classes and courses. Fun for the whole family.
-          </h2>
+          <div className="text-white z-20">
+            <Link href="/">
+              <Image
+                src={logo}
+                alt="Just Be Still Logo"
+                width={250}
+                height={250}
+              />
+            </Link>
+          </div>
         </div>
       </div>
       <div className="text-center w-full">
