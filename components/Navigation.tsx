@@ -2,12 +2,12 @@ import Link from "next/link";
 
 export default function Navigation() {
   return (
-    <nav className="absolute top-0 left-0 z-20 text-white">
+    <nav className="absolute top-0 left-0 z-20 text-white w-full">
       <div className="inline-block text-2xl mt-5 ml-5 md:mt-10 md:ml-20">
         <Link href="/">Just Be Still</Link>
       </div>
 
-      <ul className="inline-block">
+      <ul className="block">
         <li className="inline-block ml-10 md:ml-20">
           <Link href="/about">About</Link>
         </li>

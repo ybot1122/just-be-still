@@ -65,36 +65,22 @@ export default function Home() {
             </Link>
           </p>
         </div>
-        <div className="mb-5 animate-bounce grow self-end">more?</div>
+        <div className="mb-5 animate-bounce grow self-end">
+          Scroll Down to see our services
+        </div>
       </div>
-      <div className="text-center bg-forest w-full pb-10">
-        <h2 className="text-white text-6xl mt-20 mb-20">Our Services</h2>
-        <div className="inline-block mx-20 mb-20">
-          <Image
-            src="/fabric-pattern.png"
-            alt="Fabric pattern"
-            width="150"
-            height="150"
-          />
-          <p className="text-white text-2xl mt-5">Stitching</p>
-        </div>
-        <div className="inline-block mx-20 mb-20">
-          <Image src="/needle.png" alt="Needle" width="150" height="150" />
-          <p className="text-white text-2xl mt-5">Needling</p>
-        </div>
-        <div className="inline-block mx-20 mb-20">
-          <Image
-            src="/sewing-machine.png"
-            alt="Sewing Machine"
-            width="150"
-            height="150"
-          />
-          <p className="text-white text-2xl mt-5">Machine</p>
-        </div>
-        <div className="inline-block mx-20 mb-20">
-          <Image src="/sewing.png" alt="Sewing" width="150" height="150" />
-          <p className="text-white text-2xl mt-5">Hand Sewn</p>
-        </div>
+      <div className="flex flex-col flex-wrap justify-center items-center text-center w-full h-[100vh] bg-forest">
+        <h2 className="text-white text-4xl md:text-6xl mt-20 mx-5 w-full">
+          Our Services
+        </h2>
+        <ul className="text-left text-white text-2xl mx-5 mt-10">
+          <li>Sewing Classes</li>
+          <li>Private Sewing Classes</li>
+          <li>Alterations</li>
+          <li>Custom Order</li>
+          <li>Sewing Parties</li>
+          <li>Service Projects</li>
+        </ul>
       </div>
     </>
   );
