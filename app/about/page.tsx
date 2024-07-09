@@ -13,7 +13,11 @@ export default function About() {
       <PageHeader header="About Us" />
 
       <PageSection>
-        <FramedPhoto src={hero} alt="Just Be Still Teacher" height={250} />
+        <FramedPhoto
+          src={hero}
+          alt="Just Be Still Teacher"
+          height={"h-[250px]"}
+        />
         <PageParagraph>
           Welcome to Just Be Still, a creative fashion design group dedicated to
           inspiring the next generation of designers! We specialize in teaching
@@ -27,7 +31,7 @@ export default function About() {
         <FramedPhoto
           src={about_2}
           alt="Just Be Still Teacher"
-          height={350}
+          height={"h-[350px]"}
           floatLeft
         />
 
@@ -44,7 +48,11 @@ export default function About() {
       </PageSection>
 
       <PageSection>
-        <FramedPhoto src={about_3} alt="Just Be Still Teacher" height={250} />
+        <FramedPhoto
+          src={about_3}
+          alt="Just Be Still Teacher"
+          height={"h-[250px]"}
+        />
 
         <PageParagraph>
           As a teacher, I understand the importance of hands-on practice. In my

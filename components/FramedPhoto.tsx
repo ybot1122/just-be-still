@@ -6,7 +6,7 @@ export default function FramedPhoto({
   alt,
   floatLeft = false,
 }: {
-  height: number;
+  height: string;
   src: StaticImageData;
   alt: string;
   floatLeft?: boolean;
@@ -17,7 +17,7 @@ export default function FramedPhoto({
 
   return (
     <div
-      className={`relative m-auto mt-10 md:mt-0 w-[250px] h-[${height}px] ${leftOrRight}`}
+      className={`relative m-auto mt-10 md:mt-0 w-[250px] ${height} ${leftOrRight}`}
     >
       <div className="absolute left-0 top-0 w-full bg-forest -translate-x-3 -translate-y-3 h-full z-10" />
       <Image
