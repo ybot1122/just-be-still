@@ -17,8 +17,9 @@ export default function About() {
         <PageParagraph>
           Welcome to Just Be Still, a creative fashion design group dedicated to
           inspiring the next generation of designers! We specialize in teaching
-          kids how to sew and unleash their creativity. But that's not all—we
-          also offer alterations; we take custom orders and fun sewing parties.
+          kids how to sew and unleash their creativity. But that&apos;s not
+          all—we also offer alterations; we take custom orders and fun sewing
+          parties.
         </PageParagraph>
       </PageSection>
 
@@ -35,7 +36,7 @@ export default function About() {
           the basics. In college, I had the opportunity to teach middle school
           kids crafts like knitting, cooking, baking, and needlework at ROHI
           camp during the summer! I have a passion for teaching kids. With a
-          master's degree in instructional education, I have a deep
+          master&apos;s degree in instructional education, I have a deep
           understanding of effective teaching methods and am committed to
           providing a comprehensive and accessible learning experience for
           anyone interested in sewing.

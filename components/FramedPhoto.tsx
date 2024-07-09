@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from "next/image";
 
-export default function ({
+export default function FramedPhoto({
   height,
   src,
   alt,

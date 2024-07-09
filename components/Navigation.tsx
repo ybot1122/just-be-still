@@ -37,7 +37,7 @@ const Navigation = () => {
     } else {
       document.removeEventListener("click", closeCb);
     }
-  }, [navOpen]);
+  }, [navOpen, closeCb]);
 
   return (
     <nav className={`absolute t-0 l-0 z-30 w-full`}>
