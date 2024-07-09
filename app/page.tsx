@@ -4,14 +4,8 @@ import logo from "@/public/logo.jpg";
 import home_bg from "@/public/home_Bg.jpg";
 import down_icon from "@/public/down-arrow.png";
 import home_pic1 from "@/public/homepic1.jpeg";
-
-import { Indie_Flower } from "next/font/google";
-
-const indie_flower = Indie_Flower({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal"],
-});
+import home_pic2 from "@/public/homepic2.jpg";
+import home_pic3 from "@/public/homepic3.jpg";
 
 export default function Home() {
   return (
@@ -78,6 +72,30 @@ export default function Home() {
         <h2 className=" text-4xl md:text-6xl mt-20 px-5 w-full">
           Our Services
         </h2>
+        <div className="w-full px-5">
+          <div className="relative max-w-[1024px] max-h-[50vh] m-auto aspect-video">
+            <Image
+              src={home_pic2}
+              placeholder="blur"
+              alt="Just Be Still Class"
+              fill
+              objectFit="contain"
+            />
+          </div>
+        </div>
+
+        <div className="w-full px-5">
+          <div className="relative max-w-[1024px] max-h-[50vh] m-auto aspect-video">
+            <Image
+              src={home_pic3}
+              placeholder="blur"
+              alt="Just Be Still Class"
+              fill
+              objectFit="contain"
+            />
+          </div>
+        </div>
+
         <div className="w-full">
           <ul className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
             <li>Sewing Classes</li>
