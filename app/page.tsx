@@ -16,7 +16,7 @@ const indie_flower = Indie_Flower({
 export default function Home() {
   return (
     <>
-      <div className="relative w-full h-[100vh] items-center justify-between text-sm">
+      <section className="relative w-full h-[100vh] items-center justify-between text-sm">
         <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image
             src={home_bg}
@@ -47,8 +47,8 @@ export default function Home() {
             />
           </div>
         </div>
-      </div>
-      <div className="flex flex-wrap justify-center items-center text-center w-full h-[100vh]">
+      </section>
+      <section className="flex flex-wrap justify-center items-center text-center w-full h-[100vh]">
         <h2 className={`text-forest text-4xl md:text-6xl mt-20 mx-5 w-full`}>
           Welcome to Just Be Still
         </h2>
@@ -73,8 +73,8 @@ export default function Home() {
         <div className="mb-5 animate-bounce grow self-end">
           Scroll Down to see our services
         </div>
-      </div>
-      <div className="flex flex-wrap justify-center items-center text-center w-full h-[100vh] bg-forest text-white">
+      </section>
+      <section className="flex flex-wrap justify-center items-center text-center w-full h-[100vh] bg-forest text-white">
         <h2 className=" text-4xl md:text-6xl mt-20 px-5 w-full">
           Our Services
         </h2>
@@ -93,7 +93,7 @@ export default function Home() {
             Click Here for More Details
           </Link>
         </p>
-      </div>
+      </section>
     </>
   );
 }
