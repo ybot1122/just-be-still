@@ -24,7 +24,6 @@ export default function FramedPhoto({
         src={src}
         alt={alt}
         width="250"
-        height={height}
         className="z-20 absolute left-0 top-0"
         placeholder="blur"
       />
