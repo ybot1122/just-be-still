@@ -24,8 +24,8 @@ export default function About() {
             />
           </div>
           <p className="text-xl md:text-2xl color-text md:leading-loose mt-5 md:mt-20 px-5 m-auto">
-            Welcome to Justbestill, a creative fashion design group dedicated to
-            inspiring the next generation of designers! We specialize in
+            Welcome to Just Be Still, a creative fashion design group dedicated
+            to inspiring the next generation of designers! We specialize in
             teaching kids how to sew and unleash their creativity. But that's
             not all—we also offer alterations; we take custom orders and fun
             sewing parties.
@@ -78,8 +78,8 @@ export default function About() {
             useful items.
           </p>
           <p className="font-bold text-xl md:text-2xl color-text md:leading-loose mt-5 md:mt-20 px-5 m-auto">
-            At Justbestill, we believe in the power of practical application to
-            master any craft.
+            At Just Be Still, we believe in the power of practical application
+            to master any craft.
           </p>
           <p className="text-xl md:text-2xl color-text md:leading-loose mt-5 md:mt-20 px-5 m-auto">
             By combining classroom-style instruction with practice projects, we
