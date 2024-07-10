@@ -99,7 +99,7 @@ export default function Home() {
             icon="sewing-machine"
           />
         </div>
-        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 self-end">
+        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end bg-forest text-white p-5">
           <Link href="/services" className="underline">
             See All our Services
           </Link>

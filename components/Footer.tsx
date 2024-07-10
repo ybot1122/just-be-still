@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-20 mb-5 text-xs text-center">
+    <footer className="w-full mt-[50vh] mb-5 text-xs text-center">
       <p>&copy; 2024 Just Be Still</p>
       <p className="mt-2">
         Visit us on{" "}
