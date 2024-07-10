@@ -13,6 +13,11 @@ export default function Footer() {
           Facebook
         </Link>
       </p>
+      <p className="underline mt-2 text-[0.5rem]">
+        <Link href="https://www.flaticon.com/free-icons/group">
+          Icons by Freepik
+        </Link>
+      </p>
     </footer>
   );
 }

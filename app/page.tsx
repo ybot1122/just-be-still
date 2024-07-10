@@ -28,7 +28,7 @@ export default function Home() {
 
       <HomePageInfoSection header="Welcome to Just Be Still">
         <div className="w-full">
-          <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
+          <p className="text-xl md:text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
             A creative fashion design group dedicated to inspiring the next
             generation of designers! We specialize in teaching kids how to sew
             and unleash their creativity.
@@ -86,12 +86,18 @@ export default function Home() {
 
       <HomePageInfoSection header="Our Services">
         <div className="grid grid-cols-3 gap-2 w-full">
-          <HomePageServicesIcon serviceName="Sewing Classes" />
-          <HomePageServicesIcon serviceName="Private Sewing Classes" />
-          <HomePageServicesIcon serviceName="Alterations" />
-          <HomePageServicesIcon serviceName="Custom Order" />
-          <HomePageServicesIcon serviceName="Sewing Parties" />
-          <HomePageServicesIcon serviceName="Service Projects" />
+          <HomePageServicesIcon serviceName="Sewing Classes" icon="sewing" />
+          <HomePageServicesIcon
+            serviceName="Private Sewing Classes"
+            icon="needle"
+          />
+          <HomePageServicesIcon serviceName="Alterations" icon="fabric" />
+          <HomePageServicesIcon serviceName="Custom Order" icon="gift" />
+          <HomePageServicesIcon serviceName="Sewing Parties" icon="party" />
+          <HomePageServicesIcon
+            serviceName="Service Projects"
+            icon="sewing-machine"
+          />
         </div>
         <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 self-end">
           <Link href="/services" className="underline">

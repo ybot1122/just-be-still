@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
-import navIcon from "@/public/icons8-menu.svg";
+import navIcon from "@/public/menu-icon.svg";
 
 const NavItem = ({ text, href }: { text: string; href: string }) => {
   return (
