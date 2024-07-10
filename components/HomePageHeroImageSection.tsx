@@ -1,18 +1,26 @@
 import Image, { StaticImageData } from "next/image";
 import React from "react";
 import down_icon from "@/public/down-arrow.png";
+import Link from "next/link";
 
 export default function HomePageHeroImageSection({
   children,
   src,
   alt,
+  id,
+  href,
 }: {
   children: React.ReactNode;
   src: StaticImageData;
   alt: string;
+  id: string;
+  href: string;
 }) {
   return (
-    <section className="relative w-full h-[100vh] items-center justify-between text-sm">
+    <section
+      className="relative w-full h-[100vh] items-center justify-between text-sm"
+      id={id}
+    >
       <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
         <Image
           src={src}
@@ -24,13 +32,15 @@ export default function HomePageHeroImageSection({
         />
         {children}
         <div className="absolute bottom-0 mb-5 animate-bounce z-10">
-          <Image
-            src={down_icon}
-            alt="Scroll Down"
-            sizes="100vw"
-            width={50}
-            height={50}
-          />
+          <Link href={href}>
+            <Image
+              src={down_icon}
+              alt="Scroll Down"
+              sizes="100vw"
+              width={50}
+              height={50}
+            />
+          </Link>
         </div>
       </div>
     </section>

@@ -12,7 +12,12 @@ import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 export default function Home() {
   return (
     <>
-      <HomePageHeroImageSection src={home_bg} alt="Just Be Still">
+      <HomePageHeroImageSection
+        src={home_bg}
+        alt="Just Be Still"
+        id="home"
+        href="#intro"
+      >
         <div className="text-white z-20">
           <Link href="/">
             <Image
@@ -26,7 +31,7 @@ export default function Home() {
         </div>
       </HomePageHeroImageSection>
 
-      <HomePageInfoSection header="Welcome to Just Be Still">
+      <HomePageInfoSection header="Welcome to Just Be Still" id="intro">
         <div className="w-full">
           <p className="text-xl md:text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
             A creative fashion design group dedicated to inspiring the next
@@ -46,11 +51,18 @@ export default function Home() {
           </div>
         </div>
         <div className="mb-5 animate-bounce grow self-end">
-          Interested in a sewing party? &#127881;
+          <Link href="#events" className="underline">
+            Interested in a sewing party? &#127881;
+          </Link>
         </div>
       </HomePageInfoSection>
 
-      <HomePageHeroImageSection src={home_pic2} alt="Just Be Still Events">
+      <HomePageHeroImageSection
+        src={home_pic2}
+        alt="Just Be Still Events"
+        id="events"
+        href="#instructor"
+      >
         <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0">
           Sewing Classes &amp;
           <br />
@@ -64,7 +76,11 @@ export default function Home() {
         </div>
       </HomePageHeroImageSection>
 
-      <HomePageInfoSection isForest header={"Meet the Instructor"}>
+      <HomePageInfoSection
+        isForest
+        header={"Meet the Instructor"}
+        id="instructor"
+      >
         <div className="w-full px-5">
           <div className="relative max-w-[1024px] md:max-h-[50vh] m-auto aspect-square">
             <Image
@@ -78,16 +94,18 @@ export default function Home() {
         </div>
 
         <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 w-full">
-          <Link href="/about" className="underline text-white">
+          <Link href="/about" className="underline text-forest bg-white p-5">
             Learn about us and our mission
           </Link>
         </p>
         <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce">
-          Scroll down to see our services
+          <Link href="#services" className="underline">
+            Explore our services
+          </Link>
         </p>
       </HomePageInfoSection>
 
-      <HomePageInfoSection header="Our Services">
+      <HomePageInfoSection header="Our Services" id="services">
         <div className="grid grid-cols-3 gap-2 w-full">
           <HomePageServicesIcon serviceName="Sewing Classes" icon="sewing" />
           <HomePageServicesIcon
