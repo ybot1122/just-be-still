@@ -5,7 +5,13 @@ import ServiceItem from "@/components/ServiceItem";
 import Link from "next/link";
 
 import private_lessons from "@/public/private_lessons.jpg";
-import Image from "next/image";
+import customorder_1 from "@/public/customorder_1.jpg";
+import customorder_2 from "@/public/customorder_2.jpg";
+import customorder_3 from "@/public/customorder_3.jpg";
+import customorder_4 from "@/public/customorder_4.jpg";
+import customorder_5 from "@/public/customorder_5.jpg";
+import customorder_6 from "@/public/customorder_6.jpg";
+import Image, { StaticImageData } from "next/image";
 
 export default function Contact() {
   return (
@@ -70,6 +76,14 @@ export default function Contact() {
             dementia? We can create a busy lapbook specifically for them. Need
             it personalized? We can do that too.
           </ServiceItemParagraph>
+          <div className="grid grid-cols-3 w-full gap-1">
+            <ServiceItemGalleryImage src={customorder_1} />
+            <ServiceItemGalleryImage src={customorder_2} />
+            <ServiceItemGalleryImage src={customorder_3} />
+            <ServiceItemGalleryImage src={customorder_4} />
+            <ServiceItemGalleryImage src={customorder_5} />
+            <ServiceItemGalleryImage src={customorder_6} />
+          </div>
         </ServiceItem>
         <ServiceItem q="Sewing Parties">
           <ServiceItemParagraph>
@@ -104,4 +118,18 @@ export default function Contact() {
 
 const ServiceItemParagraph = ({ children }: { children: React.ReactNode }) => {
   return <p className="mb-5 text-lg md:text-xl">{children}</p>;
+};
+
+const ServiceItemGalleryImage = ({ src }: { src: StaticImageData }) => {
+  return (
+    <div className="col-span-1 relative h-[150px] md:h-[250px]">
+      <Image
+        src={src}
+        alt="Custom Order Example"
+        fill
+        objectFit="cover"
+        placeholder="blur"
+      />
+    </div>
+  );
 };
