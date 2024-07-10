@@ -23,6 +23,7 @@ const Navigation = () => {
   const [navOpen, setNavOpen] = useState(false);
 
   const navItems = [
+    { text: "Home", href: "/" },
     { text: "About", href: "/about" },
     { text: "Services", href: "/services" },
     { text: "Events", href: "/events" },
