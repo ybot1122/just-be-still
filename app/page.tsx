@@ -77,10 +77,13 @@ export default function Home() {
           </div>
         </div>
 
-        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
+        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 w-full">
           <Link href="/about" className="underline text-white">
             Learn about us and our mission
           </Link>
+        </p>
+        <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce">
+          Scroll down to see our services
         </p>
       </HomePageInfoSection>
 
