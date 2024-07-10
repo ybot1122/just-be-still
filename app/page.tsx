@@ -6,6 +6,8 @@ import home_pic1 from "@/public/homepic1.jpeg";
 import home_pic2 from "@/public/homepic2.jpg";
 import home_pic3 from "@/public/homepic3.jpg";
 import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
+import HomePageInfoSection from "@/components/HomePageInfoSection";
+import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 
 export default function Home() {
   return (
@@ -24,10 +26,7 @@ export default function Home() {
         </div>
       </HomePageHeroImageSection>
 
-      <section className="flex flex-wrap justify-center items-center text-center w-full h-[100vh]">
-        <h2 className={`text-forest text-4xl md:text-6xl mt-20 mx-5 w-full`}>
-          Welcome to Just Be Still
-        </h2>
+      <HomePageInfoSection header="Welcome to Just Be Still">
         <div className="w-full">
           <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
             A creative fashion design group dedicated to inspiring the next
@@ -49,7 +48,7 @@ export default function Home() {
         <div className="mb-5 animate-bounce grow self-end">
           Interested in a sewing party? &#127881;
         </div>
-      </section>
+      </HomePageInfoSection>
 
       <HomePageHeroImageSection src={home_pic2} alt="Just Be Still Events">
         <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0">
@@ -65,11 +64,7 @@ export default function Home() {
         </div>
       </HomePageHeroImageSection>
 
-      <section className="pb-10 flex flex-wrap justify-center items-center text-center w-full h-[100vh] bg-forest text-white">
-        <h2 className={`text-white text-4xl md:text-6xl mt-20 mx-5 w-full`}>
-          Meet the Instructor
-        </h2>
-
+      <HomePageInfoSection isForest header={"Meet the Instructor"}>
         <div className="w-full px-5">
           <div className="relative max-w-[1024px] md:max-h-[50vh] m-auto aspect-square">
             <Image
@@ -87,7 +82,23 @@ export default function Home() {
             Learn about us and our mission
           </Link>
         </p>
-      </section>
+      </HomePageInfoSection>
+
+      <HomePageInfoSection header="Our Services">
+        <div className="grid grid-cols-3 gap-2 w-full">
+          <HomePageServicesIcon serviceName="Sewing Classes" />
+          <HomePageServicesIcon serviceName="Private Sewing Classes" />
+          <HomePageServicesIcon serviceName="Alterations" />
+          <HomePageServicesIcon serviceName="Custom Order" />
+          <HomePageServicesIcon serviceName="Sewing Parties" />
+          <HomePageServicesIcon serviceName="Service Projects" />
+        </div>
+        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 self-end">
+          <Link href="/services" className="underline">
+            See All our Services
+          </Link>
+        </p>
+      </HomePageInfoSection>
     </>
   );
 }
