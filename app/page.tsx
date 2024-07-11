@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/logo.jpg";
@@ -9,15 +11,27 @@ import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 
+// @ts-expect-error
+import fullpage from "fullpage.js";
+import { useCallback, useEffect } from "react";
+import Footer from "@/components/Footer";
+
 export default function Home() {
+  useEffect(() => {
+    const myFullpage = new fullpage("#fullpage", {});
+
+    return () => {
+      fullpage_api.destroy("all");
+    };
+  }, []);
+
+  const fp_next = useCallback(() => {
+    fullpage_api.moveSectionDown();
+  }, []);
+
   return (
-    <>
-      <HomePageHeroImageSection
-        src={home_bg}
-        alt="Just Be Still"
-        id="home"
-        href="#intro"
-      >
+    <div id="fullpage">
+      <HomePageHeroImageSection src={home_bg} alt="Just Be Still">
         <div className="text-white z-20">
           <Link href="/">
             <Image
@@ -31,7 +45,7 @@ export default function Home() {
         </div>
       </HomePageHeroImageSection>
 
-      <HomePageInfoSection header="Welcome to Just Be Still" id="intro">
+      <HomePageInfoSection header="Welcome to Just Be Still">
         <div className="w-full">
           <p className="text-xl md:text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
             A creative fashion design group dedicated to inspiring the next
@@ -51,18 +65,13 @@ export default function Home() {
           </div>
         </div>
         <div className="mb-5 animate-bounce grow self-end">
-          <Link href="#events" className="underline">
+          <button onClick={fp_next} className="underline">
             Interested in a sewing party? &#127881;
-          </Link>
+          </button>
         </div>
       </HomePageInfoSection>
 
-      <HomePageHeroImageSection
-        src={home_pic2}
-        alt="Just Be Still Events"
-        id="events"
-        href="#instructor"
-      >
+      <HomePageHeroImageSection src={home_pic2} alt="Just Be Still Events">
         <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0">
           Sewing Classes &amp;
           <br />
@@ -76,11 +85,7 @@ export default function Home() {
         </div>
       </HomePageHeroImageSection>
 
-      <HomePageInfoSection
-        isForest
-        header={"Meet the Instructor"}
-        id="instructor"
-      >
+      <HomePageInfoSection isForest header={"Meet the Instructor"}>
         <div className="w-full px-5">
           <div className="relative max-w-[1024px] md:max-h-[50vh] m-auto aspect-square">
             <Image
@@ -99,13 +104,13 @@ export default function Home() {
           </Link>
         </p>
         <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce">
-          <Link href="#services" className="underline">
+          <button onClick={fp_next} className="underline">
             Explore our services
-          </Link>
+          </button>
         </p>
       </HomePageInfoSection>
 
-      <HomePageInfoSection header="Our Services" id="services">
+      <HomePageInfoSection header="Our Services">
         <div className="grid grid-cols-3 gap-2 w-full">
           <HomePageServicesIcon serviceName="Sewing Classes" icon="sewing" />
           <HomePageServicesIcon
@@ -125,7 +130,8 @@ export default function Home() {
             See All our Services
           </Link>
         </p>
+        <Footer />
       </HomePageInfoSection>
-    </>
+    </div>
   );
 }

@@ -48,7 +48,7 @@ export default function HomePageServicesIcon({
 
   return (
     <div className="col-span-1 text-center mb-10">
-      <div className="inline-block relative w-[75px] h-[75px]  md:w-[150px] md:h-[150px] mb-2">
+      <div className="inline-block relative w-[75px] h-[75px]  md:w-[125px] md:h-[125px] mb-2">
         <Image src={iconSrc} alt={serviceName} fill />
       </div>
 
