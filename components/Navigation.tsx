@@ -28,7 +28,13 @@ const NavItem = ({
   );
 };
 
-const Navigation = ({ forestFont = false }: { forestFont?: boolean }) => {
+const Navigation = ({
+  forestFont = false,
+  fixed = false,
+}: {
+  forestFont?: boolean;
+  fixed?: boolean;
+}) => {
   const [navOpen, setNavOpen] = useState(false);
 
   const navItems = [
@@ -51,9 +57,10 @@ const Navigation = ({ forestFont = false }: { forestFont?: boolean }) => {
 
   const titleFont = forestFont ? " text-forest " : " text-white ";
   const itemsFont = forestFont ? " text-white md:text-forest " : "text-white";
+  const fixedClass = fixed ? " fixed " : " absolute ";
 
   return (
-    <nav className={`absolute t-0 l-0 z-30 w-full`}>
+    <nav className={`${fixedClass} t-0 l-0 z-30 w-full`}>
       <div className="flex py-4 mx-auto max-w-screen-lg h-full">
         <div className="self-center ml-5 flex-grow">
           <Link

@@ -17,7 +17,7 @@ import { useCallback, useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import PageParagraph from "@/components/PageParagraph";
 
-const whiteBgInd = [1, 4, 5];
+const whiteBgInd = [1, 4];
 
 export default function HomePageMain() {
   const [currentSectionId, setCurrentSectionId] = useState(0);
@@ -44,10 +44,10 @@ export default function HomePageMain() {
 
   return (
     <>
-      <Navigation forestFont={whiteBgInd.includes(currentSectionId)} />
+      <Navigation forestFont={whiteBgInd.includes(currentSectionId)} fixed />
       <main id="fullpage">
         <HomePageHeroImageSection src={home_bg} alt="Just Be Still">
-          <div className="text-white z-20">
+          <div className="text-white z-20 my-[150px] tall:my-0">
             <Link href="/">
               <Image
                 src={logo}
@@ -87,7 +87,7 @@ export default function HomePageMain() {
         </HomePageInfoSection>
 
         <HomePageHeroImageSection src={home_pic2} alt="Just Be Still Events">
-          <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0">
+          <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0 my-[150px] tall:my-0">
             Sewing Classes &amp;
             <br />
             &#127881; Parties &#127881;
@@ -113,12 +113,12 @@ export default function HomePageMain() {
             </div>
           </div>
 
-          <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 w-full">
+          <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 w-full mt-20 tall:mt-0">
             <Link href="/about" className="underline text-forest bg-white p-5">
               Learn about us
             </Link>
           </p>
-          <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce">
+          <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0">
             <button onClick={fp_next} className="underline">
               Explore our services
             </button>
@@ -147,7 +147,7 @@ export default function HomePageMain() {
           </p>
         </HomePageInfoSection>
 
-        <HomePageInfoSection>
+        <HomePageInfoSection isForest>
           <div>
             <PageParagraph isAccent>
               <Link href="/contact" className="underline">

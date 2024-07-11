@@ -17,7 +17,7 @@ export default function HomePageHeroImageSection({
 
   return (
     <section className="section">
-      <div className="relative w-full h-[100vh] items-center justify-between text-sm">
+      <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
         <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image
             src={src}
