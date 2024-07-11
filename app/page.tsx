@@ -95,7 +95,7 @@ export default function Home() {
 
         <p className="text-2xl max-w-[1024px] md:leading-loose inline-block px-5 w-full">
           <Link href="/about" className="underline text-forest bg-white p-5">
-            Learn about us and our mission
+            Learn about us
           </Link>
         </p>
         <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce">
@@ -120,7 +120,7 @@ export default function Home() {
             icon="sewing-machine"
           />
         </div>
-        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end bg-forest text-white p-5">
+        <p className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end bg-forest text-white p-5 mb-10">
           <Link href="/services" className="underline">
             See All our Services
           </Link>
