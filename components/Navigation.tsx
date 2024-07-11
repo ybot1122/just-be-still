@@ -5,21 +5,30 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import navIcon from "@/public/menu-icon.svg";
 
-const NavItem = ({ text, href }: { text: string; href: string }) => {
+const NavItem = ({
+  text,
+  href,
+  forestFont = false,
+}: {
+  text: string;
+  href: string;
+  forestFont: boolean;
+}) => {
+  const bg = forestFont ? " bg-forest " : " bg-white ";
   return (
     <li className={`group relative md:text-center uppercase text-md`}>
       <Link href={href} className="block p-5">
         {text}
       </Link>
       <span
-        className="opacity-0 z-40 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] bg-white b-0"
+        className={`opacity-0 z-40 transition-opacity ease-in duration-300 group-hover:opacity-100 block w-full h-[2px] ${bg} b-0`}
         aria-hidden="true"
       ></span>
     </li>
   );
 };
 
-const Navigation = () => {
+const Navigation = ({ forestFont = false }: { forestFont?: boolean }) => {
   const [navOpen, setNavOpen] = useState(false);
 
   const navItems = [
@@ -40,13 +49,16 @@ const Navigation = () => {
     }
   }, [navOpen, closeCb]);
 
+  const titleFont = forestFont ? " text-forest " : " text-white ";
+  const itemsFont = forestFont ? " text-white md:text-forest " : "text-white";
+
   return (
     <nav className={`absolute t-0 l-0 z-30 w-full`}>
-      <div className="flex py-4 mx-auto max-w-screen-lg h-full text-blue">
+      <div className="flex py-4 mx-auto max-w-screen-lg h-full">
         <div className="self-center ml-5 flex-grow">
           <Link
             href="/"
-            className="text-white italic text-center inline-block text-xl md:text-2xl"
+            className={`${titleFont} italic text-center inline-block text-xl md:text-2xl`}
           >
             Just Be Still
           </Link>
@@ -70,10 +82,15 @@ const Navigation = () => {
 
         <div className="flex col-start-2 justify-end">
           <ul
-            className={`${!navOpen ? "hidden" : ""} bg-forest md:bg-transparent text-white mt-[60px] md:mt-[0px] absolute md:mr-5 md:static max-md:animate-slideIn md:flex w-1/2 md:w-auto z-40 items-center justify-between md:space-x-4`}
+            className={`${!navOpen ? "hidden" : ""} bg-forest md:bg-transparent ${itemsFont} mt-[60px] md:mt-[0px] absolute md:mr-5 md:static max-md:animate-slideIn md:flex w-1/2 md:w-auto z-40 items-center justify-between md:space-x-4`}
           >
             {navItems.map(({ text, href }) => (
-              <NavItem text={text} href={href} key={text} />
+              <NavItem
+                text={text}
+                href={href}
+                key={text}
+                forestFont={forestFont}
+              />
             ))}
           </ul>
         </div>

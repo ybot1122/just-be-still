@@ -13,14 +13,23 @@ import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 
 // @ts-expect-error
 import fullpage from "fullpage.js";
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
 import PageParagraph from "@/components/PageParagraph";
 
+const whiteBgInd = [1, 4, 5];
+
 export default function Home() {
+  const [currentSectionId, setCurrentSectionId] = useState(0);
+
   useEffect(() => {
-    const myFullpage = new fullpage("#fullpage", {});
+    const myFullpage = new fullpage("#fullpage", {
+      licenseKey: process.env.NEXT_PUBLIC_FULLPAGE_LICENSE,
+      onLeave: (origin: { index: number }, destination: { index: number }) => {
+        setCurrentSectionId(destination.index);
+      },
+    });
 
     return () => {
       fullpage_api.destroy("all");
@@ -33,7 +42,7 @@ export default function Home() {
 
   return (
     <>
-      <Navigation />
+      <Navigation forestFont={whiteBgInd.includes(currentSectionId)} />
       <main id="fullpage">
         <HomePageHeroImageSection src={home_bg} alt="Just Be Still">
           <div className="text-white z-20">
@@ -91,7 +100,7 @@ export default function Home() {
 
         <HomePageInfoSection isForest header={"Meet the Instructor"}>
           <div className="w-full px-5">
-            <div className="relative max-w-[1024px] md:max-h-[50vh] m-auto aspect-square">
+            <div className="relative max-w-[1024px] max-h-[35vh] md:max-h-[50vh] m-auto aspect-square">
               <Image
                 src={home_pic3}
                 placeholder="blur"
