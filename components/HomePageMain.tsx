@@ -25,10 +25,13 @@ export default function HomePageMain() {
   useEffect(() => {
     const myFullpage = new fullpage("#fullpage", {
       licenseKey: process.env.NEXT_PUBLIC_FULLPAGE_LICENSE,
+      responsiveHeight: 525,
       onLeave: (origin: { index: number }, destination: { index: number }) => {
         setCurrentSectionId(destination.index);
       },
     });
+
+    fullpage_api.silentMoveTo(0);
 
     return () => {
       fullpage_api.destroy("all");

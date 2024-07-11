@@ -36,6 +36,9 @@ const config: Config = {
           "100%": { transform: "rotate(90deg)" },
         },
       },
+      screens: {
+        tall: { raw: "(min-height: 525px)" },
+      },
     },
   },
   plugins: [],

@@ -13,7 +13,7 @@ export default function HomePageInfoSection({
   return (
     <section className="section">
       <div
-        className={`flex flex-wrap justify-center items-center text-center w-full h-[100vh] ${bgClass}`}
+        className={`flex flex-wrap justify-center items-center text-center w-full tall:h-[100vh] ${bgClass}`}
       >
         {header && (
           <h2 className={`${textClass} text-3xl md:text-5xl mt-20 mx-5 w-full`}>
