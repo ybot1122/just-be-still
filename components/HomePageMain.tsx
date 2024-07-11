@@ -79,7 +79,7 @@ export default function HomePageMain() {
               />
             </div>
           </div>
-          <div className="mb-5 animate-bounce grow self-end">
+          <div className="mb-5 animate-bounce grow self-end mt-5 tall:mt-0">
             <button onClick={fp_next} className="underline">
               Interested in a sewing party? &#127881;
             </button>
@@ -118,7 +118,7 @@ export default function HomePageMain() {
               Learn about us
             </Link>
           </p>
-          <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0">
+          <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0 mb-5 tall:mb-0">
             <button onClick={fp_next} className="underline">
               Explore our services
             </button>
@@ -164,7 +164,7 @@ export default function HomePageMain() {
                 Facebook
               </Link>
             </p>
-            <p className="underline mt-2 text-[0.5rem] w-full">
+            <p className="underline mt-2 text-[0.5rem] w-full mb-5 tall:mb-0">
               <Link href="https://www.flaticon.com/free-icons/group">
                 Icons by Freepik
               </Link>
