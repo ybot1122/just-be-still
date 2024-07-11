@@ -6,10 +6,11 @@ import PageHeader from "@/components/PageHeader";
 import FramedPhoto from "@/components/FramedPhoto";
 import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
+import PageWrapper from "@/components/PageWrapper";
 
 export default function About() {
   return (
-    <>
+    <PageWrapper>
       <PageHeader header="About Us" />
 
       <PageSection>
@@ -80,6 +81,6 @@ export default function About() {
           something beautiful with your own hands.
         </PageParagraph>
       </PageSection>
-    </>
+    </PageWrapper>
   );
 }

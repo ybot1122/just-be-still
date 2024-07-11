@@ -3,10 +3,11 @@ import PageSection from "@/components/PageSection";
 import Image from "next/image";
 import julyevent from "@/public/events/july2024.png";
 import PageParagraph from "@/components/PageParagraph";
+import PageWrapper from "@/components/PageWrapper";
 
 export default function Events() {
   return (
-    <>
+    <PageWrapper>
       <PageHeader header="Events" />
       <PageSection>
         <div className="relative w-full mt-5">
@@ -36,6 +37,6 @@ export default function Events() {
           </p>
         </PageParagraph>
       </PageSection>
-    </>
+    </PageWrapper>
   );
 }
