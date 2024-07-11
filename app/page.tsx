@@ -11,8 +11,6 @@ import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 
-// @ts-expect-error
-import fullpage from "fullpage.js";
 import { useCallback, useEffect, useState } from "react";
 import Footer from "@/components/Footer";
 import Navigation from "@/components/Navigation";
@@ -24,12 +22,21 @@ export default function Home() {
   const [currentSectionId, setCurrentSectionId] = useState(0);
 
   useEffect(() => {
-    const myFullpage = new fullpage("#fullpage", {
-      licenseKey: process.env.NEXT_PUBLIC_FULLPAGE_LICENSE,
-      onLeave: (origin: { index: number }, destination: { index: number }) => {
-        setCurrentSectionId(destination.index);
-      },
-    });
+    const init = async () => {
+      // @ts-expect-error
+      const fullpage = (await import("fullpage.js")).default;
+      const myFullpage = new fullpage("#fullpage", {
+        licenseKey: process.env.NEXT_PUBLIC_FULLPAGE_LICENSE,
+        onLeave: (
+          origin: { index: number },
+          destination: { index: number },
+        ) => {
+          setCurrentSectionId(destination.index);
+        },
+      });
+    };
+
+    init();
 
     return () => {
       fullpage_api.destroy("all");
