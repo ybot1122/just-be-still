@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer className="w-full mt-[25px] mb-5 text-xs text-center">
-      <p>&copy; 2024 Just Be Still</p>
+      <p>&copy; 2024 JustBeStill</p>
       <p className="mt-2">
         Visit us on{" "}
         <Link

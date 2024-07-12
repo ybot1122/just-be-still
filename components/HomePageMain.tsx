@@ -6,7 +6,7 @@ import logo from "@/public/logo.jpg";
 import home_bg from "@/public/home_Bg.jpg";
 import home_pic1 from "@/public/homepic1.jpeg";
 import home_pic2 from "@/public/homepic2.jpg";
-import home_pic3 from "@/public/homepic3.jpg";
+import home_pic3 from "@/public/meet_the_instructor.jpeg";
 import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
@@ -46,12 +46,12 @@ export default function HomePageMain() {
     <>
       <Navigation forestFont={whiteBgInd.includes(currentSectionId)} fixed />
       <main id="fullpage">
-        <HomePageHeroImageSection src={home_bg} alt="Just Be Still">
+        <HomePageHeroImageSection src={home_bg} alt="JustBeStill">
           <div className="text-white z-20 my-[150px] tall:my-0">
             <Link href="/">
               <Image
                 src={logo}
-                alt="Just Be Still Logo"
+                alt="JustBeStill Logo"
                 width={250}
                 height={250}
                 sizes="100vw"
@@ -60,7 +60,7 @@ export default function HomePageMain() {
           </div>
         </HomePageHeroImageSection>
 
-        <HomePageInfoSection header="Welcome to Just Be Still">
+        <HomePageInfoSection header="Welcome to JustBeStill">
           <div className="w-full">
             <p className="text-xl md:text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
               A creative fashion design group dedicated to inspiring the next
@@ -73,7 +73,7 @@ export default function HomePageMain() {
               <Image
                 src={home_pic1}
                 placeholder="blur"
-                alt="Just Be Still Class"
+                alt="JustBeStill Class"
                 fill
                 objectFit="contain"
               />
@@ -86,7 +86,7 @@ export default function HomePageMain() {
           </div>
         </HomePageInfoSection>
 
-        <HomePageHeroImageSection src={home_pic2} alt="Just Be Still Events">
+        <HomePageHeroImageSection src={home_pic2} alt="JustBeStill Events">
           <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0 my-[150px] tall:my-0">
             Sewing Classes &amp;
             <br />
@@ -106,7 +106,7 @@ export default function HomePageMain() {
               <Image
                 src={home_pic3}
                 placeholder="blur"
-                alt="Just Be Still Class"
+                alt="JustBeStill Class"
                 fill
                 objectFit="contain"
               />
@@ -118,7 +118,7 @@ export default function HomePageMain() {
               Learn about us
             </Link>
           </p>
-          <p className="max-w-[1024px] md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0 mb-5 tall:mb-0">
+          <p className="w-full md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0 mb-5 tall:mb-0">
             <button onClick={fp_next} className="underline">
               Explore our services
             </button>
@@ -154,7 +154,7 @@ export default function HomePageMain() {
                 Contact Us
               </Link>
             </PageParagraph>
-            <p className="mt-5">&copy; 2024 Just Be Still</p>
+            <p className="mt-5">&copy; 2024 JustBeStill</p>
             <p className="mt-2">
               Visit us on{" "}
               <Link

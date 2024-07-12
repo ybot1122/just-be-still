@@ -67,7 +67,7 @@ const Navigation = ({
             href="/"
             className={`${titleFont} italic text-center inline-block text-xl md:text-2xl`}
           >
-            Just Be Still
+            JustBeStill
           </Link>
         </div>
 

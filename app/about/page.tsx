@@ -16,11 +16,11 @@ export default function About() {
       <PageSection>
         <FramedPhoto
           src={hero}
-          alt="Just Be Still Teacher"
+          alt="JustBe StillTeacher"
           height={"h-[250px]"}
         />
         <PageParagraph>
-          Welcome to Just Be Still, a creative fashion design group dedicated to
+          Welcome to JustBeStill, a creative fashion design group dedicated to
           inspiring the next generation of designers! We specialize in teaching
           kids how to sew and unleash their creativity. But that&apos;s not
           all—we also offer alterations; we take custom orders and fun sewing
@@ -31,7 +31,7 @@ export default function About() {
       <PageSection>
         <FramedPhoto
           src={about_2}
-          alt="Just Be Still Teacher"
+          alt="JustBeStill Teacher"
           height={"h-[350px]"}
           floatLeft
         />
@@ -51,7 +51,7 @@ export default function About() {
       <PageSection>
         <FramedPhoto
           src={about_3}
-          alt="Just Be Still Teacher"
+          alt="JustBeStill Teacher"
           height={"h-[250px]"}
         />
 
@@ -63,8 +63,8 @@ export default function About() {
         </PageParagraph>
         <PageParagraph>
           <span className="font-bold">
-            At Just Be Still, we believe in the power of practical application
-            to master any craft.
+            At JustBeStill, we believe in the power of practical application to
+            master any craft.
           </span>
         </PageParagraph>
         <PageParagraph>
