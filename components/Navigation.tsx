@@ -17,7 +17,7 @@ const NavItem = ({
   const bg = forestFont ? " bg-forest " : " bg-white ";
   return (
     <li className={`group relative md:text-center uppercase text-md`}>
-      <Link href={href} className="block p-5">
+      <Link href={href} className="block p-5 md:p-2 lg:p-5">
         {text}
       </Link>
       <span
@@ -99,6 +99,11 @@ const Navigation = ({
                 forestFont={forestFont}
               />
             ))}
+            <NavItem
+              text={"SHOP"}
+              href={"https://www.etsy.com/shop/JustBeStilldesign"}
+              forestFont={forestFont}
+            />
           </ul>
         </div>
       </div>
