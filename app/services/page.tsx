@@ -123,7 +123,9 @@ export default function Contact() {
 }
 
 const ServiceItemParagraph = ({ children }: { children: React.ReactNode }) => {
-  return <p className="mb-5 text-lg md:text-xl">{children}</p>;
+  return (
+    <p className="text-left last:mb-0 mb-5 text-lg md:text-xl">{children}</p>
+  );
 };
 
 const ServiceItemGalleryImage = ({ src }: { src: StaticImageData }) => {
