@@ -22,9 +22,10 @@ const Navigation = ({
   fixed?: boolean;
 }) => {
   const titleFont = forestFont ? " text-forest " : " text-white ";
-  const itemHoverBg = forestFont ? " bg-forest " : " bg-white ";
+  const itemHoverBg = forestFont ? "bg-white md:bg-forest " : " bg-white ";
   const fixedClass = fixed ? " fixed " : " absolute ";
   const itemsFont = forestFont ? " text-white md:text-forest " : "text-white";
+  const etsyFill = forestFont ? " fill-white md:fill-forest " : "fill-white";
 
   return (
     <div className={`${fixedClass} t-0 l-0 z-30 w-full`}>
@@ -38,18 +39,32 @@ const Navigation = ({
           </Link>
         }
       >
-        {navItems.map(({ href, text }) => {
-          return (
-            <NavItem
-              hoverBottomColor={itemHoverBg}
-              backgroundColor="bg-forest md:bg-transparent"
+        {[
+          ...navItems.map(({ href, text }) => {
+            return (
+              <NavItem
+                hoverBottomColor={itemHoverBg}
+                backgroundColor="bg-forestDark md:bg-transparent"
+              >
+                <a href={href} className={`${itemsFont} p-5 md:p-2 lg:p-5`}>
+                  {text}
+                </a>
+              </NavItem>
+            );
+          }),
+
+          <NavItem
+            hoverBottomColor={itemHoverBg}
+            backgroundColor="bg-forestDark md:bg-transparent"
+          >
+            <a
+              href="https://www.etsy.com/shop/JustBeStilldesign"
+              className={`${itemsFont} p-5 md:p-2 lg:p-5 text-nowrap`}
             >
-              <a href={href} className={`${itemsFont} p-5`}>
-                {text}
-              </a>
-            </NavItem>
-          );
-        })}
+              SHOP on <EtsyLogo fill={etsyFill} />
+            </a>
+          </NavItem>,
+        ]}
       </NavBar>
     </div>
   );

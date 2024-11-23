@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         white: "#FFFFFF",
         forest: "#495a58",
+        forestDark: "#33403e",
         text: "#3f4a49",
         transparentBlack: "rgba(0,0,0,0.25)",
       },
