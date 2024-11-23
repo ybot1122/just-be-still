@@ -22,22 +22,36 @@ const Navigation = ({
   fixed?: boolean;
 }) => {
   const titleFont = forestFont ? " text-forest " : " text-white ";
+  const itemHoverBg = forestFont ? " bg-forest " : " bg-white ";
+  const fixedClass = fixed ? " fixed " : " absolute ";
+  const itemsFont = forestFont ? " text-white md:text-forest " : "text-white";
 
   return (
-    <NavBar
-      logo={
-        <Link
-          href="/"
-          className={`${titleFont} italic text-center inline-block text-xl md:text-2xl`}
-        >
-          JustBeStill
-        </Link>
-      }
-    >
-      <NavItem>
-        <p>hi</p>
-      </NavItem>
-    </NavBar>
+    <div className={`${fixedClass} t-0 l-0 z-30 w-full`}>
+      <NavBar
+        logo={
+          <Link
+            href="/"
+            className={`${titleFont} italic text-center inline-block text-xl md:text-2xl`}
+          >
+            JustBeStill
+          </Link>
+        }
+      >
+        {navItems.map(({ href, text }) => {
+          return (
+            <NavItem
+              hoverBottomColor={itemHoverBg}
+              backgroundColor="bg-forest md:bg-transparent"
+            >
+              <a href={href} className={`${itemsFont} p-5`}>
+                {text}
+              </a>
+            </NavItem>
+          );
+        })}
+      </NavBar>
+    </div>
   );
 };
 
