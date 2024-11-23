@@ -16,7 +16,7 @@
     ]
   },
   "dependencies": {
-    "@ybot1122/toby-ui": "^0.0.2-alpha",
+    "@ybot1122/toby-ui": "file:../toby-ui",
     "fullpage.js": "^4.0.25",
     "next": "^14.2.18",
     "react": "^18",

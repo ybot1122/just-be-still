@@ -4,8 +4,44 @@ import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import navIcon from "@/public/menu-icon.svg";
+import { NavBar, NavItem } from "@ybot1122/toby-ui/NavBar";
 
-const NavItem = ({
+const navItems = [
+  { text: "Home", href: "/" },
+  { text: "About", href: "/about" },
+  { text: "Services", href: "/services" },
+  { text: "Events", href: "/events" },
+  { text: "Contact", href: "/contact" },
+];
+
+const Navigation = ({
+  forestFont = false,
+  fixed = false,
+}: {
+  forestFont?: boolean;
+  fixed?: boolean;
+}) => {
+  const titleFont = forestFont ? " text-forest " : " text-white ";
+
+  return (
+    <NavBar
+      logo={
+        <Link
+          href="/"
+          className={`${titleFont} italic text-center inline-block text-xl md:text-2xl`}
+        >
+          JustBeStill
+        </Link>
+      }
+    >
+      <NavItem>
+        <p>hi</p>
+      </NavItem>
+    </NavBar>
+  );
+};
+
+const NavItemOld = ({
   text,
   href,
   forestFont = false,
@@ -31,7 +67,7 @@ const NavItem = ({
   );
 };
 
-const Navigation = ({
+const NavigationOld = ({
   forestFont = false,
   fixed = false,
 }: {
@@ -96,14 +132,14 @@ const Navigation = ({
             className={`${!navOpen ? "hidden" : ""} bg-forest md:bg-transparent ${itemsFont} mt-[60px] md:mt-[0px] absolute md:mr-5 md:static max-md:animate-slideIn md:flex w-1/2 md:w-auto z-40 items-center justify-between md:space-x-4`}
           >
             {navItems.map(({ text, href }) => (
-              <NavItem
+              <NavItemOld
                 text={text}
                 href={href}
                 key={text}
                 forestFont={forestFont}
               />
             ))}
-            <NavItem
+            <NavItemOld
               text={"SHOP on"}
               href={"https://www.etsy.com/shop/JustBeStilldesign"}
               forestFont={forestFont}
