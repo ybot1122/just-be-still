@@ -26,10 +26,12 @@ const Navigation = ({
   const fixedClass = fixed ? " fixed " : " absolute ";
   const itemsFont = forestFont ? " text-white md:text-forest " : "text-white";
   const etsyFill = forestFont ? " fill-white md:fill-forest " : "fill-white";
+  const iconFill = forestFont ? "fill-black" : "fill-white";
 
   return (
     <div className={`${fixedClass} t-0 l-0 z-30 w-full`}>
       <NavBar
+        iconFill={iconFill}
         logo={
           <Link
             href="/"
