@@ -77,7 +77,7 @@ export default function Events() {
       </PageSection>
 
       <PageSection>
-        <PageParagraph isAccent>
+        <PageParagraph isAccent as="div">
           <p className="">Coming Up</p>
           <p className="text-left">
             <span className="font-bold">Weekend Workshops</span> in September,
