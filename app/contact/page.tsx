@@ -10,7 +10,7 @@ export default function Contact() {
     <PageWrapper>
       <PageHeader header="Contact" />
       <PageSection>
-        <PageParagraph>
+        <PageParagraph as="div">
           <p className="text-left mb-5">
             Email us at{" "}
             <span className="underline">justbestilldesign@gmail.com</span>
