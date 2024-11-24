@@ -44,6 +44,7 @@ const Navigation = ({
               <NavItem
                 hoverBottomColor={itemHoverBg}
                 backgroundColor="bg-forestDark md:bg-transparent"
+                key={href}
               >
                 <a href={href} className={`${itemsFont} p-5 md:p-2 lg:p-5`}>
                   {text}
@@ -55,6 +56,7 @@ const Navigation = ({
           <NavItem
             hoverBottomColor={itemHoverBg}
             backgroundColor="bg-forestDark md:bg-transparent"
+            key="etsy"
           >
             <a
               href="https://www.etsy.com/shop/JustBeStilldesign"
