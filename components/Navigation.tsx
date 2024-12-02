@@ -46,9 +46,9 @@ const Navigation = ({
                 backgroundColor="bg-forestDark md:bg-transparent"
                 key={href}
               >
-                <a href={href} className={`${itemsFont} p-5 md:p-2 lg:p-5`}>
+                <Link href={href} className={`${itemsFont} p-5 md:p-2 lg:p-5`}>
                   {text}
-                </a>
+                </Link>
               </NavItem>
             );
           }),
@@ -58,12 +58,12 @@ const Navigation = ({
             backgroundColor="bg-forestDark md:bg-transparent"
             key="etsy"
           >
-            <a
+            <Link
               href="https://www.etsy.com/shop/JustBeStilldesign"
               className={`${itemsFont} p-5 md:p-2 lg:p-5 text-nowrap`}
             >
               SHOP on <EtsyLogo fill={etsyFill} />
-            </a>
+            </Link>
           </NavItem>,
         ]}
       </NavBar>
