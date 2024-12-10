@@ -1,5 +1,6 @@
 <script lang="ts">
 	import bg from '$lib/images/home/1.jpg';
+	import down_arrow from '$lib/images/down-arrow.png';
 	let { children } = $props();
 </script>
 
@@ -15,7 +16,9 @@
 			/>
 			{@render children?.()}
 			<div class="absolute bottom-0 z-10 mb-5 animate-bounce">
-				<button> Arrow Down </button>
+				<button>
+					<img src={down_arrow} alt="Down Arrow" width={50} height={50} />
+				</button>
 			</div>
 		</div>
 	</div>
