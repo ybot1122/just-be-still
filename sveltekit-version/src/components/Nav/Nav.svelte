@@ -4,6 +4,7 @@
 
 <nav>
 
+	JustBeStillDesign
 	<a href="/about">About</a>
 	<a href="/services">Services</a>
 
