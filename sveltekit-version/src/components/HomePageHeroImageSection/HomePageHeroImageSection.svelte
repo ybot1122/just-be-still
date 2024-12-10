@@ -1,4 +1,5 @@
 <script lang="ts">
+	import bg from '$lib/images/home/1.jpg';
 	let { children } = $props();
 </script>
 
@@ -8,8 +9,9 @@
 			class="before:bg-recipeHeroScrim flex h-full w-full items-center justify-center before:absolute before:z-10 before:block before:h-full before:w-full"
 		>
 			<img
-				src="https://www.justbestilldesign.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Flogo.34a9cd0d.jpg&w=3840&q=75"
-				alt="hi"
+				src={bg}
+				alt="JustBeStillDesign"
+				class="absolute h-full w-full object-cover"
 			/>
 			{@render children?.()}
 			<div class="absolute bottom-0 z-10 mb-5 animate-bounce">
