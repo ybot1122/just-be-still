@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
-    ignoreDuringBuilds: ['sveltekit-version/']
+    ignoreDuringBuilds: ['sveltekit-version/', 'sveltekit-version/**']
    },
  
 };
