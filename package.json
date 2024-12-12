@@ -17,13 +17,11 @@
   },
   "dependencies": {
     "@ybot1122/toby-ui": "^0.0.3-alpha",
-    "fullpage.js": "^4.0.25",
     "next": "^14.2.18",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@types/fullpage.js": "^2.9.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

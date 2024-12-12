@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/public/logo.jpg";
@@ -10,42 +8,16 @@ import home_pic3 from "@/public/meet_the_instructor.jpeg";
 import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
-
-// @ts-expect-error
-import fullpage from "fullpage.js";
-import { useCallback, useEffect, useState } from "react";
 import Navigation from "@/components/Navigation";
 import PageParagraph from "@/components/PageParagraph";
 
 const whiteBgInd = [1, 4];
 
 export default function HomePageMain() {
-  const [currentSectionId, setCurrentSectionId] = useState(0);
-
-  useEffect(() => {
-    const myFullpage = new fullpage("#fullpage", {
-      licenseKey: process.env.NEXT_PUBLIC_FULLPAGE_LICENSE,
-      responsiveHeight: 525,
-      onLeave: (origin: { index: number }, destination: { index: number }) => {
-        setCurrentSectionId(destination.index);
-      },
-    });
-
-    fullpage_api.silentMoveTo(0);
-
-    return () => {
-      fullpage_api.destroy("all");
-    };
-  }, []);
-
-  const fp_next = useCallback(() => {
-    fullpage_api.moveSectionDown();
-  }, []);
-
   return (
     <>
-      <Navigation forestFont={whiteBgInd.includes(currentSectionId)} fixed />
-      <main id="fullpage">
+      <Navigation forestFont={true} fixed />
+      <main>
         <HomePageHeroImageSection src={home_bg} alt="JustBeStill">
           <div className="text-white z-20 my-[150px] tall:my-0">
             <Link href="/">
@@ -80,7 +52,7 @@ export default function HomePageMain() {
             </div>
           </div>
           <div className="mb-5 animate-bounce grow self-end mt-5 tall:mt-0">
-            <button onClick={fp_next} className="underline">
+            <button className="underline">
               Interested in a sewing party? &#127881;
             </button>
           </div>
@@ -119,9 +91,7 @@ export default function HomePageMain() {
             </Link>
           </p>
           <p className="w-full md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0 mb-5 tall:mb-0">
-            <button onClick={fp_next} className="underline">
-              Explore our services
-            </button>
+            <button className="underline">Explore our services</button>
           </p>
         </HomePageInfoSection>
 

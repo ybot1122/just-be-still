@@ -11,10 +11,6 @@ export default function HomePageHeroImageSection({
   src: StaticImageData;
   alt: string;
 }) {
-  const fp_next = useCallback(() => {
-    fullpage_api.moveSectionDown();
-  }, []);
-
   return (
     <section className="section">
       <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
@@ -29,7 +25,7 @@ export default function HomePageHeroImageSection({
           />
           {children}
           <div className="absolute bottom-0 mb-5 animate-bounce z-10">
-            <button onClick={fp_next}>
+            <button>
               <Image
                 src={down_icon}
                 alt="Scroll Down"
