@@ -6,11 +6,10 @@ import pumpkin1 from "@/public/fall2024/pumpkin1.jpg";
 import pumpkin2 from "@/public/fall2024/pumpkin2.jpg";
 import pumpkin3 from "@/public/fall2024/pumpkin3.jpg";
 import PageParagraph from "@/components/PageParagraph";
-import PageWrapper from "@/components/PageWrapper";
 
 export default function Events() {
   return (
-    <PageWrapper>
+    <>
       <PageHeader header="Events" />
       <PageSection>
         <div className="relative w-full mt-5">
@@ -88,6 +87,6 @@ export default function Events() {
           </p>
         </PageParagraph>
       </PageSection>
-    </PageWrapper>
+    </>
   );
 }

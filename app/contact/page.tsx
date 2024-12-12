@@ -1,13 +1,11 @@
 import PageHeader from "@/components/PageHeader";
 import PageParagraph from "@/components/PageParagraph";
 import PageSection from "@/components/PageSection";
-import PageWrapper from "@/components/PageWrapper";
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Contact() {
   return (
-    <PageWrapper>
+    <>
       <PageHeader header="Contact" />
       <PageSection>
         <PageParagraph as="div">
@@ -27,6 +25,6 @@ export default function Contact() {
           </p>
         </PageParagraph>
       </PageSection>
-    </PageWrapper>
+    </>
   );
 }
