@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="w-full mt-[25px] mb-5 text-xs text-center">
       <p>
-        <span className="mr-5">&copy; 2024 JustBeStillDesign</span>Visit us on{" "}
+        <span className="mr-5">&copy; 2024 JustBeStill</span>Visit us on{" "}
         <Link
           href={"https://www.facebook.com/profile.php?id=61550921396070"}
           className="underline mr-5"
