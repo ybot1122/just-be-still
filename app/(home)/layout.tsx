@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "../globals.css";
-import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import Navigation from "@/components/Navigation";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -24,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="snap-y snap-mandatory">
       <body className={poppins.className}>
+        <Navigation />
         {children}
         <Footer />
       </body>

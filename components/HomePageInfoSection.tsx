@@ -1,26 +1,20 @@
-import { useObserveRef } from "./useActiveScreen";
-
 export default function HomePageInfoSection({
   children,
   isForest = false,
   header,
-  addObserver,
   index,
 }: {
   children: React.ReactNode;
   isForest?: boolean;
   header?: string;
-  addObserver: (element: Element) => void;
   index: number;
 }) {
   const bgClass = isForest ? " bg-forest text-white " : " text-black ";
   const textClass = isForest ? "" : " text-forest ";
-  const elementRef = useObserveRef({ addObserver });
 
   return (
     <section
       className="section tall:snap-start tall:snap-always"
-      ref={elementRef}
       data-index={index}
     >
       <div
