@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-[25px] mb-5 text-xs text-center">
+    <footer className="w-full mt-[25px] pb-[25px] text-xs text-center tall:snap-end tall:snap-always">
       <p>
         <span className="mr-5">&copy; 2024 JustBeStill</span>Visit us on{" "}
         <Link

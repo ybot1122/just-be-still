@@ -12,7 +12,7 @@ export default function HomePageHeroImageSection({
   alt: string;
 }) {
   return (
-    <section className="section">
+    <section className="section tall:snap-start tall:snap-always">
       <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
         <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image

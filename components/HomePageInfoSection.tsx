@@ -11,7 +11,7 @@ export default function HomePageInfoSection({
   const textClass = isForest ? "" : " text-forest ";
 
   return (
-    <section className="section">
+    <section className="section tall:snap-start tall:snap-always">
       <div
         className={`flex flex-wrap justify-center items-center text-center w-full tall:h-[100vh] ${bgClass}`}
       >

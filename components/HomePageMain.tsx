@@ -8,14 +8,10 @@ import home_pic3 from "@/public/meet_the_instructor.jpeg";
 import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
-import Navigation from "@/components/Navigation";
-import PageParagraph from "@/components/PageParagraph";
-
-const whiteBgInd = [1, 4];
 
 export default function HomePageMain() {
   return (
-    <>
+    <div className="snap-y snap-mandatory">
       <HomePageHeroImageSection src={home_bg} alt="JustBeStill">
         <div className="text-white z-20 my-[150px] tall:my-0">
           <Link href="/">
@@ -117,6 +113,6 @@ export default function HomePageMain() {
           </Link>
         </p>
       </HomePageInfoSection>
-    </>
+    </div>
   );
 }

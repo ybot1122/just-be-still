@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="snap-y snap-mandatory">
       <body className={poppins.className}>
         <Navigation />
         <main>{children}</main>
