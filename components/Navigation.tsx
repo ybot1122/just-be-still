@@ -26,7 +26,7 @@ const Navigation = ({
   const iconFill = forestFont ? "fill-black" : "fill-white";
 
   return (
-    <div className={`${fixedClass} t-0 l-0 z-30 w-full`}>
+    <div className={`${fixedClass} t-0 l-0 z-30 w-full bg-forestDark`}>
       <NavBar
         iconFill={iconFill}
         logo={

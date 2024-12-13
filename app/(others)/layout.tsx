@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
-import "./globals.css";
+import "../globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="snap-y snap-mandatory">
+    <html lang="en">
       <body className={poppins.className}>
         <Navigation />
         <main>{children}</main>
