@@ -12,10 +12,10 @@ import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 import ScrollDownButton from "./ScrollDownButton";
 import Navigation from "./Navigation";
-import { useState } from "react";
+import useActiveScreen from "@/components/useActiveScreen";
 
 export default function HomePageMain() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const { addObserver, activeIndex } = useActiveScreen();
 
   return (
     <>
@@ -25,7 +25,8 @@ export default function HomePageMain() {
           <HomePageHeroImageSection
             src={home_bg}
             alt="JustBeStill"
-            onInView={() => setActiveIndex(0)}
+            addObserver={addObserver}
+            index={0}
           >
             <div className="text-white z-20 my-[150px] tall:my-0">
               <Link href="/">
@@ -42,7 +43,8 @@ export default function HomePageMain() {
 
           <HomePageInfoSection
             header="Welcome to JustBeStill"
-            onInView={() => setActiveIndex(1)}
+            addObserver={addObserver}
+            index={1}
           >
             <div className="w-full">
               <p className="text-xl md:text-2xl max-w-[1024px] md:leading-loose inline-block px-5">
@@ -58,7 +60,7 @@ export default function HomePageMain() {
                   placeholder="blur"
                   alt="JustBeStill Class"
                   fill
-                  objectFit="contain"
+                  className="object-contain"
                 />
               </div>
             </div>
@@ -72,7 +74,8 @@ export default function HomePageMain() {
           <HomePageHeroImageSection
             src={home_pic2}
             alt="JustBeStill Events"
-            onInView={() => setActiveIndex(2)}
+            addObserver={addObserver}
+            index={2}
           >
             <div className="text-white z-20 text-4xl md:text-6xl text-center px-10 md:px-0 my-[150px] tall:my-0">
               Sewing Classes &amp;
@@ -90,7 +93,8 @@ export default function HomePageMain() {
           <HomePageInfoSection
             isForest
             header={"Meet the Instructor"}
-            onInView={() => setActiveIndex(3)}
+            addObserver={addObserver}
+            index={3}
           >
             <div className="w-full px-5">
               <div className="relative max-w-[1024px] max-h-[35vh] md:max-h-[50vh] m-auto aspect-square">
@@ -99,7 +103,7 @@ export default function HomePageMain() {
                   placeholder="blur"
                   alt="JustBeStill Class"
                   fill
-                  objectFit="contain"
+                  className="object-contain"
                 />
               </div>
             </div>
@@ -119,7 +123,8 @@ export default function HomePageMain() {
 
           <HomePageInfoSection
             header="Our Services"
-            onInView={() => setActiveIndex(4)}
+            addObserver={addObserver}
+            index={4}
           >
             <div className="grid grid-cols-3 gap-2 w-full">
               <HomePageServicesIcon

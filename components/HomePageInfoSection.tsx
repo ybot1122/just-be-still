@@ -1,29 +1,27 @@
-import { useEffect } from "react";
-import useInView from "@/components/useInView";
+import { useObserveRef } from "./useActiveScreen";
 
 export default function HomePageInfoSection({
   children,
   isForest = false,
   header,
-  onInView,
+  addObserver,
+  index,
 }: {
   children: React.ReactNode;
   isForest?: boolean;
   header?: string;
-  onInView: () => void;
+  addObserver: (element: Element) => void;
+  index: number;
 }) {
   const bgClass = isForest ? " bg-forest text-white " : " text-black ";
   const textClass = isForest ? "" : " text-forest ";
-  const { elementRef, inView } = useInView();
-
-  useEffect(() => {
-    if (inView) onInView();
-  }, [inView]);
+  const elementRef = useObserveRef({ addObserver });
 
   return (
     <section
       className="section tall:snap-start tall:snap-always"
       ref={elementRef}
+      data-index={index}
     >
       <div
         className={`flex flex-wrap justify-center items-center text-center w-full tall:h-[100vh] ${bgClass}`}
