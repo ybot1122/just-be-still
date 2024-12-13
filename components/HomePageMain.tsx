@@ -143,14 +143,20 @@ export default function HomePageMain() {
                 icon="sewing-machine"
               />
             </div>
-            <p className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end text-white p-5 mb-10">
-              <Link href="/services" className="underline bg-forest p-5 mr-5">
+            <div className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end text-white p-5 mb-10 grid-cols-1 md:grid-cols-2">
+              <Link
+                href="/services"
+                className="underline bg-forest p-5 md:mr-5 mb-5 md:mb-0 inline-block"
+              >
                 See All our Services
               </Link>
-              <Link href="/contact" className="underline ml-5 bg-forest p-5">
+              <Link
+                href="/contact"
+                className="underline ml-5 bg-forest p-5 inline-block"
+              >
                 Contact Us
               </Link>
-            </p>
+            </div>
           </HomePageInfoSection>
         </div>
       </main>
