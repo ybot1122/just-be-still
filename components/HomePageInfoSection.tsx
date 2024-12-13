@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect } from "react";
+import useInView from "@/components/useInView";
 
 export default function HomePageInfoSection({
   children,
@@ -13,35 +14,11 @@ export default function HomePageInfoSection({
 }) {
   const bgClass = isForest ? " bg-forest text-white " : " text-black ";
   const textClass = isForest ? "" : " text-forest ";
-
-  const elementRef = useRef(null);
-
-  const handleIntersection = useCallback((inView: boolean) => {
-    if (inView) {
-      onInView();
-    }
-  }, []);
+  const { elementRef, inView } = useInView();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          handleIntersection(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 1.0,
-      },
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [handleIntersection]);
+    if (inView) onInView();
+  }, [inView]);
 
   return (
     <section

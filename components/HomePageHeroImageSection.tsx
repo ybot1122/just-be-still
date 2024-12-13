@@ -1,9 +1,10 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import down_icon from "@/public/down-arrow.png";
 import ScrollDownButton from "./ScrollDownButton";
+import useInView from "@/components/useInView";
 
 export default function HomePageHeroImageSection({
   children,
@@ -16,34 +17,11 @@ export default function HomePageHeroImageSection({
   alt: string;
   onInView: () => void;
 }) {
-  const elementRef = useRef(null);
-
-  const handleIntersection = useCallback((inView: boolean) => {
-    if (inView) {
-      onInView();
-    }
-  }, []);
+  const { elementRef, inView } = useInView();
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          handleIntersection(entry.isIntersecting);
-        });
-      },
-      {
-        threshold: 1.0,
-      },
-    );
-
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-
-    return () => {
-      observer.disconnect();
-    };
-  }, [handleIntersection]);
+    if (inView) onInView();
+  }, [inView]);
 
   return (
     <section
