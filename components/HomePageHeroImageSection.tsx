@@ -28,13 +28,13 @@ export default function HomePageHeroImageSection({
       data-index={index}
     >
       <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
-        <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
+        <div className="relative flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image
             src={src}
             alt={alt}
             fill
             sizes="100vw"
-            objectFit="cover"
+            className="object-cover"
             placeholder="blur"
           />
           {children}

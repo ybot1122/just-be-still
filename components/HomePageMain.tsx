@@ -60,7 +60,7 @@ export default function HomePageMain() {
                   placeholder="blur"
                   alt="JustBeStill Class"
                   fill
-                  objectFit="contain"
+                  className="object-contain"
                 />
               </div>
             </div>
@@ -103,7 +103,7 @@ export default function HomePageMain() {
                   placeholder="blur"
                   alt="JustBeStill Class"
                   fill
-                  objectFit="contain"
+                  className="object-contain"
                 />
               </div>
             </div>

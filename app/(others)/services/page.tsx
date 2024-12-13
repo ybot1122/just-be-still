@@ -51,16 +51,17 @@ export default function Contact() {
               instruction tailored to their specific needs and interests.
               Private classes are available by appointment. Everything will be
               provided.
-              <div className="relative w-[250px] md:w-[450px] aspect-square mx-auto mt-10">
-                <Image
-                  src={private_lessons}
-                  alt="Private Lessons"
-                  placeholder="blur"
-                  objectFit="contain"
-                  fill
-                />
-              </div>
             </ServiceItemParagraph>
+            <div className="relative w-[250px] md:w-[450px] aspect-square mx-auto mt-10">
+              <Image
+                src={private_lessons}
+                alt="Private Lessons"
+                placeholder="blur"
+                className="object-contain"
+                sizes="50vw"
+                fill
+              />
+            </div>
           </ServiceItem>
           <ServiceItem q="Alterations">
             <ServiceItemParagraph>
@@ -134,8 +135,9 @@ const ServiceItemGalleryImage = ({ src }: { src: StaticImageData }) => {
         src={src}
         alt="Custom Order Example"
         fill
-        objectFit="cover"
+        className="object-cover"
         placeholder="blur"
+        sizes="50vw"
       />
     </div>
   );
