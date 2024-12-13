@@ -143,16 +143,16 @@ export default function HomePageMain() {
                 icon="sewing-machine"
               />
             </div>
-            <div className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end text-white p-5 mb-10 grid-cols-1 md:grid-cols-2">
+            <div className="text-2xl max-w-[1024px] md:leading-loose inline-block self-end text-white p-5 mb-10 md:grid md:grid-cols-2">
               <Link
                 href="/services"
-                className="underline bg-forest p-5 md:mr-5 mb-5 md:mb-0 inline-block"
+                className="underline bg-forest p-5 mx-5 mb-5 md:mb-0 inline-block"
               >
                 See All our Services
               </Link>
               <Link
                 href="/contact"
-                className="underline ml-5 bg-forest p-5 inline-block"
+                className="underline mx-5 bg-forest p-5 inline-block"
               >
                 Contact Us
               </Link>
