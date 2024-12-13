@@ -2,7 +2,11 @@
 
 import { useCallback } from "react";
 
-export default function ({ children }: { children: React.ReactNode }) {
+export default function ScrollDownButton({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const onClick = useCallback(() => {
     window.scrollBy({
       top: document.documentElement.scrollHeight,
