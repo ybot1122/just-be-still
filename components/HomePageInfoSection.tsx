@@ -13,7 +13,7 @@ export default function HomePageInfoSection({
   return (
     <section className="section tall:snap-start tall:snap-always">
       <div
-        className={`flex flex-wrap justify-center items-center text-center w-full tall:h-[100vh] ${bgClass}`}
+        className={`flex flex-wrap justify-center items-center text-center w-full tall:h-[100vh] ${bgClass} pt-[50px]`}
       >
         {header && (
           <h2

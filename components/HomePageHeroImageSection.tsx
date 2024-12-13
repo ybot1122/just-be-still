@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import React, { useCallback } from "react";
 import down_icon from "@/public/down-arrow.png";
+import ScrollDownButton from "./ScrollDownButton";
 
 export default function HomePageHeroImageSection({
   children,
@@ -25,7 +26,7 @@ export default function HomePageHeroImageSection({
           />
           {children}
           <div className="absolute bottom-0 mb-5 animate-bounce z-10">
-            <button>
+            <ScrollDownButton>
               <Image
                 src={down_icon}
                 alt="Scroll Down"
@@ -33,7 +34,7 @@ export default function HomePageHeroImageSection({
                 width={50}
                 height={50}
               />
-            </button>
+            </ScrollDownButton>
           </div>
         </div>
       </div>

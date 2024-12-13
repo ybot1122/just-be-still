@@ -8,6 +8,7 @@ import home_pic3 from "@/public/meet_the_instructor.jpeg";
 import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
+import ScrollDownButton from "./ScrollDownButton";
 
 export default function HomePageMain() {
   return (
@@ -46,9 +47,9 @@ export default function HomePageMain() {
           </div>
         </div>
         <div className="mb-5 animate-bounce grow self-end mt-5 tall:mt-0">
-          <button className="underline">
+          <ScrollDownButton>
             Interested in a sewing party? &#127881;
-          </button>
+          </ScrollDownButton>
         </div>
       </HomePageInfoSection>
 
@@ -85,7 +86,7 @@ export default function HomePageMain() {
           </Link>
         </p>
         <p className="w-full md:leading-loose inline-block px-5 animate-bounce mt-20 tall:mt-0 mb-5 tall:mb-0">
-          <button className="underline">Explore our services</button>
+          <ScrollDownButton>Explore our services</ScrollDownButton>
         </p>
       </HomePageInfoSection>
 
