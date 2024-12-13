@@ -19,15 +19,6 @@ const config: Config = {
       backgroundImage: {
         recipeHeroScrim: "linear-gradient(90deg,rgba(0,0,0,.5) 0,transparent)",
       },
-      animation: {
-        slideIn: "300ms 1 alternate slidein",
-      },
-      keyframes: {
-        slidein: {
-          "0%": { transform: "translateX(50%)" },
-          "100%": { transform: "translateX(0px)" },
-        },
-      },
       screens: {
         tall: { raw: "(min-height: 525px)" },
       },

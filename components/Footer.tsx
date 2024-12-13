@@ -11,12 +11,6 @@ export default function Footer() {
         >
           Facebook
         </Link>
-        <Link
-          href="https://www.flaticon.com/free-icons/group"
-          className="text-xs"
-        >
-          Icons by Freepik
-        </Link>
       </p>
     </footer>
   );

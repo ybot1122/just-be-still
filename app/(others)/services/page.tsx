@@ -39,7 +39,7 @@ export default function Contact() {
             <ServiceItemParagraph>
               <Link
                 href="https://forms.gle/ue3RnMiC2DmxEZ5c8"
-                className="underline"
+                className="underline text-xs md:text-lg"
               >
                 https://forms.gle/ue3RnMiC2DmxEZ5c8
               </Link>

@@ -1,5 +1,3 @@
-"use client";
-
 import Image, { StaticImageData } from "next/image";
 import React, { useEffect } from "react";
 import down_icon from "@/public/down-arrow.png";
@@ -10,21 +8,16 @@ export default function HomePageHeroImageSection({
   children,
   src,
   alt,
-  addObserver,
   index,
 }: {
   children: React.ReactNode;
   src: StaticImageData;
   alt: string;
-  addObserver: (element: Element) => void;
   index: number;
 }) {
-  const elementRef = useObserveRef({ addObserver });
-
   return (
     <section
       className="section tall:snap-start tall:snap-always"
-      ref={elementRef}
       data-index={index}
     >
       <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
