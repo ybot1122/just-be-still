@@ -29,14 +29,6 @@ export default function HomePageHeroImageSection({
     >
       <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
         <div className="relative flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            placeholder="blur"
-          />
           {children}
           <div className="absolute bottom-0 mb-5 animate-bounce z-10">
             <ScrollDownButton>
