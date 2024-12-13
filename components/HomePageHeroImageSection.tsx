@@ -1,5 +1,7 @@
+"use client";
+
 import Image, { StaticImageData } from "next/image";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import down_icon from "@/public/down-arrow.png";
 import ScrollDownButton from "./ScrollDownButton";
 
@@ -7,13 +9,47 @@ export default function HomePageHeroImageSection({
   children,
   src,
   alt,
+  onInView,
 }: {
   children: React.ReactNode;
   src: StaticImageData;
   alt: string;
+  onInView: () => void;
 }) {
+  const elementRef = useRef(null);
+
+  const handleIntersection = useCallback((inView: boolean) => {
+    if (inView) {
+      onInView();
+    }
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          handleIntersection(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 1.0,
+      },
+    );
+
+    if (elementRef.current) {
+      observer.observe(elementRef.current);
+    }
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [handleIntersection]);
+
   return (
-    <section className="section tall:snap-start tall:snap-always">
+    <section
+      className="section tall:snap-start tall:snap-always"
+      ref={elementRef}
+    >
       <div className="relative w-full tall:h-[100vh] items-center justify-between text-sm">
         <div className="flex justify-center items-center w-full h-full before:absolute before:block before:w-full before:h-full before:z-10 before:bg-recipeHeroScrim">
           <Image

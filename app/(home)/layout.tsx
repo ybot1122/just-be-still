@@ -24,8 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="snap-y snap-mandatory">
       <body className={poppins.className}>
-        <Navigation fixed />
-        <main>{children}</main>
+        {children}
         <Footer />
       </body>
     </html>
