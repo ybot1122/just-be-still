@@ -12,12 +12,11 @@ import customorder_4 from "@/public/customorder_4.jpg";
 import customorder_5 from "@/public/customorder_5.jpg";
 import customorder_6 from "@/public/customorder_6.jpg";
 import Image, { StaticImageData } from "next/image";
-import PageWrapper from "@/components/PageWrapper";
 import { FAQItemList } from "@ybot1122/toby-ui/FAQItem";
 
 export default function Contact() {
   return (
-    <PageWrapper>
+    <>
       <PageHeader header="Services" />
 
       <PageSection>
@@ -118,7 +117,7 @@ export default function Contact() {
           </Link>
         </PageParagraph>
       </PageSection>
-    </PageWrapper>
+    </>
   );
 }
 
