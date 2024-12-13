@@ -2,9 +2,21 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export default function useActiveScreen() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [observerReady, setObserverReady] = useState(false);
 
-  const observer = useRef(
-    new IntersectionObserver(
+  const observer = useRef<IntersectionObserver>();
+
+  const addObserver = useCallback(
+    (element: Element) => {
+      if (observerReady && observer.current) {
+        observer.current.observe(element);
+      }
+    },
+    [observerReady],
+  );
+
+  useEffect(() => {
+    observer.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -18,16 +30,10 @@ export default function useActiveScreen() {
       {
         threshold: 0.25,
       },
-    ),
-  );
-
-  const addObserver = useCallback((element: Element) => {
-    observer.current.observe(element);
-  }, []);
-
-  useEffect(() => {
-    return () => observer.current.disconnect();
-  }, []);
+    );
+    setObserverReady(true);
+    return () => observer.current && observer.current.disconnect();
+  }, [setObserverReady]);
 
   return { addObserver, activeIndex };
 }
@@ -42,7 +48,7 @@ export const useObserveRef = ({
     if (elementRef.current) {
       addObserver(elementRef.current);
     }
-  }, []);
+  }, [addObserver]);
 
   return elementRef;
 };
