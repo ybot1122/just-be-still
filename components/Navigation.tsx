@@ -26,13 +26,13 @@ const Navigation = ({
   const iconFill = forestFont ? "fill-black" : "fill-white";
 
   return (
-    <div className={`${fixedClass} t-0 l-0 z-30 w-full`}>
+    <div className={`${fixedClass} t-0 l-0 z-50 w-full`}>
       <NavBar
         iconFill={iconFill}
         logo={
           <Link
             href="/"
-            className={`${titleFont} italic text-center inline-block text-xl md:text-2xl`}
+            className={`${titleFont} italic text-center inline-block text-xl md:text-2xl z-50`}
           >
             JustBeStill
           </Link>
