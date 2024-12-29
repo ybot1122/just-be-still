@@ -11,15 +11,22 @@ const navItems = [
   { text: "Contact", href: "/contact" },
 ];
 
-const Navigation = ({ forestFont = false }: { forestFont?: boolean }) => {
+const Navigation = ({
+  forestFont = false,
+  transparent = false,
+}: {
+  forestFont?: boolean;
+  transparent?: boolean;
+}) => {
   const titleFont = forestFont ? " text-forest " : " text-white ";
   const itemHoverBg = forestFont ? "bg-white md:bg-forest " : " bg-white ";
   const itemsFont = forestFont ? " text-white md:text-forest " : "text-white";
   const etsyFill = forestFont ? " fill-white md:fill-forest " : "fill-white";
   const iconFill = forestFont ? "fill-black" : "fill-white";
+  const shadow = transparent ? "shadow-xl" : "";
 
   return (
-    <div className={`absolute top-0 left-0 z-50 w-full bg-forest shadow-xl`}>
+    <div className={`absolute top-0 left-0 z-50 w-full bg-forest ${shadow}`}>
       <NavBar
         iconFill={iconFill}
         logo={
