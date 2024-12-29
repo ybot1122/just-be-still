@@ -12,11 +12,12 @@ const config: Config = {
       colors: {
         white: "#FFFFFF",
         forest: "#495a58",
-        forestDark: "#33403e",
+        forestDark: "rgba(51,64,62,1)",
         text: "#3f4a49",
         transparentBlack: "rgba(0,0,0,0.25)",
       },
       backgroundImage: {
+        nav: "linear-gradient(180deg,rgba(51,64,62,1), rgba(51,64,62,.7) 80%,transparent)",
         recipeHeroScrim: "linear-gradient(90deg,rgba(0,0,0,.5) 0,transparent)",
       },
       screens: {

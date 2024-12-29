@@ -9,8 +9,6 @@ import HomePageHeroImageSection from "@/components/HomePageHeroImageSection";
 import HomePageInfoSection from "@/components/HomePageInfoSection";
 import HomePageServicesIcon from "@/components/HomePageServicesIcon";
 import ScrollDownButton from "./ScrollDownButton";
-import Navigation from "./Navigation";
-import useActiveScreen from "@/components/useActiveScreen";
 
 export default function HomePageMain() {
   return (
@@ -22,8 +20,8 @@ export default function HomePageMain() {
               <Image
                 src={logo}
                 alt="JustBeStill Logo"
-                width={250}
-                height={250}
+                width={350}
+                height={350}
                 sizes="100vw"
               />
             </Link>

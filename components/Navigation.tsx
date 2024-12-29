@@ -19,7 +19,7 @@ const Navigation = ({ forestFont = false }: { forestFont?: boolean }) => {
   const iconFill = forestFont ? "fill-black" : "fill-white";
 
   return (
-    <div className={`absolute top-0 left-0 z-50 w-full`}>
+    <div className={`absolute top-0 left-0 z-50 w-full bg-forest`}>
       <NavBar
         iconFill={iconFill}
         logo={
