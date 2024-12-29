@@ -5,7 +5,7 @@ import { cookies } from "next/headers";
 
 // TODO: https://medium.com/@tony.infisical/guide-to-nodes-crypto-module-for-encryption-decryption-65c077176980
 
-export default async function checkAuth(pass: string) {
+export default async function checkAuth() {
   const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD;
   if (!ADMIN_PASSWORD) {
     throw new Error("incorrect setup");
