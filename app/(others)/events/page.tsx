@@ -9,6 +9,8 @@ import PageParagraph from "@/components/PageParagraph";
 
 export default async function Events() {
   const data = await getData();
+  const poster = data.poster;
+  const extras = data.extras;
 
   return (
     <>
@@ -16,8 +18,8 @@ export default async function Events() {
       <PageSection>
         <div className="relative w-full mt-5">
           <Image
-            src={data.poster.path}
-            alt={data.poster.alt}
+            src={poster.path}
+            alt={poster.alt}
             sizes="100vw"
             width={0}
             height={0}
@@ -30,49 +32,16 @@ export default async function Events() {
       </PageSection>
 
       <PageSection>
-        <div className="grid grid-cols-3 gap-2 mt-5 md:mt-20">
-          <div>
-            <Image
-              src={pumpkin1}
-              alt="Handsewn pumpkins"
-              placeholder="blur"
-              sizes="100vw"
-              width={0}
-              height={0}
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-            />
-          </div>
-          <div>
-            <Image
-              src={pumpkin2}
-              alt="Handsewn pumpkins"
-              placeholder="blur"
-              sizes="100vw"
-              width={0}
-              height={0}
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-            />
-          </div>
-          <div>
-            <Image
-              src={pumpkin3}
-              alt="Handsewn pumpkins"
-              placeholder="blur"
-              sizes="100vw"
-              width={0}
-              height={0}
-              style={{
-                width: "100%",
-                height: "auto",
-              }}
-            />
-          </div>
+        <div className="flex mt-5 md:mt-20 gap-2">
+          {extras.map((extra) => (
+            <div key={extra.path} className="max-h-[350px]">
+              <img
+                src={extra.path}
+                alt={extra.alt}
+                className="w-full h-full object-cover"
+              />
+            </div>
+          ))}
         </div>
       </PageSection>
 

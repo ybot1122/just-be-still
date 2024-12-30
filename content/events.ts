@@ -1,6 +1,9 @@
+type image = {
+  path: string;
+  alt: string;
+};
+
 export type Content_Event = {
-  poster: {
-    path: string;
-    alt: string;
-  };
+  poster: image;
+  extras: image[];
 };
