@@ -1,11 +1,12 @@
+import { Content_Event } from "@/content/events";
 import React, { useState } from "react";
 
-const EditServices: React.FC = () => {
+const EditEvents = ({ events }: { events: Content_Event }) => {
   return (
     <div className="text-left">
       <div className="mt-5">
         <h2 className="text-xl">Update the Poster</h2>
-        <ImageUploader />
+        <ImageUploader original={events.poster} />
       </div>
       <div className="mt-5">
         <h2 className="text-xl">Update the Extra Images</h2>
@@ -19,7 +20,7 @@ const EditServices: React.FC = () => {
   );
 };
 
-const ImageUploader: React.FC = () => {
+const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -42,19 +43,20 @@ const ImageUploader: React.FC = () => {
         <input type="file" accept="image/*" onChange={handleImageChange} />
         {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
       </div>
-      {selectedImage && (
+      {
         <div>
           <h3 className="text-lg">Selected Image:</h3>
           <img
-            src={URL.createObjectURL(selectedImage)}
+            src={
+              selectedImage ? URL.createObjectURL(selectedImage) : original.path
+            }
             alt="Selected"
             className="mt-2"
-            style={{ maxWidth: "100%", height: "auto" }}
           />
         </div>
-      )}
+      }
     </div>
   );
 };
 
-export default EditServices;
+export default EditEvents;

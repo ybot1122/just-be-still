@@ -1,9 +1,10 @@
 import PageHeader from "@/components/PageHeader";
 import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
+import getPageData from "@/lib/getPageData";
 
 export default async function Events() {
-  const data = await getData();
+  const data = await getPageData();
   const poster = data.poster;
   const extras = data.extras;
 
@@ -48,14 +49,4 @@ export default async function Events() {
       </PageSection>
     </>
   );
-}
-
-import fs from "fs";
-import path from "path";
-import { Content_Event } from "@/content/events";
-
-async function getData(): Promise<Content_Event> {
-  const filePath = path.join(process.cwd(), "content/events.json");
-  const jsonData = await fs.promises.readFile(filePath, "utf-8");
-  return JSON.parse(jsonData);
 }

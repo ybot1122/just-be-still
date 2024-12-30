@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import EditServices from "./EditServices";
+import EditEvents from "./EditServices";
+import { Content_Event } from "@/content/events";
 
-const Tabs: React.FC = () => {
+const Tabs = ({ events }: { events: Content_Event }) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
 
   const handleTabClick = (tab: string) => {
@@ -54,7 +55,7 @@ const Tabs: React.FC = () => {
         {activeTab === "tab2" && <div>Not Available Yet</div>}
         {activeTab === "tab3" && (
           <div>
-            <EditServices />
+            <EditEvents events={events} />
           </div>
         )}
         {activeTab === "tab4" && <div>Not Available Yet</div>}

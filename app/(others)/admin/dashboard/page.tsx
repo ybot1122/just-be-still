@@ -3,6 +3,7 @@ import PageSection from "@/components/PageSection";
 import checkAuth from "@/server_actions/checkAuth";
 import { redirect } from "next/navigation";
 import Tabs from "./Tabs";
+import getPageData from "@/lib/getPageData";
 
 export default async function AdminDashboard() {
   const isAuthed = await checkAuth();
@@ -11,11 +12,13 @@ export default async function AdminDashboard() {
     redirect("/");
   }
 
+  const data = await getPageData();
+
   return (
     <>
       <PageHeader header="Admin Dashboard" />
       <PageSection>
-        <Tabs />
+        <Tabs events={data} />
       </PageSection>
     </>
   );
