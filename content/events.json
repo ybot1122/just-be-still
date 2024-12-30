@@ -1,0 +1,23 @@
+{
+  "poster": {
+    "path": "/events/posters/fall2024.jpg",
+    "alt": "Fall 2024 Poster"
+  },
+  "extras": [
+    {
+      "path": "/events/images/pumpkin1.jpg",
+      "alt": "Fall 2024 Extra 1"
+    },
+    {
+      "path": "/events/images/pumpkin2.jpg",
+      "alt": "Fall 2024 Extra 2"
+    },
+    {
+      "path": "/events/images/pumpkin3.jpg",
+      "alt": "Fall 2024 Extra 3"
+    }
+  ],
+  "banner": [
+    "TBD"
+  ]
+}
