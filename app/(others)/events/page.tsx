@@ -1,10 +1,5 @@
 import PageHeader from "@/components/PageHeader";
 import PageSection from "@/components/PageSection";
-import Image from "next/image";
-import fall2024events from "@/public/events/posters/fall2024.jpg";
-import pumpkin1 from "@/public/events/images/pumpkin1.jpg";
-import pumpkin2 from "@/public/events/images/pumpkin2.jpg";
-import pumpkin3 from "@/public/events/images/pumpkin3.jpg";
 import PageParagraph from "@/components/PageParagraph";
 
 export default async function Events() {
