@@ -1,10 +1,10 @@
 import PageHeader from "@/components/PageHeader";
 import PageSection from "@/components/PageSection";
 import Image from "next/image";
-import fall2024events from "@/public/events/fall2024.jpg";
-import pumpkin1 from "@/public/fall2024/pumpkin1.jpg";
-import pumpkin2 from "@/public/fall2024/pumpkin2.jpg";
-import pumpkin3 from "@/public/fall2024/pumpkin3.jpg";
+import fall2024events from "@/public/events/posters/fall2024.jpg";
+import pumpkin1 from "@/public/events/images/pumpkin1.jpg";
+import pumpkin2 from "@/public/events/images/pumpkin2.jpg";
+import pumpkin3 from "@/public/events/images/pumpkin3.jpg";
 import PageParagraph from "@/components/PageParagraph";
 
 export default function Events() {
@@ -29,7 +29,7 @@ export default function Events() {
       </PageSection>
 
       <PageSection>
-        <div className="grid grid-cols-3 gap-2 mt-20">
+        <div className="grid grid-cols-3 gap-2 mt-5 md:mt-20">
           <div>
             <Image
               src={pumpkin1}
