@@ -15,6 +15,7 @@ const config: Config = {
         forestDark: "rgba(51,64,62,1)",
         text: "#3f4a49",
         transparentBlack: "rgba(0,0,0,0.25)",
+        errorText: "#FF4436",
       },
       backgroundImage: {
         recipeHeroScrim: "linear-gradient(90deg,rgba(0,0,0,.5) 0,transparent)",
