@@ -11,39 +11,44 @@ const Tabs: React.FC = () => {
 
   return (
     <div className="mt-5">
-      <div className="tabs">
-        <button
-          onClick={() => handleTabClick("tab1")}
-          className={activeTab === "tab1" ? "active" : ""}
+      <div className="">
+        <TabButton
+          tab="tab1"
+          activeTab={activeTab}
+          handleTabClick={handleTabClick}
         >
           Home
-        </button>
-        <button
-          onClick={() => handleTabClick("tab2")}
-          className={activeTab === "tab2" ? "active" : ""}
+        </TabButton>
+        <TabButton
+          tab="tab2"
+          activeTab={activeTab}
+          handleTabClick={handleTabClick}
         >
           About
-        </button>
-        <button
-          onClick={() => handleTabClick("tab3")}
-          className={activeTab === "tab3" ? "active" : ""}
+        </TabButton>
+        <TabButton
+          tab="tab3"
+          activeTab={activeTab}
+          handleTabClick={handleTabClick}
         >
           Services
-        </button>
-        <button
-          onClick={() => handleTabClick("tab4")}
-          className={activeTab === "tab4" ? "active" : ""}
+        </TabButton>
+        <TabButton
+          tab="tab4"
+          activeTab={activeTab}
+          handleTabClick={handleTabClick}
         >
           Events
-        </button>
-        <button
-          onClick={() => handleTabClick("tab5")}
-          className={activeTab === "tab5" ? "active" : ""}
+        </TabButton>
+        <TabButton
+          tab="tab5"
+          activeTab={activeTab}
+          handleTabClick={handleTabClick}
         >
           Contact
-        </button>
+        </TabButton>
       </div>
-      <div className="tab-content">
+      <div className="mt-5">
         {activeTab === "tab1" && <div>Content for Tab 1</div>}
         {activeTab === "tab2" && <div>Content for Tab 2</div>}
         {activeTab === "tab3" && <div>Content for Tab 3</div>}
@@ -51,6 +56,28 @@ const Tabs: React.FC = () => {
         {activeTab === "tab5" && <div>Content for Tab 5</div>}
       </div>
     </div>
+  );
+};
+
+const TabButton = ({
+  tab,
+  activeTab,
+  handleTabClick,
+  children,
+}: {
+  tab: string;
+  activeTab: string;
+  handleTabClick: (tab: string) => void;
+  children: React.ReactNode;
+}) => {
+  const active = activeTab === tab ? "bg-blue-200" : "hover:bg-gray-300";
+  return (
+    <button
+      onClick={() => handleTabClick(tab)}
+      className={`${active} px-4 mx-2 py-2 bg-gray-200  rounded-md`}
+    >
+      {children}
+    </button>
   );
 };
 
