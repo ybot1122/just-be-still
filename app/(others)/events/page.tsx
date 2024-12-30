@@ -7,16 +7,17 @@ import pumpkin2 from "@/public/events/images/pumpkin2.jpg";
 import pumpkin3 from "@/public/events/images/pumpkin3.jpg";
 import PageParagraph from "@/components/PageParagraph";
 
-export default function Events() {
+export default async function Events() {
+  const data = await getData();
+
   return (
     <>
       <PageHeader header="Events" />
       <PageSection>
         <div className="relative w-full mt-5">
           <Image
-            src={fall2024events}
-            alt="Events in the Fall 2024"
-            placeholder="blur"
+            src={data.poster.path}
+            alt={data.poster.alt}
             sizes="100vw"
             width={0}
             height={0}
@@ -89,4 +90,14 @@ export default function Events() {
       </PageSection>
     </>
   );
+}
+
+import fs from "fs";
+import path from "path";
+import { Content_Event } from "@/content/events";
+
+async function getData(): Promise<Content_Event> {
+  const filePath = path.join(process.cwd(), "content/events.json");
+  const jsonData = await fs.promises.readFile(filePath, "utf-8");
+  return JSON.parse(jsonData);
 }
