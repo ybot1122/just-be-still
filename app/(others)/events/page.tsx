@@ -17,16 +17,10 @@ export default async function Events() {
       <PageHeader header="Events" />
       <PageSection>
         <div className="relative w-full mt-5">
-          <Image
+          <img
             src={poster.path}
             alt={poster.alt}
-            sizes="100vw"
-            width={0}
-            height={0}
-            style={{
-              width: "100%",
-              height: "auto",
-            }}
+            className="w-full h-full object-cover"
           />
         </div>
       </PageSection>
