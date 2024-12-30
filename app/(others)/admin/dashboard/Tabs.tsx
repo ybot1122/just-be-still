@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import EditServices from "./EditServices";
 
 const Tabs: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
@@ -49,11 +50,15 @@ const Tabs: React.FC = () => {
         </TabButton>
       </div>
       <div className="mt-5">
-        {activeTab === "tab1" && <div>Content for Tab 1</div>}
-        {activeTab === "tab2" && <div>Content for Tab 2</div>}
-        {activeTab === "tab3" && <div>Content for Tab 3</div>}
-        {activeTab === "tab4" && <div>Content for Tab 4</div>}
-        {activeTab === "tab5" && <div>Content for Tab 5</div>}
+        {activeTab === "tab1" && <div>Not Available Yet</div>}
+        {activeTab === "tab2" && <div>Not Available Yet</div>}
+        {activeTab === "tab3" && (
+          <div>
+            <EditServices />
+          </div>
+        )}
+        {activeTab === "tab4" && <div>Not Available Yet</div>}
+        {activeTab === "tab5" && <div>Not Available Yet</div>}
       </div>
     </div>
   );
