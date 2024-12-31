@@ -43,9 +43,10 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
 
   return (
     <div className="flex gap-5">
-      {isImageChooserOpen && (
-        <ImageChooser isOpen onClose={() => setIsImageChooserOpen(false)} />
-      )}
+      <ImageChooser
+        isOpen={isImageChooserOpen}
+        onClose={() => setIsImageChooserOpen(false)}
+      />
       <div>
         <img
           src={
