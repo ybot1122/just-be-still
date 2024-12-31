@@ -1,3 +1,5 @@
+import BasicButton from "@/components/admin/BasicButton";
+import ImageChooser from "@/components/admin/ImageChooser";
 import { Content_Event } from "@/content/events";
 import React, { useState } from "react";
 
@@ -25,7 +27,7 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
 const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isUploaderVisible, setIsuploaderVisible] = useState(false);
+  const [isImageChooserOpen, setIsImageChooserOpen] = useState(false);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -40,27 +42,29 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
   };
 
   return (
-    <div className="flex">
-      {isUploaderVisible && (
-        <div>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
-          {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
-        </div>
+    <div className="flex gap-5">
+      {isImageChooserOpen && (
+        <ImageChooser isOpen onClose={() => setIsImageChooserOpen(false)} />
       )}
-      {
+      <div>
+        <img
+          src={
+            selectedImage ? URL.createObjectURL(selectedImage) : original.path
+          }
+          alt="Selected"
+          className="mt-2 w-[200px]"
+        />
+      </div>
+      <div className="">
         <div>
-          <img
-            src={
-              selectedImage ? URL.createObjectURL(selectedImage) : original.path
-            }
-            alt="Selected"
-            className="mt-2 w-[200px]"
-          />
-          <div className="mt-2">
-            Description: <EditableText text={original.alt} />
-          </div>
+          Description: <EditableText text={original.alt} />
         </div>
-      }
+        <div className="mt-5">
+          <BasicButton onClick={() => setIsImageChooserOpen(true)}>
+            Change Image
+          </BasicButton>
+        </div>
+      </div>
     </div>
   );
 };
