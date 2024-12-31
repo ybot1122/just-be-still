@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import EditEvents from "./EditServices";
+import EditEvents from "./EditEvents";
 import { Content_Event } from "@/content/events";
 
 const Tabs = ({ events }: { events: Content_Event }) => {
@@ -53,12 +53,12 @@ const Tabs = ({ events }: { events: Content_Event }) => {
       <div className="mt-5">
         {activeTab === "tab1" && <div>Not Available Yet</div>}
         {activeTab === "tab2" && <div>Not Available Yet</div>}
-        {activeTab === "tab3" && (
+        {activeTab === "tab3" && <div>Not Available Yet</div>}
+        {activeTab === "tab4" && (
           <div>
             <EditEvents events={events} />
           </div>
         )}
-        {activeTab === "tab4" && <div>Not Available Yet</div>}
         {activeTab === "tab5" && <div>Not Available Yet</div>}
       </div>
     </div>
