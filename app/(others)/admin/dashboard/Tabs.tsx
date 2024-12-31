@@ -76,11 +76,12 @@ const TabButton = ({
   handleTabClick: (tab: string) => void;
   children: React.ReactNode;
 }) => {
-  const active = activeTab === tab ? "bg-blue-200" : "hover:bg-gray-300";
+  const active =
+    activeTab === tab ? "bg-blue-200" : "bg-gray-200 hover:bg-gray-300";
   return (
     <button
       onClick={() => handleTabClick(tab)}
-      className={`${active} px-4 mx-2 py-2 bg-gray-200  rounded-md`}
+      className={`${active} px-4 mx-2 py-2 rounded-md`}
     >
       {children}
     </button>
