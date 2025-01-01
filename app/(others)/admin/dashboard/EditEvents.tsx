@@ -76,7 +76,10 @@ const ImageUploader = ({
         <div className="mt-5">
           <BasicButton
             onClick={() =>
-              setImageChooserCb(() => (p?: string) => console.log(p))
+              setImageChooserCb(() => (p?: string) => {
+                console.log(p);
+                setImageChooserCb(undefined);
+              })
             }
           >
             Change Image

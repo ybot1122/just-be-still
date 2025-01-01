@@ -18,7 +18,7 @@ const ImageChooser: React.FC<ImageChooserProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg shadow-lg relative w-[90vw]">
+      <div className="bg-white p-6 rounded-lg shadow-lg relative w-[90vw] h-[90vh] overflow-scroll">
         <button
           className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-3xl"
           onClick={() => onClose?.()}
@@ -26,12 +26,11 @@ const ImageChooser: React.FC<ImageChooserProps> = ({
           &times;
         </button>
         <h2 className="text-2xl mb-4 px-5 text-center">Choose an Image</h2>
-        {/* Add your image chooser content here */}
         <div className="flex flex-wrap gap-4">
           {images.map((image) => (
             <div
               key={image.public_id}
-              className="cursor-pointer"
+              className="relative cursor-pointer w-[calc(25%-1rem)] h-[calc(25%-1rem)] group"
               onClick={() => onClose?.(image.secure_url)}
             >
               <img
@@ -39,6 +38,9 @@ const ImageChooser: React.FC<ImageChooserProps> = ({
                 alt={image.public_id}
                 className="w-full h-auto rounded-lg"
               />
+              <div className="absolute inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                <span className="text-white text-lg">Choose Image</span>
+              </div>
             </div>
           ))}
         </div>
