@@ -1,7 +1,7 @@
 import BasicButton from "@/components/admin/BasicButton";
-import ImageChooser from "@/components/admin/ImageChooser";
 import { Content_Event } from "@/content/events";
-import React, { useState } from "react";
+import { useImageChooser } from "@/context/ImageChooserContext";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
 const EditEvents = ({ events }: { events: Content_Event }) => {
   const [poster, setPoster] = useState(events.poster);
@@ -25,31 +25,19 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
 };
 
 const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isImageChooserOpen, setIsImageChooserOpen] = useState(false);
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      if (!file.type.startsWith("image/")) {
-        setErrorMessage("Please select a valid image file.");
-        return;
-      }
-      setErrorMessage(null);
-      setSelectedImage(file);
-    }
-  };
+  const [selectedImage, setSelectedImage] = useState<File | string>(
+    original.path,
+  );
+  const { setCallback: setImageChooserCb } = useImageChooser();
 
   return (
     <div className="flex gap-5">
-      {isImageChooserOpen && (
-        <ImageChooser isOpen onClose={() => setIsImageChooserOpen(false)} />
-      )}
       <div>
         <img
           src={
-            selectedImage ? URL.createObjectURL(selectedImage) : original.path
+            typeof selectedImage === "string"
+              ? selectedImage
+              : URL.createObjectURL(selectedImage)
           }
           alt="Selected"
           className="mt-2 w-[200px]"
@@ -60,7 +48,14 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
           Description: <EditableText text={original.alt} />
         </div>
         <div className="mt-5">
-          <BasicButton onClick={() => setIsImageChooserOpen(true)}>
+          <BasicButton
+            onClick={() =>
+              setImageChooserCb(() => (p?: string) => {
+                if (p) setSelectedImage(p);
+                setImageChooserCb(() => null);
+              })
+            }
+          >
             Change Image
           </BasicButton>
         </div>
@@ -74,7 +69,7 @@ const EditableText = ({ text }: { text: string }) => {
   const [value, setValue] = useState(text);
 
   const className =
-    "border border-gray-300 p-2 cursor-text inline-block w-[400px]";
+    "border border-gray-300 p-2 cursor-text inline-block w-[400px] ml-2";
 
   const handleBlur = () => {
     setIsEditing(false);

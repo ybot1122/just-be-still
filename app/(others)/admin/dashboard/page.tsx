@@ -4,6 +4,8 @@ import checkAuth from "@/server_actions/checkAuth";
 import { redirect } from "next/navigation";
 import Tabs from "./Tabs";
 import getPageData from "@/lib/getPageData";
+import { ImageChooserProvider } from "@/context/ImageChooserContext";
+import { getCloudinaryImages } from "@/server_actions/getCloudinaryImages";
 
 export default async function AdminDashboard() {
   const isAuthed = await checkAuth();
@@ -14,11 +16,14 @@ export default async function AdminDashboard() {
 
   const data = await getPageData();
 
+  const images = await getCloudinaryImages("just-be-still-design");
   return (
     <>
       <PageHeader header="Admin Dashboard" />
       <PageSection>
-        <Tabs events={data} />
+        <ImageChooserProvider>
+          <Tabs events={data} images={images} />
+        </ImageChooserProvider>
       </PageSection>
     </>
   );
