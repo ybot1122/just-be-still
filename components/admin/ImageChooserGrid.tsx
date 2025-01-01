@@ -41,6 +41,7 @@ export const ImageChooserUpload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const { callback } = useImageChooser();
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -57,15 +58,17 @@ export const ImageChooserUpload: React.FC = () => {
 
   const handleUpload = () => {
     if (selectedFile) {
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("file", selectedFile);
       uploadImageToCloudinary(formData)
         .then((url) => {
           callback?.(url);
+          setIsLoading(false);
         })
         .catch((error) => {
-          console.log(error);
-          setError("Error uploading image. Please try again.");
+          setError(error.message);
+          setIsLoading(false);
         });
     }
   };
@@ -83,8 +86,11 @@ export const ImageChooserUpload: React.FC = () => {
       )}
       <input type="file" onChange={handleFileChange} className="my-5" />
       {selectedFile && (
-        <BasicButton onClick={handleUpload} disabled={!selectedFile}>
-          Upload Image
+        <BasicButton
+          onClick={handleUpload}
+          disabled={!selectedFile || isLoading}
+        >
+          {isLoading ? "Uploading..." : "Upload Image"}
         </BasicButton>
       )}
       {error && <p className="mt-2 text-red-500">{error}</p>}

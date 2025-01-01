@@ -50,11 +50,14 @@ export async function uploadImageToCloudinary(
     body: formData,
   });
 
-  const result = await response.json();
-  console.log(response.status, result);
-
   if (!response.ok) {
     throw new Error(`Failed to upload image: ${response.statusText}`);
+  }
+
+  const result = await response.json();
+
+  if (result.existing) {
+    throw new Error("Image with that name already exists");
   }
 
   return result.secure_url;
