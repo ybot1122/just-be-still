@@ -13,11 +13,11 @@ interface ImageChooserGridProps {
 export const ImageChooserGrid: React.FC<ImageChooserGridProps> = ({
   images,
 }) => {
-  const { callback } = useImageChooser();
+  const { callback, uploaded } = useImageChooser();
 
   return (
     <div className="flex flex-wrap gap-4">
-      {images.map((image) => (
+      {[...uploaded, ...images].map((image) => (
         <div
           key={image.public_id}
           className="relative cursor-pointer w-[calc(25%-1rem)] h-[calc(25%-1rem)] group"
@@ -39,7 +39,7 @@ export const ImageChooserGrid: React.FC<ImageChooserGridProps> = ({
 
 export const ImageChooserUpload: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const { callback } = useImageChooser();
+  const { callback, addUploaded } = useImageChooser();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -62,8 +62,9 @@ export const ImageChooserUpload: React.FC = () => {
       const formData = new FormData();
       formData.append("file", selectedFile);
       uploadImageToCloudinary(formData)
-        .then((url) => {
-          callback?.(url);
+        .then((result) => {
+          callback?.(result.secure_url);
+          addUploaded(result);
           setIsLoading(false);
         })
         .catch((error) => {

@@ -2,14 +2,13 @@
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import path from "path";
-import crypto from "crypto";
 import checkAuth from "./checkAuth";
-
-const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
+import { uploadImage } from "@ybot1122/toby-ui/Sdk/Cloudinary/uploadImage";
+import { CloudinaryResource } from "./getCloudinaryImages";
 
 export async function uploadImageToCloudinary(
   input: FormData,
-): Promise<string> {
+): Promise<CloudinaryResource> {
   if (!(await checkAuth())) {
     throw new Error("Not authorized");
   }
@@ -29,43 +28,17 @@ export async function uploadImageToCloudinary(
 
   const public_id = spinalCase(path.parse(imageFile.name).name);
 
-  const formData = new FormData();
-  const timestamp = Date.now().toString();
-  const upload_preset = "u4kwvaih";
-  const folder = "just-be-still-design";
-  formData.append("file", imageFile);
-  formData.append("public_id", public_id);
-  formData.append("folder", folder);
-  formData.append("upload_preset", "u4kwvaih");
-  formData.append("timestamp", timestamp);
-  formData.append(
-    "signature",
-    generateSignature(
-      folder,
-      public_id,
-      timestamp,
-      upload_preset,
-      CLOUDINARY_SECRET,
-    ),
-  );
-  formData.append("api_key", CLOUDINARY_KEY);
-
-  const response = await fetch(CLOUDINARY_URL, {
-    method: "POST",
-    body: formData,
+  const result = await uploadImage({
+    cloudinary_key: CLOUDINARY_KEY,
+    cloudinary_secret: CLOUDINARY_SECRET,
+    cloudinary_cloud_name: CLOUDINARY_CLOUD_NAME,
+    public_id,
+    imageFile,
+    upload_preset: "u4kwvaih",
+    folder: "just-be-still-design",
   });
 
-  if (!response.ok) {
-    throw new Error(`Failed to upload image: ${response.statusText}`);
-  }
-
-  const result = await response.json();
-
-  if (result.existing) {
-    throw new Error("Image with that name already exists");
-  }
-
-  return result.secure_url;
+  return result;
 }
 
 function spinalCase(name: string): string {
@@ -73,16 +46,4 @@ function spinalCase(name: string): string {
     .split(/\s+|_+/) // Split by spaces or underscores
     .join("-") // Join with hyphens
     .toLowerCase(); // Convert to lowercase
-}
-
-function generateSignature(
-  folder: string,
-  public_id: string,
-  timestamp: string,
-  upload_preset: string,
-  CLOUDINARY_SECRET: string,
-): string {
-  const string = `folder=${folder}&public_id=${public_id}&timestamp=${timestamp}&upload_preset=${upload_preset}${CLOUDINARY_SECRET}`;
-
-  return crypto.createHash("sha1").update(string).digest("hex");
 }

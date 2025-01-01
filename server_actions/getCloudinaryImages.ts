@@ -2,7 +2,7 @@
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import checkAuth from "./checkAuth";
-import { getCloudinaryImages as _getCloudinaryImages } from "@ybot1122/toby-ui/Sdk/Cloudinary/getCloudinaryImages";
+import { getImages } from "@ybot1122/toby-ui/Sdk/Cloudinary/getImages";
 
 export type CloudinaryResource = {
   asset_id: string;
@@ -31,11 +31,12 @@ export async function getCloudinaryImages(
   const result: CloudinaryResource[] = [];
 
   try {
-    const data = await _getCloudinaryImages(
-      CLOUDINARY_CLOUD_NAME,
-      CLOUDINARY_KEY,
-      CLOUDINARY_SECRET,
-    );
+    const data = await getImages({
+      cloudinary_key: CLOUDINARY_KEY,
+      cloudinary_secret: CLOUDINARY_SECRET,
+      cloudinary_cloud_name: CLOUDINARY_CLOUD_NAME,
+    });
+
     for (let i = 0; i < data.length; i++) {
       const resource = data[i];
       if (resource.folder.includes(folder)) {
