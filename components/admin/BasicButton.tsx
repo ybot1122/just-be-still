@@ -10,7 +10,7 @@ export default function BasicButton({
   return (
     <button
       onClick={onClick}
-      className="border border-forestDark px-5 rounded-full hover:bg-forestDark hover:text-white"
+      className="border border-forestDark px-5 rounded-full hover:bg-forestDark hover:text-white cursor-pointer"
       disabled={disabled}
     >
       {children}

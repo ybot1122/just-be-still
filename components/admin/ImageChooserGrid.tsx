@@ -4,6 +4,7 @@ import { useImageChooser } from "@/context/ImageChooserContext";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
 import { useState } from "react";
 import BasicButton from "./BasicButton";
+import { uploadImageToCloudinary } from "@/server_actions/uploadImageToCloudinary";
 
 interface ImageChooserGridProps {
   images: CloudinaryResource[];
@@ -56,13 +57,16 @@ export const ImageChooserUpload: React.FC = () => {
 
   const handleUpload = () => {
     if (selectedFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        if (reader.result) {
-          callback?.(reader.result.toString());
-        }
-      };
-      reader.readAsDataURL(selectedFile);
+      const formData = new FormData();
+      formData.append("file", selectedFile);
+      uploadImageToCloudinary(formData)
+        .then((url) => {
+          callback?.(url);
+        })
+        .catch((error) => {
+          console.log(error);
+          setError("Error uploading image. Please try again.");
+        });
     }
   };
 
@@ -78,9 +82,11 @@ export const ImageChooserUpload: React.FC = () => {
         </div>
       )}
       <input type="file" onChange={handleFileChange} className="my-5" />
-      <BasicButton onClick={handleUpload} disabled={!selectedFile}>
-        Upload Image
-      </BasicButton>
+      {selectedFile && (
+        <BasicButton onClick={handleUpload} disabled={!selectedFile}>
+          Upload Image
+        </BasicButton>
+      )}
       {error && <p className="mt-2 text-red-500">{error}</p>}
     </div>
   );
@@ -91,7 +97,7 @@ export const ImageChooserCloseButton: React.FC = () => {
 
   return (
     <button
-      className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-3xl"
+      className="absolute top-2 right-5 text-gray-500 hover:text-gray-700 text-3xl"
       onClick={() => callback?.()}
     >
       &times;
