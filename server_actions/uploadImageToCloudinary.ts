@@ -2,6 +2,7 @@
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import path from "path";
+import crypto from "crypto";
 
 const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
@@ -24,9 +25,24 @@ export async function uploadImageToCloudinary(
   const public_id = spinalCase(path.parse(imageFile.name).name);
 
   const formData = new FormData();
+  const timestamp = Date.now().toString();
+  const upload_preset = "u4kwvaih";
+  const folder = "just-be-still-design";
   formData.append("file", imageFile);
   formData.append("public_id", public_id);
-  formData.append("folder", "just-be-still-design");
+  formData.append("folder", folder);
+  formData.append("upload_preset", "u4kwvaih");
+  formData.append("timestamp", timestamp);
+  formData.append(
+    "signature",
+    generateSignature(
+      folder,
+      public_id,
+      timestamp,
+      upload_preset,
+      CLOUDINARY_SECRET,
+    ),
+  );
   formData.append("api_key", CLOUDINARY_KEY);
 
   const response = await fetch(CLOUDINARY_URL, {
@@ -34,11 +50,13 @@ export async function uploadImageToCloudinary(
     body: formData,
   });
 
+  const result = await response.json();
+  console.log(response.status, result);
+
   if (!response.ok) {
     throw new Error(`Failed to upload image: ${response.statusText}`);
   }
 
-  const result = await response.json();
   return result.secure_url;
 }
 
@@ -47,4 +65,16 @@ function spinalCase(name: string): string {
     .split(/\s+|_+/) // Split by spaces or underscores
     .join("-") // Join with hyphens
     .toLowerCase(); // Convert to lowercase
+}
+
+function generateSignature(
+  folder: string,
+  public_id: string,
+  timestamp: string,
+  upload_preset: string,
+  CLOUDINARY_SECRET: string,
+): string {
+  const string = `folder=${folder}&public_id=${public_id}&timestamp=${timestamp}&upload_preset=${upload_preset}${CLOUDINARY_SECRET}`;
+
+  return crypto.createHash("sha1").update(string).digest("hex");
 }
