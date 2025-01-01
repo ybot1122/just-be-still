@@ -34,6 +34,10 @@ export async function getCloudinaryImages(
       );
       const data = await response.json();
 
+      if (response.status === 420) {
+        throw new Error("Rate limit exceeded");
+      }
+
       for (let i = 0; i < data.resources.length; i++) {
         const resource = data.resources[i];
         if (resource.folder.includes(folder)) {

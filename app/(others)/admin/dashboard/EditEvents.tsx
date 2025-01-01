@@ -1,28 +1,16 @@
 import BasicButton from "@/components/admin/BasicButton";
-import ImageChooser, {
-  ImageChooserOnClose,
-} from "@/components/admin/ImageChooser";
 import { Content_Event } from "@/content/events";
-import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
+import { useImageChooser } from "@/context/ImageChooserContext";
 import React, { Dispatch, SetStateAction, useState } from "react";
 
-const EditEvents = ({
-  events,
-  setImageChooserCb,
-}: {
-  events: Content_Event;
-  setImageChooserCb: Dispatch<SetStateAction<ImageChooserOnClose>>;
-}) => {
+const EditEvents = ({ events }: { events: Content_Event }) => {
   const [poster, setPoster] = useState(events.poster);
 
   return (
     <div className="text-left">
       <div className="mt-5">
         <h2 className="text-xl">Poster</h2>
-        <ImageUploader
-          original={events.poster}
-          setImageChooserCb={setImageChooserCb}
-        />
+        <ImageUploader original={events.poster} />
       </div>
       <div className="mt-5">
         <h2 className="text-xl">Update the Extra Images</h2>
@@ -36,15 +24,10 @@ const EditEvents = ({
   );
 };
 
-const ImageUploader = ({
-  original,
-  setImageChooserCb,
-}: {
-  original: Content_Event["poster"];
-  setImageChooserCb: Dispatch<SetStateAction<ImageChooserOnClose>>;
-}) => {
+const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { setCallback: setImageChooserCb } = useImageChooser();
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -78,7 +61,7 @@ const ImageUploader = ({
             onClick={() =>
               setImageChooserCb(() => (p?: string) => {
                 console.log(p);
-                setImageChooserCb(undefined);
+                setImageChooserCb(() => null);
               })
             }
           >
