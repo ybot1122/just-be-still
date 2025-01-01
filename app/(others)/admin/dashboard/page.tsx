@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import Tabs from "./Tabs";
 import getPageData from "@/lib/getPageData";
 import { getCloudinaryImages } from "@/server_actions/getCloudinaryImages";
+import { ImageChooserProvider } from "@/context/ImageChooserContext";
 
 const temp = [
   {
@@ -184,7 +185,9 @@ export default async function AdminDashboard() {
     <>
       <PageHeader header="Admin Dashboard" />
       <PageSection>
-        <Tabs events={data} images={images} />
+        <ImageChooserProvider>
+          <Tabs events={data} images={images} />
+        </ImageChooserProvider>
       </PageSection>
     </>
   );
