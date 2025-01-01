@@ -20,21 +20,29 @@ export async function getCloudinaryImages(
   const URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image`;
 
   const result: CloudinaryResource[] = [];
+  let nextCursor: string | undefined = undefined;
 
   try {
-    const response = await fetch(URL, {
-      headers: {
-        Authorization: `Basic ${btoa(CLOUDINARY_KEY + ":" + CLOUDINARY_SECRET)}`,
-      },
-    });
-    const data = await response.json();
+    do {
+      const response: Response = await fetch(
+        `${URL}?next_cursor=${nextCursor || ""}`,
+        {
+          headers: {
+            Authorization: `Basic ${btoa(CLOUDINARY_KEY + ":" + CLOUDINARY_SECRET)}`,
+          },
+        },
+      );
+      const data = await response.json();
 
-    for (let i = 0; i < data.resources.length; i++) {
-      const resource = data.resources[i];
-      if (resource.folder.includes(folder)) {
-        result.push(resource);
+      for (let i = 0; i < data.resources.length; i++) {
+        const resource = data.resources[i];
+        if (resource.folder.includes(folder)) {
+          result.push(resource);
+        }
       }
-    }
+
+      nextCursor = data.next_cursor;
+    } while (nextCursor);
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);
     throw error;
