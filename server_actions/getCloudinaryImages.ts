@@ -2,7 +2,7 @@
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import checkAuth from "./checkAuth";
-import { getCloudinaryImages as get } from "@ybot1122/toby-ui/Sdk/Cloudinary/getCloudinaryImages";
+import { getCloudinaryImages as _getCloudinaryImages } from "@ybot1122/toby-ui/Sdk/Cloudinary/getCloudinaryImages";
 
 export type CloudinaryResource = {
   asset_id: string;
@@ -31,7 +31,7 @@ export async function getCloudinaryImages(
   const result: CloudinaryResource[] = [];
 
   try {
-    const data = await get(
+    const data = await _getCloudinaryImages(
       CLOUDINARY_CLOUD_NAME,
       CLOUDINARY_KEY,
       CLOUDINARY_SECRET,
