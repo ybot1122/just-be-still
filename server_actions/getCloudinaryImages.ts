@@ -25,7 +25,7 @@ export async function getCloudinaryImages(
   try {
     do {
       const response: Response = await fetch(
-        `${URL}?next_cursor=${nextCursor || ""}`,
+        `${URL}?next_cursor=${nextCursor || ""}&max_results=1000`,
         {
           headers: {
             Authorization: `Basic ${btoa(CLOUDINARY_KEY + ":" + CLOUDINARY_SECRET)}`,

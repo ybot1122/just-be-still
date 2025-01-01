@@ -25,7 +25,9 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
 };
 
 const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [selectedImage, setSelectedImage] = useState<File | string>(
+    original.path,
+  );
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
@@ -46,7 +48,9 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
       <div>
         <img
           src={
-            selectedImage ? URL.createObjectURL(selectedImage) : original.path
+            typeof selectedImage === "string"
+              ? selectedImage
+              : URL.createObjectURL(selectedImage)
           }
           alt="Selected"
           className="mt-2 w-[200px]"
@@ -60,7 +64,7 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
           <BasicButton
             onClick={() =>
               setImageChooserCb(() => (p?: string) => {
-                console.log(p);
+                if (p) setSelectedImage(p);
                 setImageChooserCb(() => null);
               })
             }
@@ -78,7 +82,7 @@ const EditableText = ({ text }: { text: string }) => {
   const [value, setValue] = useState(text);
 
   const className =
-    "border border-gray-300 p-2 cursor-text inline-block w-[400px]";
+    "border border-gray-300 p-2 cursor-text inline-block w-[400px] ml-2";
 
   const handleBlur = () => {
     setIsEditing(false);

@@ -4,7 +4,6 @@ import checkAuth from "@/server_actions/checkAuth";
 import { redirect } from "next/navigation";
 import Tabs from "./Tabs";
 import getPageData from "@/lib/getPageData";
-import { getCloudinaryImages } from "@/server_actions/getCloudinaryImages";
 import { ImageChooserProvider } from "@/context/ImageChooserContext";
 
 const temp = [
