@@ -1,16 +1,28 @@
 import BasicButton from "@/components/admin/BasicButton";
-import ImageChooser from "@/components/admin/ImageChooser";
+import ImageChooser, {
+  ImageChooserOnClose,
+} from "@/components/admin/ImageChooser";
 import { Content_Event } from "@/content/events";
-import React, { useState } from "react";
+import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
+import React, { Dispatch, SetStateAction, useState } from "react";
 
-const EditEvents = ({ events }: { events: Content_Event }) => {
+const EditEvents = ({
+  events,
+  setImageChooserCb,
+}: {
+  events: Content_Event;
+  setImageChooserCb: Dispatch<SetStateAction<ImageChooserOnClose>>;
+}) => {
   const [poster, setPoster] = useState(events.poster);
 
   return (
     <div className="text-left">
       <div className="mt-5">
         <h2 className="text-xl">Poster</h2>
-        <ImageUploader original={events.poster} />
+        <ImageUploader
+          original={events.poster}
+          setImageChooserCb={setImageChooserCb}
+        />
       </div>
       <div className="mt-5">
         <h2 className="text-xl">Update the Extra Images</h2>
@@ -24,10 +36,15 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
   );
 };
 
-const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
+const ImageUploader = ({
+  original,
+  setImageChooserCb,
+}: {
+  original: Content_Event["poster"];
+  setImageChooserCb: Dispatch<SetStateAction<ImageChooserOnClose>>;
+}) => {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [isImageChooserOpen, setIsImageChooserOpen] = useState(false);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -43,10 +60,6 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
 
   return (
     <div className="flex gap-5">
-      <ImageChooser
-        isOpen={isImageChooserOpen}
-        onClose={() => setIsImageChooserOpen(false)}
-      />
       <div>
         <img
           src={
@@ -61,7 +74,11 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
           Description: <EditableText text={original.alt} />
         </div>
         <div className="mt-5">
-          <BasicButton onClick={() => setIsImageChooserOpen(true)}>
+          <BasicButton
+            onClick={() =>
+              setImageChooserCb(() => (p?: string) => console.log(p))
+            }
+          >
             Change Image
           </BasicButton>
         </div>

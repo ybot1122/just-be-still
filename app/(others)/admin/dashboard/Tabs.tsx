@@ -3,9 +3,20 @@
 import React, { useState } from "react";
 import EditEvents from "./EditEvents";
 import { Content_Event } from "@/content/events";
+import ImageChooser, {
+  ImageChooserOnClose,
+} from "@/components/admin/ImageChooser";
+import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
 
-const Tabs = ({ events }: { events: Content_Event }) => {
+const Tabs = ({
+  events,
+  images,
+}: {
+  events: Content_Event;
+  images: CloudinaryResource[];
+}) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
+  const [imageChooserCb, setImageChooserCb] = useState<ImageChooserOnClose>();
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
@@ -56,11 +67,16 @@ const Tabs = ({ events }: { events: Content_Event }) => {
         {activeTab === "tab3" && <div>Not Available Yet</div>}
         {activeTab === "tab4" && (
           <div>
-            <EditEvents events={events} />
+            <EditEvents events={events} setImageChooserCb={setImageChooserCb} />
           </div>
         )}
         {activeTab === "tab5" && <div>Not Available Yet</div>}
       </div>
+      <ImageChooser
+        isOpen={!!imageChooserCb}
+        onClose={imageChooserCb}
+        images={images}
+      />
     </div>
   );
 };

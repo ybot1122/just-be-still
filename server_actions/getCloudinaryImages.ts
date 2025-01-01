@@ -2,7 +2,7 @@
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 
-type CloudinaryResource = {
+export type CloudinaryResource = {
   asset_id: string;
   public_id: string;
   resource_type: string;
