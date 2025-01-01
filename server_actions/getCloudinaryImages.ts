@@ -1,6 +1,7 @@
 "use server";
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
+import checkAuth from "./checkAuth";
 
 export type CloudinaryResource = {
   asset_id: string;
@@ -15,8 +16,17 @@ export type CloudinaryResource = {
 export async function getCloudinaryImages(
   folder: string,
 ): Promise<CloudinaryResource[]> {
+  if (!(await checkAuth())) {
+    throw new Error("Not authorized");
+  }
+
   const CLOUDINARY_KEY = process.env.CLOUDINARY_KEY;
   const CLOUDINARY_SECRET = process.env.CLOUDINARY_SECRET;
+
+  if (!CLOUDINARY_KEY || !CLOUDINARY_SECRET) {
+    throw new Error("Cloudinary credentials not set");
+  }
+
   const URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image`;
 
   const result: CloudinaryResource[] = [];

@@ -3,12 +3,17 @@
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import path from "path";
 import crypto from "crypto";
+import checkAuth from "./checkAuth";
 
 const CLOUDINARY_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 
 export async function uploadImageToCloudinary(
   input: FormData,
 ): Promise<string> {
+  if (!(await checkAuth())) {
+    throw new Error("Not authorized");
+  }
+
   const CLOUDINARY_KEY = process.env.CLOUDINARY_KEY;
   const CLOUDINARY_SECRET = process.env.CLOUDINARY_SECRET;
 
