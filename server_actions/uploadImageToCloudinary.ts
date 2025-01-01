@@ -4,10 +4,11 @@ import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import path from "path";
 import checkAuth from "./checkAuth";
 import { uploadImage } from "@ybot1122/toby-ui/Sdk/Cloudinary/uploadImage";
+import { CloudinaryResource } from "./getCloudinaryImages";
 
 export async function uploadImageToCloudinary(
   input: FormData,
-): Promise<string> {
+): Promise<CloudinaryResource> {
   if (!(await checkAuth())) {
     throw new Error("Not authorized");
   }
@@ -27,7 +28,7 @@ export async function uploadImageToCloudinary(
 
   const public_id = spinalCase(path.parse(imageFile.name).name);
 
-  const secure_url = await uploadImage({
+  const result = await uploadImage({
     cloudinary_key: CLOUDINARY_KEY,
     cloudinary_secret: CLOUDINARY_SECRET,
     cloudinary_cloud_name: CLOUDINARY_CLOUD_NAME,
@@ -37,7 +38,7 @@ export async function uploadImageToCloudinary(
     folder: "just-be-still-design",
   });
 
-  return secure_url;
+  return result;
 }
 
 function spinalCase(name: string): string {
