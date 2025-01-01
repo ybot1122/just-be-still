@@ -28,20 +28,7 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
   const [selectedImage, setSelectedImage] = useState<File | string>(
     original.path,
   );
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const { setCallback: setImageChooserCb } = useImageChooser();
-
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      if (!file.type.startsWith("image/")) {
-        setErrorMessage("Please select a valid image file.");
-        return;
-      }
-      setErrorMessage(null);
-      setSelectedImage(file);
-    }
-  };
 
   return (
     <div className="flex gap-5">

@@ -2,6 +2,8 @@
 
 import { useImageChooser } from "@/context/ImageChooserContext";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
+import { useState } from "react";
+import BasicButton from "./BasicButton";
 
 interface ImageChooserGridProps {
   images: CloudinaryResource[];
@@ -30,6 +32,56 @@ export const ImageChooserGrid: React.FC<ImageChooserGridProps> = ({
           </div>
         </div>
       ))}
+    </div>
+  );
+};
+
+export const ImageChooserUpload: React.FC = () => {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const { callback } = useImageChooser();
+  const [error, setError] = useState<string | null>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+      if (file.type.startsWith("image/")) {
+        setSelectedFile(file);
+        setError(null);
+      } else {
+        setSelectedFile(null);
+        setError("Please select a valid image file.");
+      }
+    }
+  };
+
+  const handleUpload = () => {
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        if (reader.result) {
+          callback?.(reader.result.toString());
+        }
+      };
+      reader.readAsDataURL(selectedFile);
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center min-h-[500px] justify-center">
+      {selectedFile && (
+        <div className="mb-4">
+          <img
+            src={URL.createObjectURL(selectedFile)}
+            alt="Selected"
+            className="max-w-[200px] h-auto"
+          />
+        </div>
+      )}
+      <input type="file" onChange={handleFileChange} className="my-5" />
+      <BasicButton onClick={handleUpload} disabled={!selectedFile}>
+        Upload Image
+      </BasicButton>
+      {error && <p className="mt-2 text-red-500">{error}</p>}
     </div>
   );
 };
