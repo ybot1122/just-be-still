@@ -2,6 +2,7 @@
 
 import { CLOUDINARY_CLOUD_NAME } from "@/constants/cloudinary";
 import checkAuth from "./checkAuth";
+import { getCloudinaryImages as get } from "@ybot1122/toby-ui/Sdk/Cloudinary/getCloudinaryImages";
 
 export type CloudinaryResource = {
   asset_id: string;
@@ -27,36 +28,20 @@ export async function getCloudinaryImages(
     throw new Error("Cloudinary credentials not set");
   }
 
-  const URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/resources/image`;
-
   const result: CloudinaryResource[] = [];
-  let nextCursor: string | undefined = undefined;
 
   try {
-    do {
-      const response: Response = await fetch(
-        `${URL}?next_cursor=${nextCursor || ""}&max_results=1000`,
-        {
-          headers: {
-            Authorization: `Basic ${btoa(CLOUDINARY_KEY + ":" + CLOUDINARY_SECRET)}`,
-          },
-        },
-      );
-      const data = await response.json();
-
-      if (response.status === 420) {
-        throw new Error("Rate limit exceeded");
+    const data = await get(
+      CLOUDINARY_CLOUD_NAME,
+      CLOUDINARY_KEY,
+      CLOUDINARY_SECRET,
+    );
+    for (let i = 0; i < data.length; i++) {
+      const resource = data[i];
+      if (resource.folder.includes(folder)) {
+        result.push(resource);
       }
-
-      for (let i = 0; i < data.resources.length; i++) {
-        const resource = data.resources[i];
-        if (resource.folder.includes(folder)) {
-          result.push(resource);
-        }
-      }
-
-      nextCursor = data.next_cursor;
-    } while (nextCursor);
+    }
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);
     throw error;
