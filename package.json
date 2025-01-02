@@ -16,7 +16,7 @@
     ]
   },
   "dependencies": {
-    "@ybot1122/toby-ui": "^0.0.11-alpha",
+    "@ybot1122/toby-ui": "^0.0.12-alpha",
     "next": "^14.2.18",
     "react": "^18",
     "react-dom": "^18"
