@@ -2,12 +2,18 @@
 
 import { getRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/getRepositoryContent";
 import { putRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/putRepositoryContent";
+import checkAuth from "./checkAuth";
 
 export async function updatePageContent(
   pageId: string,
   newContent: string,
 ): Promise<boolean> {
   const token = process.env.GITHUB_PAT;
+  const isAuthed = await checkAuth();
+
+  if (!isAuthed) {
+    throw new Error("Not authenticated");
+  }
 
   if (!token) {
     throw new Error("GitHub credentials are not set");
@@ -27,15 +33,11 @@ export async function updatePageContent(
       path,
     });
 
-    console.log(data);
-
     const sha = data.sha;
 
     if (!sha) {
       throw new Error("Tried to update a file that does not exist");
     }
-
-    console.log(sha);
 
     const response = await putRepositoryContent({
       token,
@@ -47,9 +49,8 @@ export async function updatePageContent(
       sha,
     });
 
-    console.log(response);
     return true;
   } catch (error) {
-    throw error;
+    throw new Error("An error occurred while updating the page");
   }
 }

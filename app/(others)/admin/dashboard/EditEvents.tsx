@@ -47,7 +47,7 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
         alert("An error occurred while updating the page");
       }
     } catch (error) {
-      alert("An error occurred while updating the page");
+      alert((error as Error).message);
     }
   }, []);
 
