@@ -6,5 +6,5 @@ type image = {
 export type Content_Event = {
   poster: image;
   extras: image[];
-  banner: string;
+  banner: string[];
 };
