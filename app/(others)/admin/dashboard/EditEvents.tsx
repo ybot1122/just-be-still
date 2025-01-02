@@ -8,7 +8,47 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
   const [poster, setPoster] = useState(events.poster);
 
   const submitForm = useCallback(async (e: FormData) => {
-    const update = await updatePageContent("test", JSON.stringify(e));
+    const posterPath = e.get("poster");
+    const posterAlt = e.get("poster-alt");
+
+    if (!posterPath || !posterAlt) {
+      alert("Please fill out all fields");
+      return;
+    }
+
+    const data: Content_Event = {
+      poster: {
+        path: posterPath as string,
+        alt: posterAlt as string,
+      },
+      extras: [
+        {
+          path: "/events/images/pumpkin1.jpg",
+          alt: "Fall 2024 Extra 1",
+        },
+        {
+          path: "/events/images/pumpkin2.jpg",
+          alt: "Fall 2024 Extra 2",
+        },
+        {
+          path: "/events/images/pumpkin3.jpg",
+          alt: "Fall 2024 Extra 3",
+        },
+      ],
+      banner: ["TBD"],
+    };
+
+    try {
+      const update = await updatePageContent("test", JSON.stringify(data));
+
+      if (update) {
+        alert("Page updated successfully");
+      } else {
+        alert("An error occurred while updating the page");
+      }
+    } catch (error) {
+      alert("An error occurred while updating the page");
+    }
   }, []);
 
   return (
@@ -53,7 +93,7 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
       </div>
       <div className="">
         <div>
-          Description: <EditableText text={original.alt} />
+          Description: <EditableText text={original.alt} name="poster-alt" />
         </div>
         <div className="mt-5">
           <BasicButton
@@ -73,7 +113,7 @@ const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
   );
 };
 
-const EditableText = ({ text }: { text: string }) => {
+const EditableText = ({ text, name }: { text: string; name: string }) => {
   const [value, setValue] = useState(text);
 
   const className =
@@ -85,6 +125,7 @@ const EditableText = ({ text }: { text: string }) => {
       value={value}
       onChange={(e) => setValue(e.target.value)}
       className={className}
+      name={name}
       autoFocus
     />
   );

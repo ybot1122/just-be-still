@@ -6,7 +6,7 @@ import { putRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/putRepository
 export async function updatePageContent(
   pageId: string,
   newContent: string,
-): Promise<void> {
+): Promise<boolean> {
   const token = process.env.GITHUB_PAT;
 
   if (!token) {
@@ -17,6 +17,7 @@ export async function updatePageContent(
   const repo = "just-be-still";
   const path = `content/${pageId}.json`;
   const commitMessage = `Update ${pageId} content`;
+  const content = btoa(newContent);
 
   try {
     const data = await getRepositoryContent({
@@ -26,20 +27,28 @@ export async function updatePageContent(
       path,
     });
 
+    console.log(data);
+
     const sha = data.sha;
 
     if (!sha) {
       throw new Error("Tried to update a file that does not exist");
     }
 
-    const response = putRepositoryContent({
+    console.log(sha);
+
+    const response = await putRepositoryContent({
       token,
       owner,
       repo,
       path,
       commitMessage,
-      content: newContent,
+      content,
+      sha,
     });
+
+    console.log(response);
+    return true;
   } catch (error) {
     throw error;
   }
