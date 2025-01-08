@@ -2,11 +2,9 @@ import BasicButton from "@/components/admin/BasicButton";
 import { Content_Event } from "@/content/events";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import { updatePageContent } from "@/server_actions/updatePageContent";
-import React, { Dispatch, SetStateAction, useCallback, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 const EditEvents = ({ events }: { events: Content_Event }) => {
-  const [poster, setPoster] = useState(events.poster);
-
   const submitForm = useCallback(async (e: FormData) => {
     const posterPath = e.get("poster");
     const posterAlt = e.get("poster-alt");
@@ -39,7 +37,7 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
     };
 
     try {
-      // TODO: update "test" to the correct page ID
+      // TODO : update "test" to the correct page ID
       const update = await updatePageContent("test", JSON.stringify(data));
 
       if (update) {
