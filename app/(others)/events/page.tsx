@@ -2,6 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
 import getPageData from "@/lib/getPageData";
+import EventsCarousel from "./EventsCarousel";
 
 export default async function Events() {
   const data = await getPageData();
@@ -28,24 +29,12 @@ export default async function Events() {
           why we do what we do. Our hearts are full knowing we could spread some
           love and make them feel remembered this holiday season
         </PageParagraph>
-        <PageParagraph as="div" className="text-left">
+        <PageParagraph as="div" className="text-left" isAccent>
           Thank you to everyone who helped make this possible—you're part of the
           magic!
         </PageParagraph>
       </PageSection>
-
-      <PageSection>
-        <PageParagraph isAccent as="div">
-          <p className="">Coming Up</p>
-          <p className="text-left">
-            <span className="font-bold">Weekend Workshops</span> in September,
-            October, November
-          </p>
-          <p className="text-left">
-            <span className="font-bold">Service Project</span> in December
-          </p>
-        </PageParagraph>
-      </PageSection>
+      <EventsCarousel />
     </>
   );
 }
