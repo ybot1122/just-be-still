@@ -3,6 +3,7 @@
 import { getRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/getRepositoryContent";
 import { putRepositoryContent } from "@ybot1122/toby-ui/Sdk/GitHub/putRepositoryContent";
 import checkAuth from "./checkAuth";
+import fs from "node:fs";
 
 export async function updatePageContent(
   pageId: string,
@@ -25,32 +26,47 @@ export async function updatePageContent(
   const commitMessage = `Update ${pageId} content`;
   const content = btoa(newContent);
 
-  try {
-    const data = await getRepositoryContent({
-      token,
-      owner,
-      repo,
-      path,
-    });
-
-    const sha = data.sha;
-
-    if (!sha) {
-      throw new Error("Tried to update a file that does not exist");
+  if (process.env.NODE_ENV === "development") {
+    // in development mode, save changes to filesystem locally
+    try {
+      await fs.writeFileSync(`./content/${pageId}}.json`, atob(content));
+    } catch (err) {
+      throw new Error("An error occurred while updating the page");
     }
 
-    const response = await putRepositoryContent({
-      token,
-      owner,
-      repo,
-      path,
-      commitMessage,
-      content,
-      sha,
-    });
-
     return true;
-  } catch (error) {
-    throw new Error("An error occurred while updating the page");
+  } else {
+    try {
+      const data = await getRepositoryContent({
+        token,
+        owner,
+        repo,
+        path,
+      });
+
+      const sha = data.sha;
+
+      if (!sha) {
+        throw new Error("Tried to update a file that does not exist");
+      }
+
+      const response = await putRepositoryContent({
+        token,
+        owner,
+        repo,
+        path,
+        commitMessage,
+        content,
+        sha,
+      });
+
+      if (response.commit) {
+        return true;
+      }
+
+      throw new Error("?");
+    } catch (error) {
+      throw new Error("An error occurred while updating the page");
+    }
   }
 }

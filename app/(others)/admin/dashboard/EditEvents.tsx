@@ -70,22 +70,4 @@ const EditEvents = ({ events }: { events: Page }) => {
   );
 };
 
-const EditableText = ({ text, name }: { text: string; name: string }) => {
-  const [value, setValue] = useState(text);
-
-  const className =
-    "border border-gray-300 p-2 cursor-text inline-block w-[400px] ml-2";
-
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      className={className}
-      name={name}
-      autoFocus
-    />
-  );
-};
-
 export default EditEvents;
