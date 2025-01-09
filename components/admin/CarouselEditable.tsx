@@ -1,7 +1,7 @@
 "use client";
 
 import Carousel from "../Carousel";
-import { CarouselNode, ImageNode, NodeType } from "@/content/content";
+import { CarouselWidget, ImageWidget, WidgetType } from "@/content/content";
 import { useCallback, useId, useState } from "react";
 import CarouselImage from "../CarouselImage";
 import BasicButton from "./BasicButton";
@@ -13,7 +13,7 @@ import EditableLabel from "./EditableLabel";
 export default function CarouselEditable({
   content: contentProp,
 }: {
-  content: CarouselNode["content"];
+  content: CarouselWidget["content"];
 }) {
   const id = useId();
   const [isRemoved, setIsRemoved] = useState(false);
@@ -23,8 +23,8 @@ export default function CarouselEditable({
   const addImage = useCallback(
     () => (p?: string) => {
       if (p) {
-        const image: ImageNode = {
-          type: NodeType.Image,
+        const image: ImageWidget = {
+          type: WidgetType.Image,
           src: p,
           alt: "",
           modifiers: [],
@@ -79,7 +79,7 @@ export default function CarouselEditable({
               <input
                 type="hidden"
                 value={c.src}
-                name={`${NodeType.Carousel}$${id}$${c.uuid}`}
+                name={`${WidgetType.Carousel}$${id}$${c.uuid}`}
               />
             </div>
             <BasicButton onClick={() => removeImage(c.uuid)}>

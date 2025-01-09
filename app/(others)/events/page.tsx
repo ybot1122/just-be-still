@@ -3,7 +3,7 @@ import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
 import getPageData from "@/lib/getPageData";
 import Carousel from "../../../components/Carousel";
-import { NodeType } from "@/content/content";
+import { WidgetType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 
 export default async function Events() {
@@ -15,7 +15,7 @@ export default async function Events() {
       <PageHeader header="Events" />
       <PageSection>
         {content.map((c) => {
-          if (c.type === NodeType.Paragraph) {
+          if (c.type === WidgetType.Paragraph) {
             return (
               <PageParagraph
                 as="div"
@@ -27,7 +27,7 @@ export default async function Events() {
             );
           }
 
-          if (c.type === NodeType.AccentParagraph) {
+          if (c.type === WidgetType.AccentParagraph) {
             return (
               <PageParagraph
                 as="div"
@@ -40,7 +40,7 @@ export default async function Events() {
             );
           }
 
-          if (c.type === NodeType.Carousel) {
+          if (c.type === WidgetType.Carousel) {
             return (
               <Carousel key={c.uuid}>
                 {c.content.map((img) => (

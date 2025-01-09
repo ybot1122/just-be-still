@@ -1,33 +1,33 @@
-type Node = CarouselNode | ImageNode | ParagraphNode;
+export type Widget = CarouselWidget | ImageWidget | ParagraphWidget;
 
-export type CarouselNode = {
-  type: NodeType.Carousel;
-  content: ImageNode[];
+export type CarouselWidget = {
+  type: WidgetType.Carousel;
+  content: ImageWidget[];
   uuid: string;
-  modifiers: NodeModifiers[];
+  modifiers: WidgetModifiers[];
 };
 
-export type ImageNode = {
-  type: NodeType.Image;
+export type ImageWidget = {
+  type: WidgetType.Image;
   src: string;
   alt: string;
   uuid: string;
-  modifiers: NodeModifiers[];
+  modifiers: WidgetModifiers[];
 };
 
-type ParagraphNode = {
-  type: NodeType.Paragraph | NodeType.AccentParagraph;
+type ParagraphWidget = {
+  type: WidgetType.Paragraph | WidgetType.AccentParagraph;
   content: string;
   uuid: string;
-  modifiers: NodeModifiers[];
+  modifiers: WidgetModifiers[];
 };
 
-enum NodeModifiers {
+enum WidgetModifiers {
   TextLeft = "text-left",
   FontBold = "font-bold",
 }
 
-export enum NodeType {
+export enum WidgetType {
   Paragraph = "Paragraph",
   AccentParagraph = "AccentParagraph",
   Carousel = "Carousel",
@@ -35,5 +35,5 @@ export enum NodeType {
 }
 
 export type Page = {
-  content: Node[];
+  content: Widget[];
 };

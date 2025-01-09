@@ -1,4 +1,4 @@
-import { NodeType } from "@/content/content";
+import { WidgetType } from "@/content/content";
 import BasicButton from "./BasicButton";
 
 export default function WidgetDeleted({

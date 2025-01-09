@@ -1,6 +1,6 @@
 "use client";
 
-import { NodeType } from "@/content/content";
+import { WidgetType } from "@/content/content";
 import React, { FC, ChangeEvent, useState, useId } from "react";
 import BasicButton from "./BasicButton";
 import TrashIcon from "../TrashIcon";
@@ -23,7 +23,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
   const [value, setValue] = useState(valueProp);
   const pClass = isAccent ? "pageParagraphAccent" : "pageParagraph";
   const pName = `${isAccent ? "Accent " : ""} Paragraph`;
-  const nodeType = isAccent ? NodeType.AccentParagraph : NodeType.Paragraph;
+  const nodeType = isAccent ? WidgetType.AccentParagraph : WidgetType.Paragraph;
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
