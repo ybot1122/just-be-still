@@ -11,12 +11,18 @@ const EditEvents = ({ events }: { events: Page }) => {
   const submitForm = useCallback(async (e: FormData) => {
     console.log(e);
 
+    for (const key of e.keys()) {
+      const value = e.get(key);
+      console.log(key, value);
+    }
+
     const data: Page = {
       content: [],
     };
 
     try {
       // TODO : update "test" to the correct page ID
+      /*
       const update = await updatePageContent("test", JSON.stringify(data));
 
       if (update) {
@@ -25,6 +31,8 @@ const EditEvents = ({ events }: { events: Page }) => {
       } else {
         alert("An error occurred while updating the page");
       }
+        */
+      alert("submitted. the actual api call is stubbed out.");
     } catch (error) {
       alert((error as Error).message);
     }

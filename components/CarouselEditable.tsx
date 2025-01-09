@@ -2,7 +2,7 @@
 
 import Carousel from "./Carousel";
 import { CarouselNode, ImageNode, NodeType } from "@/content/content";
-import { useCallback, useState } from "react";
+import { useCallback, useId, useState } from "react";
 import CarouselImage from "./CarouselImage";
 import BasicButton from "./admin/BasicButton";
 import { useImageChooser } from "@/context/ImageChooserContext";
@@ -12,6 +12,7 @@ export default function CarouselEditable({
 }: {
   content: CarouselNode["content"];
 }) {
+  const id = useId();
   const [content, setContent] = useState(contentProp);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
@@ -23,14 +24,14 @@ export default function CarouselEditable({
           src: p,
           alt: "",
           modifiers: [],
-          uuid: Date.now() + "a",
+          uuid: Date.now() + id,
         };
         const next = [...content, image];
         setContent(next);
       }
       setImageChooserCb(() => null);
     },
-    [setImageChooserCb],
+    [setImageChooserCb, id, content, setContent],
   );
 
   return (
@@ -53,6 +54,11 @@ export default function CarouselEditable({
               src={c.src}
               alt={c.alt}
               className="object-cover object-left-top h-full w-full"
+            />
+            <input
+              type="hidden"
+              value={c.src}
+              name={`Carousel-${id}-${c.uuid}`}
             />
           </div>
         ))}
