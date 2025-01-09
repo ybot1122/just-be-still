@@ -1,11 +1,11 @@
 "use client";
 
-import PageParagraph from "@/components/PageParagraph";
-import { Carousel as TobyUiCarousel } from "@ybot1122/toby-ui/Carousel";
 import Carousel from "./Carousel";
-import { CarouselNode, NodeType } from "@/content/content";
-import { useState } from "react";
+import { CarouselNode, ImageNode, NodeType } from "@/content/content";
+import { useCallback, useState } from "react";
 import CarouselImage from "./CarouselImage";
+import BasicButton from "./admin/BasicButton";
+import { useImageChooser } from "@/context/ImageChooserContext";
 
 export default function CarouselEditable({
   content: contentProp,
@@ -13,6 +13,25 @@ export default function CarouselEditable({
   content: CarouselNode["content"];
 }) {
   const [content, setContent] = useState(contentProp);
+  const { setCallback: setImageChooserCb } = useImageChooser();
+
+  const addImage = useCallback(
+    () => (p?: string) => {
+      if (p) {
+        const image: ImageNode = {
+          type: NodeType.Image,
+          src: p,
+          alt: "",
+          modifiers: [],
+          uuid: Date.now() + "a",
+        };
+        const next = [...content, image];
+        setContent(next);
+      }
+      setImageChooserCb(() => null);
+    },
+    [setImageChooserCb],
+  );
 
   return (
     <div className="flex flex-col items-left mt-4 border-4 border-black p-5">
@@ -24,6 +43,25 @@ export default function CarouselEditable({
           <CarouselImage src={c.src} alt={c.alt} key={c.uuid} />
         ))}
       </Carousel>
+      <div className="flex mt-20">
+        {content.map((c) => (
+          <div
+            className="relative h-[100px] overflow-hidden px-5 mt-5"
+            key={c.uuid}
+          >
+            <img
+              src={c.src}
+              alt={c.alt}
+              className="object-cover object-left-top h-full w-full"
+            />
+          </div>
+        ))}
+      </div>
+      <div className="mt-5">
+        <BasicButton onClick={() => setImageChooserCb(addImage)}>
+          Add Image
+        </BasicButton>
+      </div>
     </div>
   );
 }
