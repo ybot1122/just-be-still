@@ -1,17 +1,16 @@
 "use client";
 
 import PageParagraph from "@/components/PageParagraph";
-import PageSection from "@/components/PageSection";
-import { Carousel } from "@ybot1122/toby-ui/Carousel";
+import { Carousel as TobyUiCarousel } from "@ybot1122/toby-ui/Carousel";
 
-export default function EventsCarousel({
+export default function Carousel({
   children,
 }: {
   children: React.ReactNode[];
 }) {
   return (
     <PageParagraph as="div">
-      <Carousel
+      <TobyUiCarousel
         slidesToShow={1}
         prevButton={(onClick) => (
           <ArrowButton onClick={onClick} direction="prev" />
@@ -21,7 +20,7 @@ export default function EventsCarousel({
         )}
       >
         {children}
-      </Carousel>
+      </TobyUiCarousel>
     </PageParagraph>
   );
 }
@@ -39,7 +38,7 @@ const ArrowButton = ({
       : "M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-4.28 9.22a.75.75 0 0 0 0 1.06l3 3a.75.75 0 1 0 1.06-1.06l-1.72-1.72h5.69a.75.75 0 0 0 0-1.5h-5.69l1.72-1.72a.75.75 0 0 0-1.06-1.06l-3 3Z";
 
   return (
-    <button onClick={onClick}>
+    <button onClick={onClick} type="button">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"

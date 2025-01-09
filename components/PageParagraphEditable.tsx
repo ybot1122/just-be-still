@@ -23,7 +23,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
   };
 
   return (
-    <div className="flex flex-col items-left mt-4">
+    <div className="flex flex-col items-left mt-4 border-4 border-black p-5">
       <label
         htmlFor={id}
         className="block text-lg font-medium text-gray-700 mb-2"

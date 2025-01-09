@@ -1,6 +1,6 @@
 type Node = CarouselNode | ImageNode | ParagraphNode;
 
-type CarouselNode = {
+export type CarouselNode = {
   type: NodeType.Carousel;
   content: ImageNode[];
   uuid: string;

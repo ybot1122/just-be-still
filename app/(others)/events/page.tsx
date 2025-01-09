@@ -2,7 +2,7 @@ import PageHeader from "@/components/PageHeader";
 import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
 import getPageData from "@/lib/getPageData";
-import EventsCarousel from "../../../components/EventsCarousel";
+import Carousel from "../../../components/Carousel";
 import { NodeType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 
@@ -42,11 +42,11 @@ export default async function Events() {
 
           if (c.type === NodeType.Carousel) {
             return (
-              <EventsCarousel key={c.uuid}>
+              <Carousel key={c.uuid}>
                 {c.content.map((img) => (
                   <CarouselImage src={img.src} alt={img.alt} key={img.uuid} />
                 ))}
-              </EventsCarousel>
+              </Carousel>
             );
           }
         })}

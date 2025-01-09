@@ -1,4 +1,6 @@
 import BasicButton from "@/components/admin/BasicButton";
+import CarouselEditable from "@/components/CarouselEditable";
+import CarouselImage from "@/components/CarouselImage";
 import PageParagraphEditable from "@/components/PageParagraphEditable";
 import { ImageNode, NodeType, Page } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
@@ -49,7 +51,7 @@ const EditEvents = ({ events }: { events: Page }) => {
         }
 
         if (c.type === NodeType.Carousel) {
-          return <div key={c.uuid}>A Carousel</div>;
+          return <CarouselEditable key={c.uuid} content={c.content} />;
         }
 
         return null;
