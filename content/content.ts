@@ -7,7 +7,7 @@ type CarouselNode = {
   modifiers: NodeModifiers[];
 };
 
-type ImageNode = {
+export type ImageNode = {
   type: NodeType.Image;
   src: string;
   alt: string;
@@ -34,6 +34,6 @@ export enum NodeType {
   Image = "Image",
 }
 
-export type Content_Event = {
+export type Page = {
   content: Node[];
 };

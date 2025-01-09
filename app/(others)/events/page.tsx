@@ -3,7 +3,7 @@ import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
 import getPageData from "@/lib/getPageData";
 import EventsCarousel from "../../../components/EventsCarousel";
-import { NodeType } from "@/content/events";
+import { NodeType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 
 export default async function Events() {

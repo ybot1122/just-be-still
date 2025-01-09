@@ -1,10 +1,10 @@
 import BasicButton from "@/components/admin/BasicButton";
-import { Content_Event } from "@/content/events";
+import { ImageNode, Page } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import React, { useCallback, useState } from "react";
 
-const EditEvents = ({ events }: { events: Content_Event }) => {
+const EditEvents = ({ events }: { events: Page }) => {
   const submitForm = useCallback(async (e: FormData) => {
     const posterPath = e.get("poster");
     const posterAlt = e.get("poster-alt");
@@ -14,26 +14,8 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
       return;
     }
 
-    const data: Content_Event = {
-      poster: {
-        path: posterPath as string,
-        alt: posterAlt as string,
-      },
-      extras: [
-        {
-          path: "/events/images/pumpkin1.jpg",
-          alt: "Fall 2024 Extra 1",
-        },
-        {
-          path: "/events/images/pumpkin2.jpg",
-          alt: "Fall 2024 Extra 2",
-        },
-        {
-          path: "/events/images/pumpkin3.jpg",
-          alt: "Fall 2024 Extra 3",
-        },
-      ],
-      banner: ["TBD"],
+    const data: Page = {
+      content: [],
     };
 
     try {
@@ -55,18 +37,6 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
     <div className="text-left">
       <form action={submitForm}>
         <div className="mt-5">
-          <h2 className="text-xl">Poster</h2>
-          <ImageUploader original={events.poster} />
-        </div>
-        <div className="mt-5">
-          <h2 className="text-xl">Update the Extra Images</h2>
-          <p>Content for section 2</p>
-        </div>
-        <div className="mt-5">
-          <h2 className="text-xl">Update the Banner Message</h2>
-          <p>Content for section 3</p>
-        </div>
-        <div className="mt-5">
           <BasicButton type="submit">Update Page</BasicButton>
         </div>
       </form>
@@ -74,8 +44,8 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
   );
 };
 
-const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
-  const [selectedImage, setSelectedImage] = useState<string>(original.path);
+const ImageUploader = ({ original }: { original: ImageNode }) => {
+  const [selectedImage, setSelectedImage] = useState<string>(original.src);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
   return (
