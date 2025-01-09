@@ -44,7 +44,7 @@ export default async function Events() {
             return (
               <EventsCarousel>
                 {c.content.map((img) => (
-                  <CarouselImage src={img.src} alt={img.alt} />
+                  <CarouselImage src={img.src} alt={img.alt} key={img.uuid} />
                 ))}
               </EventsCarousel>
             );
