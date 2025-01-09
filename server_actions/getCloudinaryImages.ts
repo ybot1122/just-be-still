@@ -45,7 +45,6 @@ export async function getCloudinaryImages(
     }
   } catch (error) {
     console.error("Error fetching images from Cloudinary:", error);
-    throw error;
   }
   return result;
 }

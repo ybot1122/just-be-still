@@ -1,43 +1,28 @@
 import BasicButton from "@/components/admin/BasicButton";
-import { Content_Event } from "@/content/events";
+import CarouselEditable from "@/components/CarouselEditable";
+import CarouselImage from "@/components/CarouselImage";
+import PageParagraphEditable from "@/components/PageParagraphEditable";
+import { ImageNode, NodeType, Page } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import React, { useCallback, useState } from "react";
 
-const EditEvents = ({ events }: { events: Content_Event }) => {
+const EditEvents = ({ events }: { events: Page }) => {
   const submitForm = useCallback(async (e: FormData) => {
-    const posterPath = e.get("poster");
-    const posterAlt = e.get("poster-alt");
+    console.log(e);
 
-    if (!posterPath || !posterAlt) {
-      alert("Please fill out all fields");
-      return;
+    for (const key of e.keys()) {
+      const value = e.get(key);
+      console.log(key, value);
     }
 
-    const data: Content_Event = {
-      poster: {
-        path: posterPath as string,
-        alt: posterAlt as string,
-      },
-      extras: [
-        {
-          path: "/events/images/pumpkin1.jpg",
-          alt: "Fall 2024 Extra 1",
-        },
-        {
-          path: "/events/images/pumpkin2.jpg",
-          alt: "Fall 2024 Extra 2",
-        },
-        {
-          path: "/events/images/pumpkin3.jpg",
-          alt: "Fall 2024 Extra 3",
-        },
-      ],
-      banner: ["TBD"],
+    const data: Page = {
+      content: [],
     };
 
     try {
       // TODO : update "test" to the correct page ID
+      /*
       const update = await updatePageContent("test", JSON.stringify(data));
 
       if (update) {
@@ -46,36 +31,41 @@ const EditEvents = ({ events }: { events: Content_Event }) => {
       } else {
         alert("An error occurred while updating the page");
       }
+        */
+      alert("submitted. the actual api call is stubbed out.");
     } catch (error) {
       alert((error as Error).message);
     }
   }, []);
 
   return (
-    <div className="text-left">
-      <form action={submitForm}>
-        <div className="mt-5">
-          <h2 className="text-xl">Poster</h2>
-          <ImageUploader original={events.poster} />
-        </div>
-        <div className="mt-5">
-          <h2 className="text-xl">Update the Extra Images</h2>
-          <p>Content for section 2</p>
-        </div>
-        <div className="mt-5">
-          <h2 className="text-xl">Update the Banner Message</h2>
-          <p>Content for section 3</p>
-        </div>
-        <div className="mt-5">
-          <BasicButton type="submit">Update Page</BasicButton>
-        </div>
-      </form>
-    </div>
+    <form action={submitForm} className="text-left">
+      {events.content.map((c) => {
+        if (c.type === NodeType.Paragraph) {
+          return <PageParagraphEditable value={c.content} key={c.uuid} />;
+        }
+
+        if (c.type === NodeType.AccentParagraph) {
+          return (
+            <PageParagraphEditable value={c.content} key={c.uuid} isAccent />
+          );
+        }
+
+        if (c.type === NodeType.Carousel) {
+          return <CarouselEditable key={c.uuid} content={c.content} />;
+        }
+
+        return null;
+      })}
+      <div className="mt-5">
+        <BasicButton type="submit">Update Page</BasicButton>
+      </div>
+    </form>
   );
 };
 
-const ImageUploader = ({ original }: { original: Content_Event["poster"] }) => {
-  const [selectedImage, setSelectedImage] = useState<string>(original.path);
+const ImageUploader = ({ original }: { original: ImageNode }) => {
+  const [selectedImage, setSelectedImage] = useState<string>(original.src);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
   return (

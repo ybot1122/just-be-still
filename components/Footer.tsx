@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full mt-[25px] pb-[25px] text-xs text-center tall:snap-end tall:snap-always">
+    <footer className="w-full mt-20 pb-[25px] text-xs text-center tall:snap-end tall:snap-always">
       <p>
         <span className="mr-5">
           &copy; {new Date().getFullYear()} JustBeStill

@@ -24,7 +24,7 @@ export default function LoginToAdmin({}: {}) {
         }
       });
     }
-  }, [setStatus]);
+  }, [setStatus, router]);
 
   return (
     <PageParagraph as="div">

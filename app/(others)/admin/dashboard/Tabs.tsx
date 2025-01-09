@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import EditEvents from "./EditEvents";
-import { Content_Event } from "@/content/events";
+import { Page } from "@/content/content";
 import ImageChooser from "@/components/admin/ImageChooser";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
 import { useImageChooser } from "@/context/ImageChooserContext";
@@ -11,7 +11,7 @@ const Tabs = ({
   events,
   images,
 }: {
-  events: Content_Event;
+  events: Page;
   images: CloudinaryResource[];
 }) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
