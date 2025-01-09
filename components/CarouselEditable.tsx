@@ -6,6 +6,7 @@ import { useCallback, useId, useState } from "react";
 import CarouselImage from "./CarouselImage";
 import BasicButton from "./admin/BasicButton";
 import { useImageChooser } from "@/context/ImageChooserContext";
+import TrashIcon from "./TrashIcon";
 
 export default function CarouselEditable({
   content: contentProp,
@@ -26,12 +27,20 @@ export default function CarouselEditable({
           modifiers: [],
           uuid: Date.now() + id,
         };
-        const next = [...content, image];
-        setContent(next);
+        content.push(image);
+        setContent(content);
       }
       setImageChooserCb(() => null);
     },
     [setImageChooserCb, id, content, setContent],
+  );
+
+  const removeImage = useCallback(
+    (uuid: string) => {
+      const next = content.filter((c) => c.uuid !== uuid);
+      setContent(next);
+    },
+    [content, setContent],
   );
 
   return (
@@ -46,20 +55,25 @@ export default function CarouselEditable({
       </Carousel>
       <div className="flex mt-10">
         {content.map((c) => (
-          <div
-            className="relative h-[100px] overflow-hidden px-5 mt-5"
-            key={c.uuid}
-          >
-            <img
-              src={c.src}
-              alt={c.alt}
-              className="object-cover object-left-top h-full w-full"
-            />
-            <input
-              type="hidden"
-              value={c.src}
-              name={`${NodeType.Carousel}$${id}$${c.uuid}`}
-            />
+          <div className="flex flex-col items-center">
+            <div
+              className="relative h-[100px] overflow-hidden px-5 my-2"
+              key={c.uuid}
+            >
+              <img
+                src={c.src}
+                alt={c.alt}
+                className="object-cover object-left-top h-full w-full"
+              />
+              <input
+                type="hidden"
+                value={c.src}
+                name={`${NodeType.Carousel}$${id}$${c.uuid}`}
+              />
+            </div>
+            <BasicButton onClick={() => removeImage(c.uuid)}>
+              <TrashIcon width={24} height={24} className="my-1" />
+            </BasicButton>
           </div>
         ))}
       </div>
