@@ -1,23 +1,55 @@
 {
-  "poster": {
-    "path": "/events/posters/fall2024.jpg",
-    "alt": "Fall 2024 Poster"
-  },
-  "extras": [
+  "content": [
     {
-      "path": "/events/images/pumpkin1.jpg",
-      "alt": "Fall 2024 Extra 1"
+      "type": "Paragraph",
+      "modifiers": ["font-bold"],
+      "content": "December Workshop Update",
+      "uuid": "1"
     },
     {
-      "path": "/events/images/pumpkin2.jpg",
-      "alt": "Fall 2024 Extra 2"
+      "type": "Paragraph",
+      "modifiers": ["text-left"],
+      "content": "This month, we had the joy of partnering with Green Hills Retirement Home to bring a little extra comfort and love to their residents. With 55 residents eagerly awaiting handmade pillows, we got to work and created 55 beautiful, cozy pillows just for them!",
+      "uuid": "2"
     },
     {
-      "path": "/events/images/pumpkin3.jpg",
-      "alt": "Fall 2024 Extra 3"
+      "type": "Carousel",
+      "modifiers": [],
+      "content": [
+        {
+          "type": "Image",
+          "modifiers": [],
+          "src": "https://via.placeholder.com/300",
+          "alt": "Pillow 1",
+          "uuid": "1"
+        },
+        {
+          "type": "Image",
+          "modifiers": [],
+          "src": "https://via.placeholder.com/300",
+          "alt": "Pillow 2",
+          "uuid": "2"
+        },
+        {
+          "type": "Image",
+          "modifiers": [],
+          "src": "https://via.placeholder.com/300",
+          "alt": "Pillow 3",
+          "uuid": "3"
+        }
+      ]
+    },
+    {
+      "type": "Paragraph",
+      "modifiers": ["text-left"],
+      "content": "Delivering these heartfelt gifts was an unforgettable experience. Seeing their smiles and hearing their words of gratitude reminded us why we do what we do. Our hearts are full knowing we could spread some love and make them feel remembered this holiday season",
+      "uuid": "3"
+    },
+    {
+      "type": "AccentParagraph",
+      "modifiers": ["text-left"],
+      "content": "Thank you to everyone who helped make this possible — you're part of the magic!",
+      "uuid": "4"
     }
-  ],
-  "banner": [
-    "TBD"
   ]
 }

@@ -3,37 +3,46 @@ import PageSection from "@/components/PageSection";
 import PageParagraph from "@/components/PageParagraph";
 import getPageData from "@/lib/getPageData";
 import EventsCarousel from "./EventsCarousel";
+import { NodeType } from "@/content/events";
 
 export default async function Events() {
   const data = await getPageData();
-  const poster = data.poster;
-  const extras = data.extras;
+  const content = data.content;
 
   return (
     <>
       <PageHeader header="Events" />
-
       <PageSection>
-        <PageParagraph as="div" className="font-bold">
-          December Workshop Update
-        </PageParagraph>
-        <PageParagraph as="div" className="text-left">
-          This month, we had the joy of partnering with Green Hills Retirement
-          Home to bring a little extra comfort and love to their residents. With
-          55 residents eagerly awaiting handmade pillows, we got to work and
-          created 55 beautiful, cozy pillows just for them!
-        </PageParagraph>
-        <EventsCarousel />
-        <PageParagraph as="div" className="text-left">
-          Delivering these heartfelt gifts was an unforgettable experience.
-          Seeing their smiles and hearing their words of gratitude reminded us
-          why we do what we do. Our hearts are full knowing we could spread some
-          love and make them feel remembered this holiday season
-        </PageParagraph>
-        <PageParagraph as="div" className="text-left mb-20" isAccent>
-          Thank you to everyone who helped make this possible — you&apos;re part
-          of the magic!
-        </PageParagraph>
+        {content.map((c) => {
+          if (c.type === NodeType.Paragraph) {
+            return (
+              <PageParagraph
+                as="div"
+                className={c.modifiers.join(" ")}
+                key={c.uuid}
+              >
+                {c.content}
+              </PageParagraph>
+            );
+          }
+
+          if (c.type === NodeType.AccentParagraph) {
+            return (
+              <PageParagraph
+                as="div"
+                className={c.modifiers.join(" ")}
+                isAccent
+                key={c.uuid}
+              >
+                {c.content}
+              </PageParagraph>
+            );
+          }
+
+          if (c.type === NodeType.Carousel) {
+            return <EventsCarousel key={c.uuid} />;
+          }
+        })}
       </PageSection>
     </>
   );
