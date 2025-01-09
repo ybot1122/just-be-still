@@ -88,9 +88,9 @@ export default function CarouselEditable({
           </div>
         ))}
       </div>
-      <div className="mt-5">
+      <div className="mt-5 flex justify-center">
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
-          Add Image
+          <div className="py-2">Add Image</div>
         </BasicButton>
       </div>
     </div>

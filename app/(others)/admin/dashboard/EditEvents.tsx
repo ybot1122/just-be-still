@@ -56,6 +56,7 @@ const EditEvents = ({ events }: { events: Page }) => {
       })}
       <div className="flex gap-2 mt-5 justify-center">
         <select
+          id="new-widget-chooser"
           className="border border-gray-300 p-2 cursor-pointer"
           defaultValue={WidgetType.Paragraph}
         >
@@ -66,8 +67,8 @@ const EditEvents = ({ events }: { events: Page }) => {
         </select>
         <BasicButton
           onClick={() => {
-            const selectElement = document.querySelector(
-              "select",
+            const selectElement = document.getElementById(
+              "new-widget-chooser",
             ) as HTMLSelectElement;
             const selectedOption = selectElement.value;
             console.log("Add selected widget clicked", selectedOption);
@@ -78,7 +79,9 @@ const EditEvents = ({ events }: { events: Page }) => {
       </div>
 
       <div className="flex justify-center mt-10">
-        <BasicButton type="submit">Update Page</BasicButton>
+        <BasicButton type="submit">
+          <div className="py-2">Update Page</div>
+        </BasicButton>
       </div>
     </form>
   );
