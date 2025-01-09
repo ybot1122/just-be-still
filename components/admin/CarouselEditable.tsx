@@ -1,12 +1,14 @@
 "use client";
 
-import Carousel from "./Carousel";
+import Carousel from "../Carousel";
 import { CarouselNode, ImageNode, NodeType } from "@/content/content";
 import { useCallback, useId, useState } from "react";
-import CarouselImage from "./CarouselImage";
-import BasicButton from "./admin/BasicButton";
+import CarouselImage from "../CarouselImage";
+import BasicButton from "./BasicButton";
 import { useImageChooser } from "@/context/ImageChooserContext";
-import TrashIcon from "./TrashIcon";
+import TrashIcon from "../TrashIcon";
+import WidgetDeleted from "./WidgetDeleted";
+import EditableLabel from "./EditableLabel";
 
 export default function CarouselEditable({
   content: contentProp,
@@ -14,6 +16,7 @@ export default function CarouselEditable({
   content: CarouselNode["content"];
 }) {
   const id = useId();
+  const [isRemoved, setIsRemoved] = useState(false);
   const [content, setContent] = useState(contentProp);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
@@ -43,11 +46,22 @@ export default function CarouselEditable({
     [content, setContent],
   );
 
+  if (isRemoved) {
+    return (
+      <WidgetDeleted
+        widgetName="Image Carousel"
+        undoCb={() => setIsRemoved(false)}
+      />
+    );
+  }
+
   return (
     <div className="flex flex-col items-left mt-4 border-4 border-black p-5">
-      <label className="block text-lg font-medium text-gray-700 mb-2">
-        Image Carousel
-      </label>
+      <EditableLabel
+        htmlFor={id}
+        name={"Image Carousel"}
+        removeCb={() => setIsRemoved(true)}
+      />
       <Carousel>
         {content.map((c) => (
           <CarouselImage src={c.src} alt={c.alt} key={c.uuid} />

@@ -1,6 +1,6 @@
 import BasicButton from "@/components/admin/BasicButton";
-import CarouselEditable from "@/components/CarouselEditable";
-import PageParagraphEditable from "@/components/PageParagraphEditable";
+import CarouselEditable from "@/components/admin/CarouselEditable";
+import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
 import { ImageNode, NodeType, Page } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import React, { useCallback, useState } from "react";

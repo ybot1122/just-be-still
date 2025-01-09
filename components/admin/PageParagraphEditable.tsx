@@ -2,8 +2,10 @@
 
 import { NodeType } from "@/content/content";
 import React, { FC, ChangeEvent, useState, useId } from "react";
-import BasicButton from "./admin/BasicButton";
-import TrashIcon from "./TrashIcon";
+import BasicButton from "./BasicButton";
+import TrashIcon from "../TrashIcon";
+import WidgetDeleted from "./WidgetDeleted";
+import EditableLabel from "./EditableLabel";
 
 interface PageParagraphEditable {
   value: string;
@@ -29,26 +31,17 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
 
   if (isRemoved) {
     return (
-      <div className="flex flex-col items-center mt-4 border-4 border-red-500 p-5">
-        <p className="text-red-500 mb-4">This {pName} has been deleted.</p>
-        <BasicButton onClick={() => setIsRemoved(false)}>Undo</BasicButton>
-      </div>
+      <WidgetDeleted widgetName={pName} undoCb={() => setIsRemoved(false)} />
     );
   }
 
   return (
     <div className="flex flex-col items-left mt-4 border-4 border-black p-5">
-      <div className="flex justify-between items-top w-full mb-5">
-        <label
-          htmlFor={id}
-          className="block text-lg font-medium text-gray-700 mb-2"
-        >
-          {pName}
-        </label>
-        <BasicButton onClick={() => setIsRemoved(true)}>
-          <TrashIcon width={24} height={24} />
-        </BasicButton>
-      </div>
+      <EditableLabel
+        htmlFor={id}
+        name={pName}
+        removeCb={() => setIsRemoved(true)}
+      />
       <textarea
         id={id}
         name={`${nodeType}$${id}`}
