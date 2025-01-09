@@ -42,7 +42,7 @@ export default async function Events() {
 
           if (c.type === NodeType.Carousel) {
             return (
-              <EventsCarousel>
+              <EventsCarousel key={c.uuid}>
                 {c.content.map((img) => (
                   <CarouselImage src={img.src} alt={img.alt} key={img.uuid} />
                 ))}
