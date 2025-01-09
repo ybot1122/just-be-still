@@ -1,5 +1,6 @@
 import BasicButton from "@/components/admin/BasicButton";
 import CarouselEditable from "@/components/admin/CarouselEditable";
+import SingleImageEditable from "@/components/admin/SingleImageEditable";
 import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
 import WidgetAdder from "@/components/admin/WidgetAdder";
 import { ImageWidget, WidgetType, Page, Widget } from "@/content/content";
@@ -53,6 +54,10 @@ const EditEvents = ({ events }: { events: Page }) => {
           return <CarouselEditable key={c.uuid} content={c.content} />;
         }
 
+        if (c.type === WidgetType.Image) {
+          return <SingleImageEditable original={c} key={c.uuid} />;
+        }
+
         return null;
       })}
       <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
@@ -62,45 +67,6 @@ const EditEvents = ({ events }: { events: Page }) => {
         </BasicButton>
       </div>
     </form>
-  );
-};
-
-const ImageUploader = ({ original }: { original: ImageWidget }) => {
-  const [selectedImage, setSelectedImage] = useState<string>(original.src);
-  const { setCallback: setImageChooserCb } = useImageChooser();
-
-  return (
-    <div className="flex gap-5">
-      <div>
-        <img
-          src={
-            typeof selectedImage === "string"
-              ? selectedImage
-              : URL.createObjectURL(selectedImage)
-          }
-          alt="Selected"
-          className="mt-2 w-[200px]"
-        />
-      </div>
-      <div className="">
-        <div>
-          Description: <EditableText text={original.alt} name="poster-alt" />
-        </div>
-        <div className="mt-5">
-          <BasicButton
-            onClick={() =>
-              setImageChooserCb(() => (p?: string) => {
-                if (p) setSelectedImage(p);
-                setImageChooserCb(() => null);
-              })
-            }
-          >
-            Change Image
-          </BasicButton>
-        </div>
-      </div>
-      <input type="hidden" value={selectedImage} name="poster" />
-    </div>
   );
 };
 
