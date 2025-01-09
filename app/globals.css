@@ -6,6 +6,12 @@ html {
   scroll-behavior: smooth;
 }
 
-.fp-watermark {
-  display: none;
+@layer components {
+  .pageParagraph {
+    @apply text-xl md:text-2xl md:leading-loose px-5 m-auto;
+  }
+
+  .pageParagraphAccent { 
+    @apply text-xl md:text-2xl md:leading-loose px-5 m-auto bg-forest text-white py-5;
+  }
 }

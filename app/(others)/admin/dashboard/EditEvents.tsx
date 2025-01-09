@@ -1,5 +1,6 @@
 import BasicButton from "@/components/admin/BasicButton";
-import { ImageNode, Page } from "@/content/content";
+import PageParagraphEditable from "@/components/PageParagraphEditable";
+import { ImageNode, NodeType, Page } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import React, { useCallback, useState } from "react";
@@ -36,6 +37,21 @@ const EditEvents = ({ events }: { events: Page }) => {
   return (
     <div className="text-left">
       <form action={submitForm}>
+        {events.content.map((c) => {
+          if (c.type === NodeType.Paragraph) {
+            return <PageParagraphEditable value={c.content} id={c.uuid} />;
+          }
+
+          if (c.type === NodeType.AccentParagraph) {
+            return (
+              <PageParagraphEditable value={c.content} id={c.uuid} isAccent />
+            );
+          }
+
+          if (c.type === NodeType.Carousel) {
+            return <div key={c.uuid}>A Carousel</div>;
+          }
+        })}
         <div className="mt-5">
           <BasicButton type="submit">Update Page</BasicButton>
         </div>
