@@ -4,7 +4,11 @@ import PageParagraph from "@/components/PageParagraph";
 import PageSection from "@/components/PageSection";
 import { Carousel } from "@ybot1122/toby-ui/Carousel";
 
-export default function EventsCarousel() {
+export default function EventsCarousel({
+  children,
+}: {
+  children: React.ReactNode[];
+}) {
   return (
     <PageParagraph as="div">
       <Carousel
@@ -16,28 +20,11 @@ export default function EventsCarousel() {
           <ArrowButton onClick={onClick} direction="next" />
         )}
       >
-        <CarouselImage src={"/events/dec2024/dec-3.jpg"} alt="Dec 3" />
-        <CarouselImage src={"/events/dec2024/dec-6.jpg"} alt="Dec 2" />
-        <CarouselImage src={"/events/dec2024/dec-5.jpg"} alt="Dec 4" />
-        <CarouselImage src={"/events/dec2024/dec-4.jpg"} alt="Dec 5" />
-        <CarouselImage src={"/events/dec2024/dec-2.jpg"} alt="Dec 6" />
-        <CarouselImage src={"/events/dec2024/dec-1.jpg"} alt="Dec 1" />
+        {children}
       </Carousel>
     </PageParagraph>
   );
 }
-
-const CarouselImage = ({ src, alt }: { src: string; alt: string }) => {
-  return (
-    <div className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden px-5">
-      <img
-        src={src}
-        alt={alt}
-        className="object-cover object-left-top h-full w-full"
-      />
-    </div>
-  );
-};
 
 const ArrowButton = ({
   onClick,

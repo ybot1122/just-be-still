@@ -19,23 +19,44 @@
         {
           "type": "Image",
           "modifiers": [],
-          "src": "https://via.placeholder.com/300",
-          "alt": "Pillow 1",
-          "uuid": "1"
+          "src": "/events/dec2024/dec-3.jpg",
+          "alt": "Partnering with Green Hills Retirement Home",
+          "uuid": "dec3"
         },
         {
           "type": "Image",
           "modifiers": [],
-          "src": "https://via.placeholder.com/300",
-          "alt": "Pillow 2",
-          "uuid": "2"
+          "src": "/events/dec2024/dec-6.jpg",
+          "alt": "Partnering with Green Hills Retirement Home",
+          "uuid": "dec2"
         },
         {
           "type": "Image",
           "modifiers": [],
-          "src": "https://via.placeholder.com/300",
-          "alt": "Pillow 3",
-          "uuid": "3"
+          "src": "/events/dec2024/dec-5.jpg",
+          "alt": "Partnering with Green Hills Retirement Home",
+          "uuid": "dec3"
+        },
+        {
+          "type": "Image",
+          "modifiers": [],
+          "src": "/events/dec2024/dec-4.jpg",
+          "alt": "Partnering with Green Hills Retirement Home",
+          "uuid": "dec4"
+        },
+        {
+          "type": "Image",
+          "modifiers": [],
+          "src": "/events/dec2024/dec-2.jpg",
+          "alt": "Partnering with Green Hills Retirement Home",
+          "uuid": "dec2"
+        },
+        {
+          "type": "Image",
+          "modifiers": [],
+          "src": "/events/dec2024/dec-1.jpg",
+          "alt": "Partnering with Green Hills Retirement Home",
+          "uuid": "dec1"
         }
       ]
     },
