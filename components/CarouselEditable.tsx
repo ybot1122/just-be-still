@@ -44,7 +44,7 @@ export default function CarouselEditable({
           <CarouselImage src={c.src} alt={c.alt} key={c.uuid} />
         ))}
       </Carousel>
-      <div className="flex mt-20">
+      <div className="flex mt-10">
         {content.map((c) => (
           <div
             className="relative h-[100px] overflow-hidden px-5 mt-5"
@@ -58,7 +58,7 @@ export default function CarouselEditable({
             <input
               type="hidden"
               value={c.src}
-              name={`Carousel-${id}-${c.uuid}`}
+              name={`${NodeType.Carousel}$${id}$${c.uuid}`}
             />
           </div>
         ))}

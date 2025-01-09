@@ -42,19 +42,12 @@ const EditEvents = ({ events }: { events: Page }) => {
     <form action={submitForm} className="text-left">
       {events.content.map((c) => {
         if (c.type === NodeType.Paragraph) {
-          return (
-            <PageParagraphEditable value={c.content} id={c.uuid} key={c.uuid} />
-          );
+          return <PageParagraphEditable value={c.content} key={c.uuid} />;
         }
 
         if (c.type === NodeType.AccentParagraph) {
           return (
-            <PageParagraphEditable
-              value={c.content}
-              id={c.uuid}
-              key={c.uuid}
-              isAccent
-            />
+            <PageParagraphEditable value={c.content} key={c.uuid} isAccent />
           );
         }
 

@@ -1,22 +1,23 @@
 "use client";
 
-import React, { FC, ChangeEvent, useState } from "react";
+import { NodeType } from "@/content/content";
+import React, { FC, ChangeEvent, useState, useId } from "react";
 
 interface PageParagraphEditable {
   value: string;
   placeholder?: string;
-  id: string;
   isAccent?: boolean;
 }
 
 const PageParagraphEditable: FC<PageParagraphEditable> = ({
   value: valueProp,
   placeholder,
-  id,
   isAccent = false,
 }) => {
+  const id = useId();
   const [value, setValue] = useState(valueProp);
   const pClass = isAccent ? "pageParagraphAccent" : "pageParagraph";
+  const nodeType = isAccent ? NodeType.AccentParagraph : NodeType.Paragraph;
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
@@ -32,6 +33,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
       </label>
       <textarea
         id={id}
+        name={`${nodeType}$${id}`}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
