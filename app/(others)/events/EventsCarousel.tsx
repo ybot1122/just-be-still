@@ -1,18 +1,12 @@
 "use client";
 
+import PageParagraph from "@/components/PageParagraph";
 import PageSection from "@/components/PageSection";
 import { Carousel } from "@ybot1122/toby-ui/Carousel";
-import Image from "next/image";
-import dec1 from "@/public/events/dec2024/dec-1.jpg";
-import dec2 from "@/public/events/dec2024/dec-2.jpg";
-import dec3 from "@/public/events/dec2024/dec-3.jpg";
-import dec4 from "@/public/events/dec2024/dec-4.jpg";
-import dec5 from "@/public/events/dec2024/dec-5.jpg";
-import dec6 from "@/public/events/dec2024/dec-6.jpg";
 
 export default function EventsCarousel() {
   return (
-    <PageSection className="mt-10 md:mt-20">
+    <PageParagraph as="div">
       <Carousel
         slidesToShow={1}
         prevButton={(onClick) => (
@@ -22,28 +16,28 @@ export default function EventsCarousel() {
           <ArrowButton onClick={onClick} direction="next" />
         )}
       >
-        <div className="relative">
-          <Image src={dec1} alt="Dec 1" className="object-contain object-top" />
-        </div>
-        <div className="relative h-[300px] md:h-[400px]">
-          <Image src={dec2} alt="Dec 2" />
-        </div>
-        <div className="relative h-[300px] md:h-[400px]">
-          <Image src={dec3} alt="Dec 3" />
-        </div>
-        <div className="relative h-[300px] md:h-[400px]">
-          <Image src={dec4} alt="Dec 4" />
-        </div>
-        <div className="relative h-[300px] md:h-[400px]">
-          <Image src={dec5} alt="Dec 5" />
-        </div>
-        <div className="relative h-[300px] md:h-[400px]">
-          <Image src={dec6} alt="Dec 6" />
-        </div>
+        <CarouselImage src={"/events/dec2024/dec-3.jpg"} alt="Dec 3" />
+        <CarouselImage src={"/events/dec2024/dec-6.jpg"} alt="Dec 2" />
+        <CarouselImage src={"/events/dec2024/dec-5.jpg"} alt="Dec 4" />
+        <CarouselImage src={"/events/dec2024/dec-4.jpg"} alt="Dec 5" />
+        <CarouselImage src={"/events/dec2024/dec-2.jpg"} alt="Dec 6" />
+        <CarouselImage src={"/events/dec2024/dec-1.jpg"} alt="Dec 1" />
       </Carousel>
-    </PageSection>
+    </PageParagraph>
   );
 }
+
+const CarouselImage = ({ src, alt }: { src: string; alt: string }) => {
+  return (
+    <div className="relative h-[300px] sm:h-[400px] md:h-[500px] overflow-hidden">
+      <img
+        src={src}
+        alt={alt}
+        className="object-cover object-left-top h-full w-full"
+      />
+    </div>
+  );
+};
 
 const ArrowButton = ({
   onClick,
@@ -62,7 +56,7 @@ const ArrowButton = ({
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className={`fill-green h-[24px] w-[24px]`}
+        className={`fill-green h-[24px] w-[24px] md:h-[48px] md:w-[48px]`}
       >
         <path fillRule="evenodd" d={d} clipRule="evenodd" />
       </svg>
