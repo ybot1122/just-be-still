@@ -21,6 +21,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
+
   return (
     <div className="flex flex-col items-left mt-4">
       <label

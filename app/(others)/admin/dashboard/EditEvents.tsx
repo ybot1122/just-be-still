@@ -7,13 +7,7 @@ import React, { useCallback, useState } from "react";
 
 const EditEvents = ({ events }: { events: Page }) => {
   const submitForm = useCallback(async (e: FormData) => {
-    const posterPath = e.get("poster");
-    const posterAlt = e.get("poster-alt");
-
-    if (!posterPath || !posterAlt) {
-      alert("Please fill out all fields");
-      return;
-    }
+    console.log(e);
 
     const data: Page = {
       content: [],
@@ -35,28 +29,35 @@ const EditEvents = ({ events }: { events: Page }) => {
   }, []);
 
   return (
-    <div className="text-left">
-      <form action={submitForm}>
-        {events.content.map((c) => {
-          if (c.type === NodeType.Paragraph) {
-            return <PageParagraphEditable value={c.content} id={c.uuid} />;
-          }
+    <form action={submitForm} className="text-left">
+      {events.content.map((c) => {
+        if (c.type === NodeType.Paragraph) {
+          return (
+            <PageParagraphEditable value={c.content} id={c.uuid} key={c.uuid} />
+          );
+        }
 
-          if (c.type === NodeType.AccentParagraph) {
-            return (
-              <PageParagraphEditable value={c.content} id={c.uuid} isAccent />
-            );
-          }
+        if (c.type === NodeType.AccentParagraph) {
+          return (
+            <PageParagraphEditable
+              value={c.content}
+              id={c.uuid}
+              key={c.uuid}
+              isAccent
+            />
+          );
+        }
 
-          if (c.type === NodeType.Carousel) {
-            return <div key={c.uuid}>A Carousel</div>;
-          }
-        })}
-        <div className="mt-5">
-          <BasicButton type="submit">Update Page</BasicButton>
-        </div>
-      </form>
-    </div>
+        if (c.type === NodeType.Carousel) {
+          return <div key={c.uuid}>A Carousel</div>;
+        }
+
+        return null;
+      })}
+      <div className="mt-5">
+        <BasicButton type="submit">Update Page</BasicButton>
+      </div>
+    </form>
   );
 };
 
