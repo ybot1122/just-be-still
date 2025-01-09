@@ -31,8 +31,8 @@ export default async function Events() {
           love and make them feel remembered this holiday season
         </PageParagraph>
         <PageParagraph as="div" className="text-left mb-20" isAccent>
-          Thank you to everyone who helped make this possible—you're part of the
-          magic!
+          Thank you to everyone who helped make this possible — you&apos;re part
+          of the magic!
         </PageParagraph>
       </PageSection>
     </>
