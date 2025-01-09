@@ -1,12 +1,13 @@
 import BasicButton from "@/components/admin/BasicButton";
 import CarouselEditable from "@/components/admin/CarouselEditable";
 import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
+import WidgetAdder from "@/components/admin/WidgetAdder";
 import { ImageWidget, WidgetType, Page, Widget } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import React, { useCallback, useState } from "react";
 
 const EditEvents = ({ events }: { events: Page }) => {
-  const [newNodes, setNewNodes] = useState<Widget[]>([]);
+  const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const submitForm = useCallback(async (e: FormData) => {
     for (const key of e.keys()) {
       const value = e.get(key);
@@ -37,7 +38,7 @@ const EditEvents = ({ events }: { events: Page }) => {
 
   return (
     <form action={submitForm} className="text-left">
-      {[...events.content, ...newNodes].map((c) => {
+      {[...events.content, ...newWidgets].map((c) => {
         if (c.type === WidgetType.Paragraph) {
           return <PageParagraphEditable value={c.content} key={c.uuid} />;
         }
@@ -54,30 +55,7 @@ const EditEvents = ({ events }: { events: Page }) => {
 
         return null;
       })}
-      <div className="flex gap-2 mt-5 justify-center">
-        <select
-          id="new-widget-chooser"
-          className="border border-gray-300 p-2 cursor-pointer"
-          defaultValue={WidgetType.Paragraph}
-        >
-          <option value={WidgetType.Paragraph}>Paragraph</option>
-          <option value={WidgetType.AccentParagraph}>Accent Paragraph</option>
-          <option value={WidgetType.Carousel}>Image Carousel</option>
-          <option value={WidgetType.Image}>Single Image</option>
-        </select>
-        <BasicButton
-          onClick={() => {
-            const selectElement = document.getElementById(
-              "new-widget-chooser",
-            ) as HTMLSelectElement;
-            const selectedOption = selectElement.value;
-            console.log("Add selected widget clicked", selectedOption);
-          }}
-        >
-          Add Selected Widget
-        </BasicButton>
-      </div>
-
+      <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
       <div className="flex justify-center mt-10">
         <BasicButton type="submit">
           <div className="py-2">Update Page</div>
