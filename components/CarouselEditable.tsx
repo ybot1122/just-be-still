@@ -55,11 +55,8 @@ export default function CarouselEditable({
       </Carousel>
       <div className="flex mt-10">
         {content.map((c) => (
-          <div className="flex flex-col items-center">
-            <div
-              className="relative h-[100px] overflow-hidden px-5 my-2"
-              key={c.uuid}
-            >
+          <div className="flex flex-col items-center" key={c.uuid}>
+            <div className="relative h-[100px] overflow-hidden px-5 my-2">
               <img
                 src={c.src}
                 alt={c.alt}
