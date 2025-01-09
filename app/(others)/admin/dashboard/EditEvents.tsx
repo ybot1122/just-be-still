@@ -1,16 +1,12 @@
 import BasicButton from "@/components/admin/BasicButton";
 import CarouselEditable from "@/components/CarouselEditable";
-import CarouselImage from "@/components/CarouselImage";
 import PageParagraphEditable from "@/components/PageParagraphEditable";
 import { ImageNode, NodeType, Page } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
-import { updatePageContent } from "@/server_actions/updatePageContent";
 import React, { useCallback, useState } from "react";
 
 const EditEvents = ({ events }: { events: Page }) => {
   const submitForm = useCallback(async (e: FormData) => {
-    console.log(e);
-
     for (const key of e.keys()) {
       const value = e.get(key);
       console.log(key, value);
