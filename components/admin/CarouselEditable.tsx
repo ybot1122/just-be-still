@@ -35,7 +35,7 @@ export default function CarouselEditable({
       }
       setImageChooserCb(() => null);
     },
-    [setImageChooserCb, id, content, setContent],
+    [setImageChooserCb, content, setContent],
   );
 
   const removeImage = useCallback(

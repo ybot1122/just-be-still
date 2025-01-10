@@ -52,7 +52,7 @@ export default async function Events() {
           }
 
           if (c.type === WidgetType.Image) {
-            return <SingleImage src={c.src} alt={c.alt} />;
+            return <SingleImage src={c.src} alt={c.alt} key={c.uuid} />;
           }
         })}
       </PageSection>
