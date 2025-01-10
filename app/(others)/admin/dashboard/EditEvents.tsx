@@ -6,6 +6,7 @@ import WidgetAdder from "@/components/admin/WidgetAdder";
 import { ImageWidget, WidgetType, Page, Widget } from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import React, { useCallback, useState } from "react";
+import { updatePageContent } from "@/server_actions/updatePageContent";
 
 const EditEvents = ({ events }: { events: Page }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
@@ -54,9 +55,7 @@ const EditEvents = ({ events }: { events: Page }) => {
     console.log(data);
 
     try {
-      // TODO : update "test" to the correct page ID
-      /*
-      const update = await updatePageContent("test", JSON.stringify(data));
+      const update = await updatePageContent("events", JSON.stringify(data));
 
       if (update) {
         // TODO: add toast notifications
@@ -64,8 +63,6 @@ const EditEvents = ({ events }: { events: Page }) => {
       } else {
         alert("An error occurred while updating the page");
       }
-        */
-      alert("submitted. the actual api call is stubbed out.");
     } catch (error) {
       alert((error as Error).message);
     }
