@@ -45,6 +45,30 @@ const EditEvents = ({ events }: { events: Page }) => {
             uuid: crypto.randomUUID(),
           },
         });
+      } else if (field[0].startsWith(WidgetType.Image)) {
+        let c = content.find((c) => c.id === field[1]);
+
+        if (!c) {
+          c = {
+            id: field[1],
+            widget: {
+              type: WidgetType.Image,
+              src: "",
+              alt: "",
+              modifiers: [],
+              uuid: crypto.randomUUID(),
+            },
+          };
+          content.push(c);
+        }
+
+        const w = c.widget as ImageWidget;
+
+        if (field[0].includes("-alt")) {
+          w.alt = val;
+        } else {
+          w.src = val;
+        }
       }
     }
 
