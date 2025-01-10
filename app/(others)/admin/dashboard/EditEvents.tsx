@@ -19,17 +19,12 @@ const EditEvents = ({ events }: { events: Page }) => {
   const submitForm = useCallback(async (e: FormData) => {
     const content: { id: string; widget: Widget }[] = [];
 
+    // Get Data
     for (const key of e.keys()) {
       const value = e.get(key);
       const field = key.split("$");
-      console.log(field, value);
 
-      const val = value?.toString().trim();
-
-      if (!val) {
-        console.error(key, " empty");
-        continue;
-      }
+      const val = value?.toString().trim() || "";
 
       if (field[0] === WidgetType.Paragraph) {
         content.push({
@@ -64,35 +59,70 @@ const EditEvents = ({ events }: { events: Page }) => {
             uuid: crypto.randomUUID(),
           },
         });
-      } else if (field[0].startsWith(WidgetType.Carousel)) {
-        let c = content.find((c) => c.id === field[1]);
+      } else if (field[0] === WidgetType.Carousel) {
+        const images = val.split(",");
 
-        if (!c) {
-          c = {
-            id: field[1],
-            widget: {
-              type: WidgetType.Carousel,
-              modifiers: [],
-              uuid: crypto.randomUUID(),
-              content: [],
-            },
-          };
-          content.push(c);
+        if (!images[0]) {
+          images.splice(0, 1);
         }
 
-        const w = c.widget as CarouselWidget;
-        w.content.push({
-          type: WidgetType.Image,
-          src: val,
-          alt:
-            e
-              .get(`${WidgetType.Carousel}-alt$${field[1]}`)
-              ?.toString()
-              .trim() || "",
+        const w: CarouselWidget = {
+          type: WidgetType.Carousel,
           modifiers: [],
           uuid: crypto.randomUUID(),
-        });
+          content: images.map((src) => ({
+            type: WidgetType.Image,
+            src: src,
+            alt:
+              e
+                .get(`${WidgetType.Carousel}-alt$${field[1]}`)
+                ?.toString()
+                .trim() || "",
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          })),
+        };
+
+        const c = {
+          id: field[1],
+          widget: w,
+        };
+        content.push(c);
       }
+    }
+
+    // Validate
+    const errors = [];
+    for (const c in content) {
+      const w = content[c].widget;
+      if (
+        w.type === WidgetType.AccentParagraph ||
+        w.type === WidgetType.Paragraph
+      ) {
+        if (!w.content) {
+          errors.push(`${w.type}$${content[c].id}$error`);
+        }
+      } else if (w.type === WidgetType.Image) {
+        if (!w.src) {
+          errors.push(`${w.type}$${content[c].id}$error`);
+        }
+        if (!w.alt) {
+          errors.push(`${w.type}-alt$${content[c].id}$error`);
+        }
+      } else if (w.type === WidgetType.Carousel) {
+        if (!w.content.length) {
+          errors.push(`${w.type}$${content[c].id}$error`);
+        }
+
+        if (w.content.length && !w.content[0].alt) {
+          errors.push(`${w.type}-alt$${content[c].id}$error`);
+        }
+      }
+    }
+
+    if (errors.length) {
+      console.log(errors);
+      return;
     }
 
     const data: Page = {

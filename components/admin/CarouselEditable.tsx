@@ -85,11 +85,6 @@ export default function CarouselEditable({
                 alt={c.alt}
                 className="object-cover object-left-top h-full w-full"
               />
-              <input
-                type="hidden"
-                value={c.src}
-                name={`${WidgetType.Carousel}$${id}$${c.uuid}`}
-              />
             </div>
             <BasicButton onClick={() => removeImage(c.uuid)}>
               <TrashIcon width={24} height={24} className="my-1" />
@@ -97,6 +92,11 @@ export default function CarouselEditable({
           </div>
         ))}
       </div>
+      <input
+        type="hidden"
+        value={content.map((c) => c.src).join(",")}
+        name={`${WidgetType.Carousel}$${id}`}
+      />
       <div className="mt-5 flex justify-center items-center">
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
           <div className="py-2">Add Image</div>
