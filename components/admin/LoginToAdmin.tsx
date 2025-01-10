@@ -28,24 +28,26 @@ export default function LoginToAdmin({}: {}) {
 
   return (
     <PageParagraph as="div">
-      <div>
-        <input
-          type="password"
-          placeholder="Enter Password"
-          className="p-2 border border-forestDark"
-          ref={passwordRef}
-        />
-      </div>
-      <div className="mt-5">
-        {status === "loading" ? (
-          <span>loading...</span>
-        ) : (
-          <BasicButton onClick={onLogin}>Login to Admin</BasicButton>
-        )}{" "}
-        {status === "error" && (
-          <p className="text-errorText text-sm">Error Logging In</p>
-        )}
-      </div>
+      <form action={onLogin}>
+        <div>
+          <input
+            type="password"
+            placeholder="Enter Password"
+            className="p-2 border border-forestDark"
+            ref={passwordRef}
+          />
+        </div>
+        <div className="mt-5">
+          {status === "loading" ? (
+            <span>loading...</span>
+          ) : (
+            <BasicButton onClick={onLogin}>Login to Admin</BasicButton>
+          )}{" "}
+          {status === "error" && (
+            <p className="text-errorText text-sm">Error Logging In</p>
+          )}
+        </div>
+      </form>
     </PageParagraph>
   );
 }

@@ -1,29 +1,149 @@
 import BasicButton from "@/components/admin/BasicButton";
-import CarouselEditable from "@/components/CarouselEditable";
-import CarouselImage from "@/components/CarouselImage";
-import PageParagraphEditable from "@/components/PageParagraphEditable";
-import { ImageNode, NodeType, Page } from "@/content/content";
+import CarouselEditable from "@/components/admin/CarouselEditable";
+import SingleImageEditable from "@/components/admin/SingleImageEditable";
+import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
+import WidgetAdder from "@/components/admin/WidgetAdder";
+import {
+  ImageWidget,
+  WidgetType,
+  Page,
+  Widget,
+  CarouselWidget,
+} from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
-import { updatePageContent } from "@/server_actions/updatePageContent";
 import React, { useCallback, useState } from "react";
+import { updatePageContent } from "@/server_actions/updatePageContent";
 
 const EditEvents = ({ events }: { events: Page }) => {
-  const submitForm = useCallback(async (e: FormData) => {
-    console.log(e);
+  const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
 
+  const submitForm = useCallback(async (e: FormData) => {
+    setErrors([]);
+    const content: { id: string; widget: Widget }[] = [];
+    const newErrors: string[] = [];
+
+    // Get Data
     for (const key of e.keys()) {
       const value = e.get(key);
-      console.log(key, value);
+      const field = key.split("$");
+
+      const val = value?.toString().trim() || "";
+
+      if (field[0] === WidgetType.Paragraph) {
+        content.push({
+          id: field[1],
+          widget: {
+            type: WidgetType.Paragraph,
+            content: val,
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          },
+        });
+      } else if (field[0] === WidgetType.AccentParagraph) {
+        content.push({
+          id: field[1],
+          widget: {
+            type: WidgetType.AccentParagraph,
+            content: val,
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          },
+        });
+      } else if (field[0] === WidgetType.Image) {
+        content.push({
+          id: field[1],
+          widget: {
+            type: WidgetType.Image,
+            src: val,
+            alt:
+              e.get(`${WidgetType.Image}-alt$${field[1]}`)?.toString().trim() ||
+              "",
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          },
+        });
+      } else if (field[0] === WidgetType.Carousel) {
+        const images = val.split(",");
+
+        if (!images[0]) {
+          images.splice(0, 1);
+        }
+
+        const w: CarouselWidget = {
+          type: WidgetType.Carousel,
+          modifiers: [],
+          uuid: crypto.randomUUID(),
+          content: images.map((src) => ({
+            type: WidgetType.Image,
+            src: src,
+            alt:
+              e
+                .get(`${WidgetType.Carousel}-alt$${field[1]}`)
+                ?.toString()
+                .trim() || "",
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          })),
+        };
+
+        const c = {
+          id: field[1],
+          widget: w,
+        };
+        content.push(c);
+      }
+    }
+
+    // Validate
+    for (const c in content) {
+      const w = content[c].widget;
+      if (
+        w.type === WidgetType.AccentParagraph ||
+        w.type === WidgetType.Paragraph
+      ) {
+        if (!w.content) {
+          newErrors.push(`${w.type}$${content[c].id}$error`);
+        }
+      } else if (w.type === WidgetType.Image) {
+        if (!w.src) {
+          newErrors.push(`${w.type}$${content[c].id}$error`);
+        }
+        if (!w.alt) {
+          newErrors.push(`${w.type}-alt$${content[c].id}$error`);
+        }
+      } else if (w.type === WidgetType.Carousel) {
+        if (!w.content.length) {
+          newErrors.push(`${w.type}$${content[c].id}$error`);
+        }
+
+        if (w.content.length && !w.content[0].alt) {
+          newErrors.push(`${w.type}-alt$${content[c].id}$error`);
+        }
+      }
+    }
+
+    if (newErrors.length) {
+      setErrors(newErrors);
+      console.log(newErrors);
+      newErrors.map((n) => {
+        const dom = document.getElementById(n);
+
+        if (dom) {
+          dom.classList.remove("hidden");
+        }
+      });
+      return;
     }
 
     const data: Page = {
-      content: [],
+      content: content.map((c) => c.widget),
     };
 
+    console.log(data);
+
     try {
-      // TODO : update "test" to the correct page ID
-      /*
-      const update = await updatePageContent("test", JSON.stringify(data));
+      const update = await updatePageContent("events", JSON.stringify(data));
 
       if (update) {
         // TODO: add toast notifications
@@ -31,8 +151,6 @@ const EditEvents = ({ events }: { events: Page }) => {
       } else {
         alert("An error occurred while updating the page");
       }
-        */
-      alert("submitted. the actual api call is stubbed out.");
     } catch (error) {
       alert((error as Error).message);
     }
@@ -40,84 +158,40 @@ const EditEvents = ({ events }: { events: Page }) => {
 
   return (
     <form action={submitForm} className="text-left">
-      {events.content.map((c) => {
-        if (c.type === NodeType.Paragraph) {
+      {[...events.content, ...newWidgets].map((c) => {
+        if (c.type === WidgetType.Paragraph) {
           return <PageParagraphEditable value={c.content} key={c.uuid} />;
         }
 
-        if (c.type === NodeType.AccentParagraph) {
+        if (c.type === WidgetType.AccentParagraph) {
           return (
             <PageParagraphEditable value={c.content} key={c.uuid} isAccent />
           );
         }
 
-        if (c.type === NodeType.Carousel) {
+        if (c.type === WidgetType.Carousel) {
           return <CarouselEditable key={c.uuid} content={c.content} />;
+        }
+
+        if (c.type === WidgetType.Image) {
+          return <SingleImageEditable original={c} key={c.uuid} />;
         }
 
         return null;
       })}
-      <div className="mt-5">
-        <BasicButton type="submit">Update Page</BasicButton>
+      <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
+
+      <div className="flex flex-col items-center justify-center mt-10">
+        <BasicButton type="submit">
+          <div className="py-2">Update Page</div>
+        </BasicButton>
+        {errors.length > 0 && (
+          <div className="text-red-500">
+            You have some errors. Please check above.
+          </div>
+        )}
       </div>
     </form>
-  );
-};
-
-const ImageUploader = ({ original }: { original: ImageNode }) => {
-  const [selectedImage, setSelectedImage] = useState<string>(original.src);
-  const { setCallback: setImageChooserCb } = useImageChooser();
-
-  return (
-    <div className="flex gap-5">
-      <div>
-        <img
-          src={
-            typeof selectedImage === "string"
-              ? selectedImage
-              : URL.createObjectURL(selectedImage)
-          }
-          alt="Selected"
-          className="mt-2 w-[200px]"
-        />
-      </div>
-      <div className="">
-        <div>
-          Description: <EditableText text={original.alt} name="poster-alt" />
-        </div>
-        <div className="mt-5">
-          <BasicButton
-            onClick={() =>
-              setImageChooserCb(() => (p?: string) => {
-                if (p) setSelectedImage(p);
-                setImageChooserCb(() => null);
-              })
-            }
-          >
-            Change Image
-          </BasicButton>
-        </div>
-      </div>
-      <input type="hidden" value={selectedImage} name="poster" />
-    </div>
-  );
-};
-
-const EditableText = ({ text, name }: { text: string; name: string }) => {
-  const [value, setValue] = useState(text);
-
-  const className =
-    "border border-gray-300 p-2 cursor-text inline-block w-[400px] ml-2";
-
-  return (
-    <input
-      type="text"
-      value={value}
-      onChange={(e) => setValue(e.target.value)}
-      className={className}
-      name={name}
-      autoFocus
-    />
   );
 };
 

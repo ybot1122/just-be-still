@@ -1,7 +1,9 @@
 "use client";
 
-import { NodeType } from "@/content/content";
+import { WidgetType } from "@/content/content";
 import React, { FC, ChangeEvent, useState, useId } from "react";
+import WidgetDeleted from "./WidgetDeleted";
+import EditableLabel from "./EditableLabel";
 
 interface PageParagraphEditable {
   value: string;
@@ -15,30 +17,40 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
   isAccent = false,
 }) => {
   const id = useId();
+  const [isRemoved, setIsRemoved] = useState(false);
   const [value, setValue] = useState(valueProp);
   const pClass = isAccent ? "pageParagraphAccent" : "pageParagraph";
-  const nodeType = isAccent ? NodeType.AccentParagraph : NodeType.Paragraph;
+  const pName = `${isAccent ? "Accent " : ""} Paragraph`;
+  const nodeType = isAccent ? WidgetType.AccentParagraph : WidgetType.Paragraph;
 
   const handleChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
 
+  if (isRemoved) {
+    return (
+      <WidgetDeleted widgetName={pName} undoCb={() => setIsRemoved(false)} />
+    );
+  }
+
   return (
     <div className="flex flex-col items-left mt-4 border-4 border-black p-5">
-      <label
+      <EditableLabel
         htmlFor={id}
-        className="block text-lg font-medium text-gray-700 mb-2"
-      >
-        {isAccent ? "Accent " : ""} Paragraph
-      </label>
+        name={pName}
+        removeCb={() => setIsRemoved(true)}
+      />
       <textarea
         id={id}
         name={`${nodeType}$${id}`}
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
-        className={`${pClass} border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
+        className={`${pClass} py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
       />
+      {value.trim() === "" && (
+        <p className="text-red-500 mt-2">This field cannot be empty.</p>
+      )}
     </div>
   );
 };
