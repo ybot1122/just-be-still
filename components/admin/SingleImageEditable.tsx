@@ -35,6 +35,12 @@ export default function SingleImageEditable({
       <SingleImage src={selectedImage} alt={"Selected"} />
       <div className="">
         <div>Description:</div>
+        <input
+          type="text"
+          className="mt-2 p-2 border rounded w-1/2"
+          placeholder="Enter image description"
+          name={`${WidgetType.Image}-alt$${id}${original.uuid}`}
+        />
         <div className="mt-5">
           <BasicButton
             onClick={() =>
@@ -51,7 +57,7 @@ export default function SingleImageEditable({
       <input
         type="hidden"
         value={selectedImage}
-        name={`${WidgetType.Image}$${id}`}
+        name={`${WidgetType.Image}$${id}${original.uuid}`}
       />
     </div>
   );

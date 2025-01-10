@@ -28,7 +28,7 @@ export default function CarouselEditable({
           src: p,
           alt: "",
           modifiers: [],
-          uuid: Date.now() + id,
+          uuid: crypto.randomUUID(),
         };
         content.push(image);
         setContent(content);
@@ -88,10 +88,16 @@ export default function CarouselEditable({
           </div>
         ))}
       </div>
-      <div className="mt-5 flex justify-center">
+      <div className="mt-5 flex justify-center items-center">
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
           <div className="py-2">Add Image</div>
         </BasicButton>
+        <input
+          type="text"
+          className="mx-2 p-2 border rounded w-1/2"
+          placeholder="Describe the Carousel Images"
+          name={`${WidgetType.Carousel}-alt$${id}`}
+        />
       </div>
     </div>
   );
