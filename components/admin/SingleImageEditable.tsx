@@ -41,6 +41,12 @@ export default function SingleImageEditable({
           placeholder="Enter image description"
           name={`${WidgetType.Image}-alt$${id}`}
         />
+        <p
+          id={`${WidgetType.Image}-alt$${id}$error`}
+          className="text-red-500 mt-2 hidden"
+        >
+          This field cannot be empty.
+        </p>
         <div className="mt-5">
           <BasicButton
             onClick={() =>

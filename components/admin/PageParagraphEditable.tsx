@@ -2,8 +2,6 @@
 
 import { WidgetType } from "@/content/content";
 import React, { FC, ChangeEvent, useState, useId } from "react";
-import BasicButton from "./BasicButton";
-import TrashIcon from "../TrashIcon";
 import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
 
@@ -50,6 +48,9 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
         onChange={handleChange}
         className={`${pClass} py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
       />
+      {value.trim() === "" && (
+        <p className="text-red-500 mt-2">This field cannot be empty.</p>
+      )}
     </div>
   );
 };

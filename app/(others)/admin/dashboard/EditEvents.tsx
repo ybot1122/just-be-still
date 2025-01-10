@@ -126,6 +126,13 @@ const EditEvents = ({ events }: { events: Page }) => {
     if (newErrors.length) {
       setErrors(newErrors);
       console.log(newErrors);
+      newErrors.map((n) => {
+        const dom = document.getElementById(n);
+
+        if (dom) {
+          dom.classList.remove("hidden");
+        }
+      });
       return;
     }
 
@@ -174,16 +181,15 @@ const EditEvents = ({ events }: { events: Page }) => {
       })}
       <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
 
-      {errors.length > 0 && (
-        <div className="text-red-500">
-          You have some errors. Please check above.
-        </div>
-      )}
-
-      <div className="flex justify-center mt-10">
+      <div className="flex flex-col items-center justify-center mt-10">
         <BasicButton type="submit">
           <div className="py-2">Update Page</div>
         </BasicButton>
+        {errors.length > 0 && (
+          <div className="text-red-500">
+            You have some errors. Please check above.
+          </div>
+        )}
       </div>
     </form>
   );

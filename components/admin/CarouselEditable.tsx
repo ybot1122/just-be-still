@@ -70,6 +70,12 @@ export default function CarouselEditable({
           placeholder="Description"
           name={`${WidgetType.Carousel}-alt$${id}`}
         />
+        <p
+          id={`${WidgetType.Carousel}-alt$${id}$error`}
+          className="text-red-500 mt-2 hidden"
+        >
+          This field cannot be empty.
+        </p>
       </div>
       <Carousel>
         {content.map((c) => (
@@ -97,10 +103,16 @@ export default function CarouselEditable({
         value={content.map((c) => c.src).join(",")}
         name={`${WidgetType.Carousel}$${id}`}
       />
-      <div className="mt-5 flex justify-center items-center">
+      <div className="mt-5 flex-col flex justify-center items-center">
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
           <div className="py-2">Add Image</div>
         </BasicButton>
+        <p
+          id={`${WidgetType.Carousel}$${id}$error`}
+          className="text-red-500 mt-2 hidden"
+        >
+          You must have at least one image.
+        </p>
       </div>
     </div>
   );
