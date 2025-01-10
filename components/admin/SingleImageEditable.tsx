@@ -33,7 +33,7 @@ export default function SingleImageEditable({
         removeCb={() => setIsRemoved(true)}
       />
       <SingleImage src={selectedImage} alt={"Selected"} />
-      <div className="">
+      <div className="mt-2">
         <div>Description:</div>
         <input
           type="text"

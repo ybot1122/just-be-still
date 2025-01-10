@@ -10,9 +10,12 @@ import React, { useCallback, useState } from "react";
 const EditEvents = ({ events }: { events: Page }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const submitForm = useCallback(async (e: FormData) => {
+    const content = [];
+
     for (const key of e.keys()) {
       const value = e.get(key);
-      console.log(key, value);
+      const field = key.split("$");
+      console.log(field, value);
     }
 
     const data: Page = {

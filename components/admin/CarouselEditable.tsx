@@ -62,6 +62,15 @@ export default function CarouselEditable({
         name={"Image Carousel"}
         removeCb={() => setIsRemoved(true)}
       />
+      <div className="mt-5 flex justify-center items-center">
+        <div>Describe this Carousel: </div>
+        <input
+          type="text"
+          className="mx-2 p-2 border rounded w-1/2"
+          placeholder="Description"
+          name={`${WidgetType.Carousel}-alt$${id}`}
+        />
+      </div>
       <Carousel>
         {content.map((c) => (
           <CarouselImage src={c.src} alt={c.alt} key={c.uuid} />
@@ -92,12 +101,6 @@ export default function CarouselEditable({
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
           <div className="py-2">Add Image</div>
         </BasicButton>
-        <input
-          type="text"
-          className="mx-2 p-2 border rounded w-1/2"
-          placeholder="Describe the Carousel Images"
-          name={`${WidgetType.Carousel}-alt$${id}`}
-        />
       </div>
     </div>
   );
