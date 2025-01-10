@@ -3,7 +3,13 @@ import CarouselEditable from "@/components/admin/CarouselEditable";
 import SingleImageEditable from "@/components/admin/SingleImageEditable";
 import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
 import WidgetAdder from "@/components/admin/WidgetAdder";
-import { ImageWidget, WidgetType, Page, Widget } from "@/content/content";
+import {
+  ImageWidget,
+  WidgetType,
+  Page,
+  Widget,
+  CarouselWidget,
+} from "@/content/content";
 import { useImageChooser } from "@/context/ImageChooserContext";
 import React, { useCallback, useState } from "react";
 import { updatePageContent } from "@/server_actions/updatePageContent";
@@ -45,30 +51,47 @@ const EditEvents = ({ events }: { events: Page }) => {
             uuid: crypto.randomUUID(),
           },
         });
-      } else if (field[0].startsWith(WidgetType.Image)) {
+      } else if (field[0] === WidgetType.Image) {
+        content.push({
+          id: field[1],
+          widget: {
+            type: WidgetType.Image,
+            src: val,
+            alt:
+              e.get(`${WidgetType.Image}-alt$${field[1]}`)?.toString().trim() ||
+              "",
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          },
+        });
+      } else if (field[0].startsWith(WidgetType.Carousel)) {
         let c = content.find((c) => c.id === field[1]);
 
         if (!c) {
           c = {
             id: field[1],
             widget: {
-              type: WidgetType.Image,
-              src: "",
-              alt: "",
+              type: WidgetType.Carousel,
               modifiers: [],
               uuid: crypto.randomUUID(),
+              content: [],
             },
           };
           content.push(c);
         }
 
-        const w = c.widget as ImageWidget;
-
-        if (field[0].includes("-alt")) {
-          w.alt = val;
-        } else {
-          w.src = val;
-        }
+        const w = c.widget as CarouselWidget;
+        w.content.push({
+          type: WidgetType.Image,
+          src: val,
+          alt:
+            e
+              .get(`${WidgetType.Carousel}-alt$${field[1]}`)
+              ?.toString()
+              .trim() || "",
+          modifiers: [],
+          uuid: crypto.randomUUID(),
+        });
       }
     }
 

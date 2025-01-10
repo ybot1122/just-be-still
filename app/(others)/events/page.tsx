@@ -5,6 +5,7 @@ import getPageData from "@/lib/getPageData";
 import Carousel from "../../../components/Carousel";
 import { WidgetType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
+import SingleImage from "@/components/SingleImage";
 
 export default async function Events() {
   const data = await getPageData();
@@ -48,6 +49,10 @@ export default async function Events() {
                 ))}
               </Carousel>
             );
+          }
+
+          if (c.type === WidgetType.Image) {
+            return <SingleImage src={c.src} alt={c.alt} />;
           }
         })}
       </PageSection>

@@ -39,7 +39,7 @@ export default function SingleImageEditable({
           type="text"
           className="mt-2 p-2 border rounded w-1/2"
           placeholder="Enter image description"
-          name={`${WidgetType.Image}-alt$${id}$${original.uuid}`}
+          name={`${WidgetType.Image}-alt$${id}`}
         />
         <div className="mt-5">
           <BasicButton
@@ -57,7 +57,7 @@ export default function SingleImageEditable({
       <input
         type="hidden"
         value={selectedImage}
-        name={`${WidgetType.Image}$${id}$${original.uuid}`}
+        name={`${WidgetType.Image}$${id}`}
       />
     </div>
   );
