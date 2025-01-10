@@ -16,8 +16,12 @@ import { updatePageContent } from "@/server_actions/updatePageContent";
 
 const EditEvents = ({ events }: { events: Page }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
+
   const submitForm = useCallback(async (e: FormData) => {
+    setErrors([]);
     const content: { id: string; widget: Widget }[] = [];
+    const newErrors: string[] = [];
 
     // Get Data
     for (const key of e.keys()) {
@@ -92,7 +96,6 @@ const EditEvents = ({ events }: { events: Page }) => {
     }
 
     // Validate
-    const errors = [];
     for (const c in content) {
       const w = content[c].widget;
       if (
@@ -100,28 +103,29 @@ const EditEvents = ({ events }: { events: Page }) => {
         w.type === WidgetType.Paragraph
       ) {
         if (!w.content) {
-          errors.push(`${w.type}$${content[c].id}$error`);
+          newErrors.push(`${w.type}$${content[c].id}$error`);
         }
       } else if (w.type === WidgetType.Image) {
         if (!w.src) {
-          errors.push(`${w.type}$${content[c].id}$error`);
+          newErrors.push(`${w.type}$${content[c].id}$error`);
         }
         if (!w.alt) {
-          errors.push(`${w.type}-alt$${content[c].id}$error`);
+          newErrors.push(`${w.type}-alt$${content[c].id}$error`);
         }
       } else if (w.type === WidgetType.Carousel) {
         if (!w.content.length) {
-          errors.push(`${w.type}$${content[c].id}$error`);
+          newErrors.push(`${w.type}$${content[c].id}$error`);
         }
 
         if (w.content.length && !w.content[0].alt) {
-          errors.push(`${w.type}-alt$${content[c].id}$error`);
+          newErrors.push(`${w.type}-alt$${content[c].id}$error`);
         }
       }
     }
 
-    if (errors.length) {
-      console.log(errors);
+    if (newErrors.length) {
+      setErrors(newErrors);
+      console.log(newErrors);
       return;
     }
 
@@ -169,6 +173,13 @@ const EditEvents = ({ events }: { events: Page }) => {
         return null;
       })}
       <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
+
+      {errors.length > 0 && (
+        <div className="text-red-500">
+          You have some errors. Please check above.
+        </div>
+      )}
+
       <div className="flex justify-center mt-10">
         <BasicButton type="submit">
           <div className="py-2">Update Page</div>
