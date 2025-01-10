@@ -10,17 +10,48 @@ import React, { useCallback, useState } from "react";
 const EditEvents = ({ events }: { events: Page }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const submitForm = useCallback(async (e: FormData) => {
-    const content = [];
+    const content: { id: string; widget: Widget }[] = [];
 
     for (const key of e.keys()) {
       const value = e.get(key);
       const field = key.split("$");
       console.log(field, value);
+
+      const val = value?.toString().trim();
+
+      if (!val) {
+        console.error(key, " empty");
+        continue;
+      }
+
+      if (field[0] === WidgetType.Paragraph) {
+        content.push({
+          id: field[1],
+          widget: {
+            type: WidgetType.Paragraph,
+            content: val,
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          },
+        });
+      } else if (field[0] === WidgetType.AccentParagraph) {
+        content.push({
+          id: field[1],
+          widget: {
+            type: WidgetType.AccentParagraph,
+            content: val,
+            modifiers: [],
+            uuid: crypto.randomUUID(),
+          },
+        });
+      }
     }
 
     const data: Page = {
-      content: [],
+      content: content.map((c) => c.widget),
     };
+
+    console.log(data);
 
     try {
       // TODO : update "test" to the correct page ID
