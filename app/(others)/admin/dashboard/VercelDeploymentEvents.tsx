@@ -34,7 +34,7 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
   }, []);
 
   return (
-    <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap">
+    <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all">
       {text}
     </div>
   );

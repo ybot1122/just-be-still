@@ -44,6 +44,7 @@ export default function SingleImageEditable({
             className="mt-2 p-2 border rounded w-1/2"
             placeholder="Enter image description"
             name={`${WidgetType.Image}-alt$${id}`}
+            defaultValue={original.alt}
           />
           <FieldError
             id={`${WidgetType.Image}-alt$${id}$error`}

@@ -26,7 +26,7 @@ export async function updatePageContent(
   const commitMessage = `Update ${pageId} content`;
   const content = btoa(newContent);
 
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.VERCEL_ENV === "development") {
     // in development mode, save changes to filesystem locally
     try {
       await new Promise<void>((resolve) =>

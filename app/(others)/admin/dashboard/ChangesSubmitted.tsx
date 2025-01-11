@@ -11,9 +11,14 @@ const ChangesSubmitted: React.FC = async () => {
   });
 
   return (
-    <div>
-      <h1>Changes Submitted</h1>
-      <p>Your changes have been successfully submitted.</p>
+    <div className="p-5 text-center">
+      <h1 className="text-green-500 font-bold">Changes Submitted</h1>
+      <p>
+        Your changes have been successfully submitted and are currently being
+        deployed.
+      </p>
+      <p>This usually takes about 30-60 seconds.</p>
+      <p className="mb-10">You can close this screen if you want.</p>
       <VercelDeploymentEvents id={data.deployments[0].uid} />
     </div>
   );
