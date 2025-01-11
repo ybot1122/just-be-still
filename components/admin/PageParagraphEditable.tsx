@@ -4,6 +4,7 @@ import { WidgetType } from "@/content/content";
 import React, { FC, ChangeEvent, useState, useId } from "react";
 import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
+import FieldError from "./FieldError";
 
 interface PageParagraphEditable {
   value: string;
@@ -33,6 +34,17 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
     );
   }
 
+  const error_id = `${nodeType}$${id}$error`;
+  const error_dom = document.getElementById(error_id);
+
+  if (error_dom) {
+    if (!value?.trim()) {
+      error_dom.classList.remove("hidden");
+    } else {
+      error_dom.classList.add("hidden");
+    }
+  }
+
   return (
     <div className="flex flex-col items-left mt-4 border-4 border-black p-5">
       <EditableLabel
@@ -46,11 +58,14 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            e.preventDefault();
+          }
+        }}
         className={`${pClass} py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
       />
-      {value.trim() === "" && (
-        <p className="text-red-500 mt-2">This field cannot be empty.</p>
-      )}
+      <FieldError id={error_id} message="This field cannot be empty." />
     </div>
   );
 };

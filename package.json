@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "just-be-still-design",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,15 +16,15 @@
     ]
   },
   "dependencies": {
-    "@ybot1122/toby-ui": "^0.0.12-alpha",
-    "next": "^14.2.18",
-    "react": "^18",
-    "react-dom": "^18"
+    "@ybot1122/toby-ui": "0.0.14-alpha",
+    "next": "15.1.4",
+    "react": "19.0.0",
+    "react-dom": "19.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "19.0.4",
+    "@types/react-dom": "19.0.2",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
     "husky": "^8.0.0",

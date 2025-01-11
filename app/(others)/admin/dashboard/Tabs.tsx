@@ -1,18 +1,23 @@
 "use client";
 
 import React, { useState } from "react";
-import EditEvents from "./EditEvents";
+import EditPage from "./EditPage";
 import { Page } from "@/content/content";
 import ImageChooser from "@/components/admin/ImageChooser";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
 import { useImageChooser } from "@/context/ImageChooserContext";
+import ChangesSubmitted from "./ChangesSubmitted";
 
 const Tabs = ({
   events,
+  test,
   images,
+  ChangesSubmittedComponent,
 }: {
   events: Page;
+  test?: Page;
   images: CloudinaryResource[];
+  ChangesSubmittedComponent: React.ReactElement;
 }) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
 
@@ -60,6 +65,15 @@ const Tabs = ({
         >
           Contact
         </TabButton>
+        {test && (
+          <TabButton
+            tab="tab6"
+            activeTab={activeTab}
+            handleTabClick={handleTabClick}
+          >
+            TEST
+          </TabButton>
+        )}
       </div>
       <div className="mt-5">
         {activeTab === "tab1" && <div>Not Available Yet</div>}
@@ -67,10 +81,23 @@ const Tabs = ({
         {activeTab === "tab3" && <div>Not Available Yet</div>}
         {activeTab === "tab4" && (
           <div>
-            <EditEvents events={events} />
+            <EditPage
+              pageId="events"
+              pageData={events}
+              ChangesSubmittedComponent={ChangesSubmittedComponent}
+            />
           </div>
         )}
         {activeTab === "tab5" && <div>Not Available Yet</div>}
+        {activeTab === "tab6" && test && (
+          <div>
+            <EditPage
+              pageId="test"
+              pageData={test}
+              ChangesSubmittedComponent={ChangesSubmittedComponent}
+            />
+          </div>
+        )}
       </div>
       <ImageChooser isOpen={!!callback} images={images} />
     </div>

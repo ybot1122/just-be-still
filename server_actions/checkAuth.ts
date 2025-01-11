@@ -12,7 +12,7 @@ export default async function checkAuth() {
   }
 
   try {
-    const auth = await cookies().get(COOKIES_ADMIN_TOKEN);
+    const auth = await (await cookies()).get(COOKIES_ADMIN_TOKEN);
 
     if (!auth || !auth.value) {
       return false;

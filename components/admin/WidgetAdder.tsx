@@ -53,7 +53,7 @@ export default function WidgetAdder({
             case WidgetType.Image:
               addWidget({
                 type: WidgetType.Image,
-                src: "https://res.cloudinary.com/dryy6uo6k/image/upload/v1736466609/just-be-still-design/logo_xhnmjv.jpg",
+                src: "",
                 alt: "Placeholder",
                 uuid: crypto.randomUUID(),
                 modifiers: [],

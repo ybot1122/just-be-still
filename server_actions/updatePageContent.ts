@@ -29,7 +29,12 @@ export async function updatePageContent(
   if (process.env.NODE_ENV === "development") {
     // in development mode, save changes to filesystem locally
     try {
-      await fs.writeFileSync(`./content/test.json`, atob(content));
+      await new Promise<void>((resolve) =>
+        setTimeout(async () => {
+          await fs.writeFileSync(`./content/test.json`, atob(content));
+          resolve();
+        }, 2000),
+      );
     } catch (err) {
       throw new Error("An error occurred while updating the page");
     }

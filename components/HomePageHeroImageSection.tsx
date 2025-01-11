@@ -1,8 +1,7 @@
 import Image, { StaticImageData } from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import down_icon from "@/public/down-arrow.png";
 import ScrollDownButton from "./ScrollDownButton";
-import { useObserveRef } from "./useActiveScreen";
 
 export default function HomePageHeroImageSection({
   children,

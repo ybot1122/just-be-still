@@ -12,7 +12,7 @@ import customorder_4 from "@/public/customorder_4.jpg";
 import customorder_5 from "@/public/customorder_5.jpg";
 import customorder_6 from "@/public/customorder_6.jpg";
 import Image, { StaticImageData } from "next/image";
-import { FAQItemList } from "@ybot1122/toby-ui/FAQItem";
+import Accordion from "@/components/Accordion";
 
 export default function Contact() {
   return (
@@ -20,7 +20,7 @@ export default function Contact() {
       <PageHeader header="Services" />
 
       <PageSection>
-        <FAQItemList>
+        <Accordion>
           <ServiceItem q="Sewing Classes">
             <ServiceItemParagraph>
               JustBeStill is offering in-person sewing classes in June and July!
@@ -106,7 +106,7 @@ export default function Contact() {
               residents.
             </ServiceItemParagraph>
           </ServiceItem>
-        </FAQItemList>
+        </Accordion>
       </PageSection>
 
       <PageSection>

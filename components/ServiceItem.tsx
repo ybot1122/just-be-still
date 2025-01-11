@@ -1,16 +1,16 @@
 "use client";
 
-import { FAQItem } from "@ybot1122/toby-ui/FAQItem";
+import { AccordionItem } from "@ybot1122/toby-ui/AccordionItem";
 
 export default function ServiceItem({
   q,
   children,
 }: {
   q: string;
-  children: JSX.Element | JSX.Element[];
+  children: React.ReactElement | React.ReactElement[];
 }) {
   return (
-    <FAQItem
+    <AccordionItem
       question={q}
       questionFontColor="text-forest"
       fillColor="fill-forest"
@@ -18,6 +18,6 @@ export default function ServiceItem({
       bold
     >
       {children}
-    </FAQItem>
+    </AccordionItem>
   );
 }

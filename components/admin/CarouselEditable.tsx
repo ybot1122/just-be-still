@@ -9,15 +9,16 @@ import { useImageChooser } from "@/context/ImageChooserContext";
 import TrashIcon from "../TrashIcon";
 import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
+import FieldError from "./FieldError";
 
 export default function CarouselEditable({
-  content: contentProp,
+  carousel,
 }: {
-  content: CarouselWidget["content"];
+  carousel: CarouselWidget;
 }) {
   const id = useId();
   const [isRemoved, setIsRemoved] = useState(false);
-  const [content, setContent] = useState(contentProp);
+  const [content, setContent] = useState(carousel.content);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
   const addImage = useCallback(
@@ -62,20 +63,19 @@ export default function CarouselEditable({
         name={"Image Carousel"}
         removeCb={() => setIsRemoved(true)}
       />
-      <div className="mt-5 flex justify-center items-center">
+      <div className="mt-5 flex flex-col justify-center items-center">
         <div>Describe this Carousel: </div>
         <input
           type="text"
           className="mx-2 p-2 border rounded w-1/2"
           placeholder="Description"
           name={`${WidgetType.Carousel}-alt$${id}`}
+          defaultValue={carousel.content.length ? carousel.content[0].alt : ""}
         />
-        <p
+        <FieldError
           id={`${WidgetType.Carousel}-alt$${id}$error`}
-          className="text-red-500 mt-2 hidden"
-        >
-          This field cannot be empty.
-        </p>
+          message="This field cannot be empty."
+        />
       </div>
       <Carousel>
         {content.map((c) => (
@@ -107,12 +107,10 @@ export default function CarouselEditable({
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
           <div className="py-2">Add Image</div>
         </BasicButton>
-        <p
+        <FieldError
           id={`${WidgetType.Carousel}$${id}$error`}
-          className="text-red-500 mt-2 hidden"
-        >
-          You must have at least one image.
-        </p>
+          message="You must have at least one image.."
+        />
       </div>
     </div>
   );
