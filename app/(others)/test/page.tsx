@@ -6,10 +6,15 @@ import Carousel from "../../../components/Carousel";
 import { WidgetType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 import SingleImage from "@/components/SingleImage";
+import { redirect } from "next/navigation";
 
 export default async function Test() {
   const data = await getPageData();
   const content = data.content;
+
+  if (process.env.VERCEL_ENV === "production") {
+    redirect("/");
+  }
 
   return (
     <>
