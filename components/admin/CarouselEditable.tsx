@@ -11,13 +11,13 @@ import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
 
 export default function CarouselEditable({
-  content: contentProp,
+  carousel,
 }: {
-  content: CarouselWidget["content"];
+  carousel: CarouselWidget;
 }) {
   const id = useId();
   const [isRemoved, setIsRemoved] = useState(false);
-  const [content, setContent] = useState(contentProp);
+  const [content, setContent] = useState(carousel.content);
   const { setCallback: setImageChooserCb } = useImageChooser();
 
   const addImage = useCallback(
@@ -69,6 +69,7 @@ export default function CarouselEditable({
           className="mx-2 p-2 border rounded w-1/2"
           placeholder="Description"
           name={`${WidgetType.Carousel}-alt$${id}`}
+          value={carousel.content.length ? carousel.content[0].alt : ""}
         />
         <p
           id={`${WidgetType.Carousel}-alt$${id}$error`}

@@ -180,7 +180,7 @@ const EditEvents = ({ events }: { events: Page }) => {
         }
 
         if (c.type === WidgetType.Carousel) {
-          return <CarouselEditable key={c.uuid} content={c.content} />;
+          return <CarouselEditable key={c.uuid} carousel={c} />;
         }
 
         if (c.type === WidgetType.Image) {
