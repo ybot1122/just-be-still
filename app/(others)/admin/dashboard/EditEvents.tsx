@@ -8,9 +8,16 @@ import React, { useCallback, useState } from "react";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import { useFormStatus } from "react-dom";
 
-const EditEvents = ({ events }: { events: Page }) => {
+const EditEvents = ({
+  events,
+  ChangesSubmittedComponent,
+}: {
+  events: Page;
+  ChangesSubmittedComponent: React.ReactElement;
+}) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
+  const [finished, setFinished] = useState(false);
 
   const submitForm = useCallback(
     async (e: FormData) => {
@@ -156,10 +163,15 @@ const EditEvents = ({ events }: { events: Page }) => {
       } catch (error) {
         alert((error as Error).message);
       } finally {
+        setFinished(true);
       }
     },
-    [errors, setErrors],
+    [errors, setErrors, setFinished],
   );
+
+  if (finished) {
+    return ChangesSubmittedComponent;
+  }
 
   return (
     <form action={submitForm} className="text-left">

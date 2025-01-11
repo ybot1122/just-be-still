@@ -6,13 +6,16 @@ import { Page } from "@/content/content";
 import ImageChooser from "@/components/admin/ImageChooser";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
 import { useImageChooser } from "@/context/ImageChooserContext";
+import ChangesSubmitted from "./ChangesSubmitted";
 
 const Tabs = ({
   events,
   images,
+  ChangesSubmittedComponent,
 }: {
   events: Page;
   images: CloudinaryResource[];
+  ChangesSubmittedComponent: React.ReactElement;
 }) => {
   const [activeTab, setActiveTab] = useState<string>("tab1");
 
@@ -67,7 +70,10 @@ const Tabs = ({
         {activeTab === "tab3" && <div>Not Available Yet</div>}
         {activeTab === "tab4" && (
           <div>
-            <EditEvents events={events} />
+            <EditEvents
+              events={events}
+              ChangesSubmittedComponent={ChangesSubmittedComponent}
+            />
           </div>
         )}
         {activeTab === "tab5" && <div>Not Available Yet</div>}
