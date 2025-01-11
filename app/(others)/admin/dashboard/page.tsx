@@ -15,7 +15,11 @@ export default async function AdminDashboard() {
     redirect("/");
   }
 
-  const data = await getPageData();
+  const data = await getPageData("events");
+  let test;
+  if (process.env.VERCEL_ENV !== "production") {
+    test = await getPageData("test");
+  }
 
   const images = await getCloudinaryImages("just-be-still-design");
   return (
@@ -25,6 +29,7 @@ export default async function AdminDashboard() {
         <ImageChooserProvider>
           <Tabs
             events={data}
+            test={test}
             images={images}
             ChangesSubmittedComponent={<ChangesSubmitted />}
           />

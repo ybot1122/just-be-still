@@ -9,9 +9,11 @@ import { updatePageContent } from "@/server_actions/updatePageContent";
 import { useFormStatus } from "react-dom";
 
 const EditEvents = ({
+  pageId,
   events,
   ChangesSubmittedComponent,
 }: {
+  pageId: string;
   events: Page;
   ChangesSubmittedComponent: React.ReactElement;
 }) => {
@@ -152,7 +154,7 @@ const EditEvents = ({
       };
 
       try {
-        const update = await updatePageContent("events", JSON.stringify(data));
+        const update = await updatePageContent(pageId, JSON.stringify(data));
 
         if (update) {
           setFinished(true);

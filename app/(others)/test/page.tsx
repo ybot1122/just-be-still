@@ -9,7 +9,7 @@ import SingleImage from "@/components/SingleImage";
 import { redirect } from "next/navigation";
 
 export default async function Test() {
-  const data = await getPageData();
+  const data = await getPageData("test");
   const content = data.content;
 
   if (process.env.VERCEL_ENV === "production") {

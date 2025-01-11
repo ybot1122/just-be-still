@@ -8,7 +8,7 @@ import CarouselImage from "@/components/CarouselImage";
 import SingleImage from "@/components/SingleImage";
 
 export default async function Events() {
-  const data = await getPageData();
+  const data = await getPageData("events");
   const content = data.content;
 
   return (
