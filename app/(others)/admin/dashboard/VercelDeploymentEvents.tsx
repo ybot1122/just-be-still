@@ -19,6 +19,7 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
           if (done) {
             console.log(done);
             // TODO: done never seems to be true?
+            // TODO: if I have to, just keep polling the deployment status.
             setDone(true);
             break;
           }
