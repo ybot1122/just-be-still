@@ -155,15 +155,10 @@ const EditEvents = ({
         const update = await updatePageContent("events", JSON.stringify(data));
 
         if (update) {
-          // TODO: add toast notifications
-          alert("Page updated successfully");
-        } else {
-          alert("An error occurred while updating the page");
+          setFinished(true);
         }
       } catch (error) {
         alert((error as Error).message);
-      } finally {
-        setFinished(true);
       }
     },
     [errors, setErrors, setFinished],
