@@ -1,5 +1,5 @@
 {
-  "name": "nextjs",
+  "name": "just-be-still-design",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,7 @@
     ]
   },
   "dependencies": {
-    "@ybot1122/toby-ui": "0.0.13-alpha",
+    "@ybot1122/toby-ui": "0.0.14-alpha",
     "next": "15.1.4",
     "react": "19.0.0",
     "react-dom": "19.0.0"
