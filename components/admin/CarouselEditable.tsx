@@ -70,7 +70,7 @@ export default function CarouselEditable({
           className="mx-2 p-2 border rounded w-1/2"
           placeholder="Description"
           name={`${WidgetType.Carousel}-alt$${id}`}
-          value={carousel.content.length ? carousel.content[0].alt : ""}
+          defaultValue={carousel.content.length ? carousel.content[0].alt : ""}
         />
         <FieldError
           id={`${WidgetType.Carousel}-alt$${id}$error`}

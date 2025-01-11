@@ -17,6 +17,7 @@ import { updatePageContent } from "@/server_actions/updatePageContent";
 const EditEvents = ({ events }: { events: Page }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const submitForm = useCallback(
     async (e: FormData) => {
@@ -28,6 +29,7 @@ const EditEvents = ({ events }: { events: Page }) => {
         }
       });
 
+      setIsLoading(true);
       setErrors([]);
       const content: { id: string; widget: Widget }[] = [];
       const newErrors: string[] = [];
@@ -143,6 +145,7 @@ const EditEvents = ({ events }: { events: Page }) => {
             dom.classList.remove("hidden");
           }
         });
+        setIsLoading(false);
         return;
       }
 
@@ -161,10 +164,13 @@ const EditEvents = ({ events }: { events: Page }) => {
         }
       } catch (error) {
         alert((error as Error).message);
+      } finally {
+        setIsLoading(false);
       }
     },
-    [errors, setErrors],
+    [errors, setErrors, setIsLoading],
   );
+  console.log(isLoading);
 
   return (
     <form action={submitForm} className="text-left">
@@ -190,10 +196,11 @@ const EditEvents = ({ events }: { events: Page }) => {
         return null;
       })}
       <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
-
       <div className="flex flex-col items-center justify-center mt-10">
-        <BasicButton type="submit">
-          <div className="py-2">Update Page</div>
+        <BasicButton type="submit" disabled={isLoading}>
+          <div className="py-2">
+            {isLoading ? "Updating..." : "Update Page"}
+          </div>
         </BasicButton>
         {errors.length > 0 && (
           <div className="text-red-500">
