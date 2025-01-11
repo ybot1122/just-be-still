@@ -10,6 +10,16 @@ const ChangesSubmitted: React.FC = async () => {
     token: process.env.VERCEL_AT || "",
   });
 
+  if (!data || !data.deployments || !data.deployments.length) {
+    return (
+      <div className="p-5 text-center">
+        <h1 className="text-red-500 font-bold">
+          An Error Occurred. Please Contact Web Developer.
+        </h1>
+      </div>
+    );
+  }
+
   return (
     <div className="p-5 text-center">
       <h1 className="text-green-500 font-bold">Changes Submitted</h1>

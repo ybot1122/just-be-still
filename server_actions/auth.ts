@@ -20,7 +20,7 @@ export default async function auth(pass: string) {
         await cookies()
       ).set(COOKIES_ADMIN_TOKEN, val, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.VERCEL_ENV === "production",
         maxAge: COOKIES_AGE_2_HOURS,
         path: "/",
       });
