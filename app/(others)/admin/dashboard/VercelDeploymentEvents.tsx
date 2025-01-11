@@ -1,24 +1,34 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-export default function VercelDeploymentEvents() {
+const regex = /"(text)":"((\\"|[^"])*)"/i;
+
+export default function VercelDeploymentEvents({ id }: { id: string }) {
   const [text, setText] = useState("");
 
   useEffect(() => {
     const fetchStream = async () => {
-      const response = await fetch("/admin/getDeploymentEvents");
+      const response = await fetch(`/admin/getDeploymentEvents?id=${id}`);
       const reader = response.body?.getReader();
 
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
           if (done) break;
-          setText((prev) => prev + new TextDecoder().decode(value));
+          const next = new TextDecoder().decode(value);
+          setText((prev) => prev + next);
         }
       }
     };
 
-    console.log(JSON.parse(text));
+    const matchRegex = () => {
+      const matches = text.match(regex);
+      if (matches) {
+        console.log("Matched values:", matches);
+      }
+    };
+
+    matchRegex();
 
     fetchStream();
   }, []);

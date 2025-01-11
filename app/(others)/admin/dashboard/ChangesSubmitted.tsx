@@ -6,7 +6,7 @@ const ChangesSubmitted: React.FC = async () => {
   const data = await listDeployments({
     app: "just-be-still",
     since: 100,
-    limit: 10,
+    limit: 1,
     token: process.env.VERCEL_AT || "",
   });
 
@@ -14,7 +14,7 @@ const ChangesSubmitted: React.FC = async () => {
     <div>
       <h1>Changes Submitted</h1>
       <p>Your changes have been successfully submitted.</p>
-      <VercelDeploymentEvents />
+      <VercelDeploymentEvents id={data.deployments[0].uid} />
     </div>
   );
 };
