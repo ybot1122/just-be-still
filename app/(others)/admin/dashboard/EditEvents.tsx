@@ -3,21 +3,14 @@ import CarouselEditable from "@/components/admin/CarouselEditable";
 import SingleImageEditable from "@/components/admin/SingleImageEditable";
 import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
 import WidgetAdder from "@/components/admin/WidgetAdder";
-import {
-  ImageWidget,
-  WidgetType,
-  Page,
-  Widget,
-  CarouselWidget,
-} from "@/content/content";
-import { useImageChooser } from "@/context/ImageChooserContext";
+import { WidgetType, Page, Widget, CarouselWidget } from "@/content/content";
 import React, { useCallback, useState } from "react";
 import { updatePageContent } from "@/server_actions/updatePageContent";
+import { useFormStatus } from "react-dom";
 
 const EditEvents = ({ events }: { events: Page }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const submitForm = useCallback(
     async (e: FormData) => {
@@ -29,7 +22,6 @@ const EditEvents = ({ events }: { events: Page }) => {
         }
       });
 
-      setIsLoading(true);
       setErrors([]);
       const content: { id: string; widget: Widget }[] = [];
       const newErrors: string[] = [];
@@ -145,7 +137,6 @@ const EditEvents = ({ events }: { events: Page }) => {
             dom.classList.remove("hidden");
           }
         });
-        setIsLoading(false);
         return;
       }
 
@@ -165,12 +156,10 @@ const EditEvents = ({ events }: { events: Page }) => {
       } catch (error) {
         alert((error as Error).message);
       } finally {
-        setIsLoading(false);
       }
     },
-    [errors, setErrors, setIsLoading],
+    [errors, setErrors],
   );
-  console.log(isLoading);
 
   return (
     <form action={submitForm} className="text-left">
@@ -197,11 +186,7 @@ const EditEvents = ({ events }: { events: Page }) => {
       })}
       <WidgetAdder addWidget={(w) => setNewWidgets((prev) => [...prev, w])} />
       <div className="flex flex-col items-center justify-center mt-10">
-        <BasicButton type="submit" disabled={isLoading}>
-          <div className="py-2">
-            {isLoading ? "Updating..." : "Update Page"}
-          </div>
-        </BasicButton>
+        <Submit />
         {errors.length > 0 && (
           <div className="text-red-500">
             You have some errors. Please check above.
@@ -209,6 +194,17 @@ const EditEvents = ({ events }: { events: Page }) => {
         )}
       </div>
     </form>
+  );
+};
+
+const Submit = () => {
+  const { pending } = useFormStatus();
+  return pending ? (
+    <div className="py-2">Updating...</div>
+  ) : (
+    <BasicButton type="submit">
+      <div className="py-2">Update Page</div>
+    </BasicButton>
   );
 };
 
