@@ -19,13 +19,11 @@ export default async function checkAuth() {
     }
 
     const parts = auth.value.split(".");
-    console.log(parts);
     if (parts.length !== 3) {
       return false;
     }
 
     const at = decryptSymmetric(ENCRYPTION_KEY, parts[0], parts[1], parts[2]);
-    console.log(at);
     return at === ADMIN_PASSWORD;
   } catch (e) {
     console.error("checkAuth method failing");
