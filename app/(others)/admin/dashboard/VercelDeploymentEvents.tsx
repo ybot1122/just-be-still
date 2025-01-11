@@ -33,5 +33,5 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
     fetchStream();
   }, []);
 
-  return <div style={{ whiteSpace: "pre-wrap" }}>{text}</div>;
+  <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap">{text}</div>;
 }
