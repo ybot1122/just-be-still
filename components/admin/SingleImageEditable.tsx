@@ -5,6 +5,7 @@ import BasicButton from "./BasicButton";
 import EditableLabel from "./EditableLabel";
 import WidgetDeleted from "./WidgetDeleted";
 import SingleImage from "../SingleImage";
+import FieldError from "./FieldError";
 
 export default function SingleImageEditable({
   original,
@@ -44,12 +45,10 @@ export default function SingleImageEditable({
             placeholder="Enter image description"
             name={`${WidgetType.Image}-alt$${id}`}
           />
-          <p
+          <FieldError
             id={`${WidgetType.Image}-alt$${id}$error`}
-            className="text-red-500 mt-2 hidden"
-          >
-            This field cannot be empty.
-          </p>
+            message="This field cannot be empty."
+          />
         </div>
       ) : null}
       <div className="flex flex-col items-center justify-center mt-5">
@@ -63,12 +62,10 @@ export default function SingleImageEditable({
         >
           {selectedImage ? "Change Image" : "Choose Image"}
         </BasicButton>
-        <p
+        <FieldError
           id={`${WidgetType.Image}$${id}$error`}
-          className="text-red-500 mt-2 hidden"
-        >
-          You must select an image.
-        </p>
+          message="You must select an image."
+        />
       </div>
       <input
         type="hidden"

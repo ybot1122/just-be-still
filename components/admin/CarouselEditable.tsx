@@ -9,6 +9,7 @@ import { useImageChooser } from "@/context/ImageChooserContext";
 import TrashIcon from "../TrashIcon";
 import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
+import FieldError from "./FieldError";
 
 export default function CarouselEditable({
   carousel,
@@ -71,12 +72,10 @@ export default function CarouselEditable({
           name={`${WidgetType.Carousel}-alt$${id}`}
           value={carousel.content.length ? carousel.content[0].alt : ""}
         />
-        <p
+        <FieldError
           id={`${WidgetType.Carousel}-alt$${id}$error`}
-          className="text-red-500 mt-2 hidden"
-        >
-          This field cannot be empty.
-        </p>
+          message="This field cannot be empty."
+        />
       </div>
       <Carousel>
         {content.map((c) => (
@@ -108,12 +107,10 @@ export default function CarouselEditable({
         <BasicButton onClick={() => setImageChooserCb(addImage)}>
           <div className="py-2">Add Image</div>
         </BasicButton>
-        <p
+        <FieldError
           id={`${WidgetType.Carousel}$${id}$error`}
-          className="text-red-500 mt-2 hidden"
-        >
-          You must have at least one image.
-        </p>
+          message="You must have at least one image.."
+        />
       </div>
     </div>
   );
