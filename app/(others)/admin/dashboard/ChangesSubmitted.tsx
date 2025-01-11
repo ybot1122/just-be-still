@@ -5,7 +5,6 @@ import VercelDeploymentEvents from "./VercelDeploymentEvents";
 const ChangesSubmitted: React.FC = async () => {
   const data = await listDeployments({
     app: "just-be-still",
-    since: Date.now(),
     limit: 1,
     token: process.env.VERCEL_AT || "",
   });
