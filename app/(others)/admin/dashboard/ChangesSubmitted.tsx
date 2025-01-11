@@ -1,5 +1,5 @@
 import { listDeployments } from "@ybot1122/toby-ui/Sdk/Vercel/listDeployments";
-import React, { Suspense } from "react";
+import React from "react";
 import VercelDeploymentEvents from "./VercelDeploymentEvents";
 
 const ChangesSubmitted: React.FC = async () => {

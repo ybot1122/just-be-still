@@ -18,6 +18,8 @@ export default function VercelDeploymentEvents() {
       }
     };
 
+    console.log(JSON.parse(text));
+
     fetchStream();
   }, []);
 
