@@ -136,7 +136,6 @@ const EditEvents = ({ events }: { events: Page }) => {
 
       if (newErrors.length) {
         setErrors(newErrors);
-        console.log(newErrors);
         newErrors.map((n) => {
           const dom = document.getElementById(n);
 
@@ -150,8 +149,6 @@ const EditEvents = ({ events }: { events: Page }) => {
       const data: Page = {
         content: content.map((c) => c.widget),
       };
-
-      console.log(data);
 
       try {
         const update = await updatePageContent("events", JSON.stringify(data));
