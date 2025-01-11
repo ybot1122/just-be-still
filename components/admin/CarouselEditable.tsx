@@ -62,7 +62,7 @@ export default function CarouselEditable({
         name={"Image Carousel"}
         removeCb={() => setIsRemoved(true)}
       />
-      <div className="mt-5 flex justify-center items-center">
+      <div className="mt-5 flex flex-col justify-center items-center">
         <div>Describe this Carousel: </div>
         <input
           type="text"
