@@ -8,13 +8,13 @@ import React, { useCallback, useState } from "react";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import { useFormStatus } from "react-dom";
 
-const EditEvents = ({
+const EditPage = ({
   pageId,
-  events,
+  pageData,
   ChangesSubmittedComponent,
 }: {
   pageId: string;
-  events: Page;
+  pageData: Page;
   ChangesSubmittedComponent: React.ReactElement;
 }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
@@ -172,7 +172,7 @@ const EditEvents = ({
 
   return (
     <form action={submitForm} className="text-left">
-      {[...events.content, ...newWidgets].map((c) => {
+      {[...pageData.content, ...newWidgets].map((c) => {
         if (c.type === WidgetType.Paragraph) {
           return <PageParagraphEditable value={c.content} key={c.uuid} />;
         }
@@ -217,4 +217,4 @@ const Submit = () => {
   );
 };
 
-export default EditEvents;
+export default EditPage;

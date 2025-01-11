@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import EditEvents from "./EditEvents";
+import EditPage from "./EditPage";
 import { Page } from "@/content/content";
 import ImageChooser from "@/components/admin/ImageChooser";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
@@ -81,9 +81,9 @@ const Tabs = ({
         {activeTab === "tab3" && <div>Not Available Yet</div>}
         {activeTab === "tab4" && (
           <div>
-            <EditEvents
+            <EditPage
               pageId="events"
-              events={events}
+              pageData={events}
               ChangesSubmittedComponent={ChangesSubmittedComponent}
             />
           </div>
@@ -91,10 +91,9 @@ const Tabs = ({
         {activeTab === "tab5" && <div>Not Available Yet</div>}
         {activeTab === "tab6" && test && (
           <div>
-            {" "}
-            <EditEvents
+            <EditPage
               pageId="test"
-              events={test}
+              pageData={test}
               ChangesSubmittedComponent={ChangesSubmittedComponent}
             />
           </div>
