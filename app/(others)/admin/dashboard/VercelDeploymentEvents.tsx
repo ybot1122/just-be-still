@@ -16,6 +16,10 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
+
+          const response = await fetch(`/admin/getDeployment?id=${id}`);
+          console.log(response);
+
           if (done) {
             console.log(done);
             // TODO: done never seems to be true?
@@ -41,7 +45,7 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
       <div className="mb-10">
         {done ? "Done" : <Loader color="#000" width={50} />}
       </div>
-      <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all text-left text-sm flex flex-col-reverse">
+      <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all text-left text-sm flex flex-col-reverse border-2 border-dashed border-fores p-5">
         {matches.map((m, ind) => (
           <p className="my-2" key={ind}>
             {m}
