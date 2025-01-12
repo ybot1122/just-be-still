@@ -6,7 +6,6 @@ import { Page } from "@/content/content";
 import ImageChooser from "@/components/admin/ImageChooser";
 import { CloudinaryResource } from "@/server_actions/getCloudinaryImages";
 import { useImageChooser } from "@/context/ImageChooserContext";
-import ChangesSubmitted from "./ChangesSubmitted";
 
 const Tabs = ({
   events,
@@ -26,6 +25,10 @@ const Tabs = ({
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
+
+  if (activeTab === "changesSubmitted") {
+    return ChangesSubmittedComponent;
+  }
 
   return (
     <div className="mt-5">
@@ -84,7 +87,7 @@ const Tabs = ({
             <EditPage
               pageId="events"
               pageData={events}
-              ChangesSubmittedComponent={ChangesSubmittedComponent}
+              onSubmit={() => handleTabClick("changesSubmitted")}
             />
           </div>
         )}
@@ -94,7 +97,7 @@ const Tabs = ({
             <EditPage
               pageId="test"
               pageData={test}
-              ChangesSubmittedComponent={ChangesSubmittedComponent}
+              onSubmit={() => handleTabClick("changesSubmitted")}
             />
           </div>
         )}

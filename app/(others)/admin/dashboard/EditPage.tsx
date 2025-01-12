@@ -11,15 +11,14 @@ import { useFormStatus } from "react-dom";
 const EditPage = ({
   pageId,
   pageData,
-  ChangesSubmittedComponent,
+  onSubmit,
 }: {
   pageId: string;
   pageData: Page;
-  ChangesSubmittedComponent: React.ReactElement;
+  onSubmit: () => void;
 }) => {
   const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
   const [errors, setErrors] = useState<string[]>([]);
-  const [finished, setFinished] = useState(false);
 
   const submitForm = useCallback(
     async (e: FormData) => {
@@ -157,18 +156,14 @@ const EditPage = ({
         const update = await updatePageContent(pageId, JSON.stringify(data));
 
         if (update) {
-          setFinished(true);
+          onSubmit();
         }
       } catch (error) {
         alert((error as Error).message);
       }
     },
-    [errors, setErrors, setFinished],
+    [errors, setErrors],
   );
-
-  if (finished) {
-    return ChangesSubmittedComponent;
-  }
 
   return (
     <form action={submitForm} className="text-left">
