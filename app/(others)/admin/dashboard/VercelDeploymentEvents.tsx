@@ -17,8 +17,9 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
         while (true) {
           const { done, value } = await reader.read();
 
-          const response = await fetch(`/admin/getDeployment?id=${id}`);
-          console.log(response);
+          const cd = await fetch(`/admin/getDeployment?id=${id}`);
+          const d = await cd.json();
+          console.log(d);
 
           if (done) {
             console.log(done);
