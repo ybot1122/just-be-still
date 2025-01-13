@@ -1,31 +1,33 @@
 "use client";
-import { Loader } from "@/components/Loader";
 import React, { useState, useEffect } from "react";
-
 const regex = /"(text)":"((\\"|[^"])*)"/g;
 
-export default function VercelDeploymentEvents({ id }: { id: string }) {
+export default function VercelDeploymentEvents({
+  id,
+  setDeploymentDone,
+}: {
+  id: string;
+  setDeploymentDone: () => void;
+}) {
   const [text, setText] = useState("");
-  const [done, setDone] = useState(false);
+  const [stop, setStop] = useState(false);
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchStream = async () => {
-      const response = await fetch(`/admin/getDeploymentEvents?id=${id}`);
+      const response = await fetch(`/admin/getDeploymentEvents?id=${id}`, {
+        signal,
+      });
       const reader = response.body?.getReader();
 
       if (reader) {
         while (true) {
           const { done, value } = await reader.read();
 
-          const cd = await fetch(`/admin/getDeployment?id=${id}`);
-          const d = await cd.json();
-          console.log(d);
-
           if (done) {
-            console.log(done);
-            // TODO: done never seems to be true?
-            // TODO: if I have to, just keep polling the deployment status.
-            setDone(true);
+            setStop(true);
+            setDeploymentDone();
             break;
           }
           const next = new TextDecoder().decode(value);
@@ -34,25 +36,40 @@ export default function VercelDeploymentEvents({ id }: { id: string }) {
       }
     };
 
-    fetchStream();
-  }, [setDone]);
+    if (!stop) {
+      fetchStream();
+    }
+
+    () => controller.abort();
+  }, [setDeploymentDone, stop]);
+
+  useEffect(() => {
+    const check = async () => {
+      const cd = await fetch(`/admin/getDeployment?id=${id}`);
+      const d = await cd.json();
+      console.log(d.readyState, d.readySubstate);
+
+      if (d.readyState === "READY" && d.readySubstate === "PROMOTED") {
+        setStop(true);
+        setDeploymentDone();
+      } else {
+        setTimeout(check, 5000);
+      }
+    };
+    setTimeout(check, 5000);
+  }, [id, setDeploymentDone]);
 
   const matches = Array.from(text.matchAll(regex))
     .map((match) => match[2])
     .reverse();
 
   return (
-    <>
-      <div className="mb-10">
-        {done ? "Done" : <Loader color="#000" width={50} />}
-      </div>
-      <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all text-left text-sm flex flex-col-reverse border-2 border-dashed border-fores p-5">
-        {matches.map((m, ind) => (
-          <p className="my-2" key={ind}>
-            {m}
-          </p>
-        ))}
-      </div>
-    </>
+    <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all text-left text-sm flex flex-col-reverse border-2 border-dashed border-fores p-5">
+      {matches.map((m, ind) => (
+        <p className="my-2" key={ind}>
+          {m}
+        </p>
+      ))}
+    </div>
   );
 }
