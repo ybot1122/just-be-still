@@ -28,7 +28,7 @@ export default function VercelDeploymentEvents({
         setTimeout(check, 5000);
       }
     };
-    setTimeout(check, 5000);
+    setTimeout(check, 1000);
   }, [id, setDeploymentDone]);
 
   return (

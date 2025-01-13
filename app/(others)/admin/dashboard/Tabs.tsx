@@ -124,6 +124,7 @@ const TabButton = ({
     <button
       onClick={() => handleTabClick(tab)}
       className={`${active} px-4 mx-2 py-2 rounded-md`}
+      type="button"
     >
       {children}
     </button>

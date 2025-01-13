@@ -3,7 +3,13 @@ import CarouselEditable from "@/components/admin/CarouselEditable";
 import SingleImageEditable from "@/components/admin/SingleImageEditable";
 import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
 import WidgetAdder from "@/components/admin/WidgetAdder";
-import { WidgetType, Page, Widget, CarouselWidget } from "@/content/content";
+import {
+  WidgetType,
+  Page,
+  Widget,
+  CarouselWidget,
+  WidgetModifiers,
+} from "@/content/content";
 import React, { useCallback, useState } from "react";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import { useFormStatus } from "react-dom";
@@ -41,13 +47,17 @@ const EditPage = ({
 
         const val = value?.toString().trim() || "";
 
+        const modifiersVal =
+          e.get(`${field[0]}-modifiers$${field[1]}`)?.toString() || "";
+        const modifiers = modifiersVal.split(" ") as WidgetModifiers[];
+
         if (field[0] === WidgetType.Paragraph) {
           content.push({
             id: field[1],
             widget: {
               type: WidgetType.Paragraph,
               content: val,
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             },
           });
@@ -57,7 +67,7 @@ const EditPage = ({
             widget: {
               type: WidgetType.AccentParagraph,
               content: val,
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             },
           });
@@ -72,7 +82,7 @@ const EditPage = ({
                   .get(`${WidgetType.Image}-alt$${field[1]}`)
                   ?.toString()
                   .trim() || "",
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             },
           });
@@ -95,7 +105,7 @@ const EditPage = ({
                   .get(`${WidgetType.Carousel}-alt$${field[1]}`)
                   ?.toString()
                   .trim() || "",
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             })),
           };
@@ -169,13 +179,11 @@ const EditPage = ({
     <form action={submitForm} className="text-left">
       {[...pageData.content, ...newWidgets].map((c) => {
         if (c.type === WidgetType.Paragraph) {
-          return <PageParagraphEditable value={c.content} key={c.uuid} />;
+          return <PageParagraphEditable widget={c} key={c.uuid} />;
         }
 
         if (c.type === WidgetType.AccentParagraph) {
-          return (
-            <PageParagraphEditable value={c.content} key={c.uuid} isAccent />
-          );
+          return <PageParagraphEditable widget={c} key={c.uuid} isAccent />;
         }
 
         if (c.type === WidgetType.Carousel) {

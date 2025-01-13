@@ -15,14 +15,16 @@ export type ImageWidget = {
   modifiers: WidgetModifiers[];
 };
 
-type ParagraphWidget = {
+export type ParagraphWidget = {
   type: WidgetType.Paragraph | WidgetType.AccentParagraph;
   content: string;
   uuid: string;
   modifiers: WidgetModifiers[];
 };
 
-enum WidgetModifiers {
+export enum WidgetModifiers {
+  TextCenter = "text-center",
+  TextRight = "text-right",
   TextLeft = "text-left",
   FontBold = "font-bold",
 }

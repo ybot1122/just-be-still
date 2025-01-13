@@ -5,6 +5,8 @@ import PageParagraph from "../PageParagraph";
 import BasicButton from "./BasicButton";
 import auth from "@/server_actions/auth";
 import { useRouter } from "next/navigation";
+import { useFormStatus } from "react-dom";
+import { Loader } from "../Loader";
 export default function LoginToAdmin({}: {}) {
   const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -37,17 +39,24 @@ export default function LoginToAdmin({}: {}) {
             ref={passwordRef}
           />
         </div>
-        <div className="mt-5">
-          {status === "loading" ? (
-            <span>loading...</span>
-          ) : (
-            <BasicButton onClick={onLogin}>Login to Admin</BasicButton>
-          )}{" "}
-          {status === "error" && (
-            <p className="text-errorText text-sm">Error Logging In</p>
-          )}
-        </div>
+        <Submit error={status === "error"} />
       </form>
     </PageParagraph>
   );
 }
+
+const Submit = ({ error }: { error: boolean }) => {
+  const { pending } = useFormStatus();
+  return (
+    <div className="mt-5">
+      {pending ? (
+        <Loader color="#000" width={25} />
+      ) : (
+        <BasicButton type="submit">Login to Admin</BasicButton>
+      )}{" "}
+      {error ? (
+        <p className="text-errorText text-sm">Error Logging In</p>
+      ) : null}
+    </div>
+  );
+};
