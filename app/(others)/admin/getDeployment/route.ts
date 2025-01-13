@@ -1,4 +1,5 @@
 import checkAuth from "@/server_actions/checkAuth";
+import { getDeployment } from "@ybot1122/toby-ui/Sdk/Vercel/getDeployment";
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
@@ -16,14 +17,10 @@ export async function GET(request: Request) {
     return new Response("Unauthorized", { status: 401 });
   }
 
-  const r = await fetch(`https://api.vercel.com/v13/deployments/${id}`, {
-    headers: {
-      Authorization: `Bearer ${VERCEL_AT}`,
-    },
-    method: "get",
+  const data = await getDeployment({
+    id,
+    token: VERCEL_AT,
   });
-
-  const data = await r.json();
 
   return new Response(JSON.stringify(data), { status: 200 });
 }

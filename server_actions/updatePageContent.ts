@@ -24,7 +24,7 @@ export async function updatePageContent(
   const repo = "just-be-still";
   const path = `content/${pageId}.json`;
   const commitMessage = `Update ${pageId} content`;
-  const content = btoa(newContent);
+  const content = bytesToBase64(new TextEncoder().encode(newContent));
 
   try {
     const data = await getRepositoryContent({
@@ -55,7 +55,10 @@ export async function updatePageContent(
       try {
         await new Promise<void>((resolve) =>
           setTimeout(async () => {
-            await fs.writeFileSync(`./content/test.json`, atob(content));
+            await fs.writeFileSync(
+              `./content/test.json`,
+              new TextDecoder().decode(base64ToBytes(content)),
+            );
             resolve();
           }, 2000),
         );
@@ -72,4 +75,16 @@ export async function updatePageContent(
   } catch (error) {
     throw new Error("An error occurred while updating the page");
   }
+}
+
+function base64ToBytes(base64: string) {
+  const binString = atob(base64);
+  return Uint8Array.from(binString, (m) => m.codePointAt(0) ?? 0);
+}
+
+function bytesToBase64(bytes: Uint8Array): string {
+  const binString = Array.from(bytes, (byte) =>
+    String.fromCodePoint(byte),
+  ).join("");
+  return btoa(binString);
 }

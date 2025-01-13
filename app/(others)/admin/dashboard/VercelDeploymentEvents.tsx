@@ -4,9 +4,11 @@ import React, { useState, useEffect } from "react";
 export default function VercelDeploymentEvents({
   id,
   setDeploymentDone,
+  setError,
 }: {
   id: string;
   setDeploymentDone: () => void;
+  setError: () => void;
 }) {
   const [text, setText] = useState<
     { created: number; id: string; text: string }[]
@@ -24,6 +26,8 @@ export default function VercelDeploymentEvents({
 
       if (d.readyState === "READY" && d.readySubstate === "PROMOTED") {
         setDeploymentDone();
+      } else if (d.readyState === "ERROR") {
+        setError();
       } else {
         setTimeout(check, 5000);
       }
