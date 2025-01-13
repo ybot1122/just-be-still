@@ -22,7 +22,7 @@ type ParagraphWidget = {
   modifiers: WidgetModifiers[];
 };
 
-enum WidgetModifiers {
+export enum WidgetModifiers {
   TextLeft = "text-left",
   FontBold = "font-bold",
 }

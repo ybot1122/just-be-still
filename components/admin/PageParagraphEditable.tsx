@@ -87,6 +87,11 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
         }}
         className={`${pClass} py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
       />
+      <input
+        type="hidden"
+        name={`${nodeType}-modifiers$${id}`}
+        value="text-left"
+      />
       <FieldError id={error_id} message="This field cannot be empty." />
     </div>
   );

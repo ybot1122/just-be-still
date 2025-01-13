@@ -3,7 +3,13 @@ import CarouselEditable from "@/components/admin/CarouselEditable";
 import SingleImageEditable from "@/components/admin/SingleImageEditable";
 import PageParagraphEditable from "@/components/admin/PageParagraphEditable";
 import WidgetAdder from "@/components/admin/WidgetAdder";
-import { WidgetType, Page, Widget, CarouselWidget } from "@/content/content";
+import {
+  WidgetType,
+  Page,
+  Widget,
+  CarouselWidget,
+  WidgetModifiers,
+} from "@/content/content";
 import React, { useCallback, useState } from "react";
 import { updatePageContent } from "@/server_actions/updatePageContent";
 import { useFormStatus } from "react-dom";
@@ -42,12 +48,16 @@ const EditPage = ({
         const val = value?.toString().trim() || "";
 
         if (field[0] === WidgetType.Paragraph) {
+          const modifiersVal =
+            e.get(`${field[0]}-alt$${field[1]}`)?.toString() || "";
+          const modifiers = modifiersVal.split(",") as WidgetModifiers[];
+
           content.push({
             id: field[1],
             widget: {
               type: WidgetType.Paragraph,
               content: val,
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             },
           });
