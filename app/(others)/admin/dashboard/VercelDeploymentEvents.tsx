@@ -10,47 +10,19 @@ export default function VercelDeploymentEvents({
   setDeploymentDone: () => void;
 }) {
   const [text, setText] = useState("");
-  const [stop, setStop] = useState(false);
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    const fetchStream = async () => {
-      const response = await fetch(`/admin/getDeploymentEvents?id=${id}`, {
-        signal,
-      });
-      const reader = response.body?.getReader();
-
-      if (reader) {
-        while (true) {
-          const { done, value } = await reader.read();
-
-          if (done) {
-            setStop(true);
-            setDeploymentDone();
-            break;
-          }
-          const next = new TextDecoder().decode(value);
-          setText((prev) => prev + next);
-        }
-      }
-    };
-
-    if (!stop) {
-      fetchStream();
-    }
-
-    () => controller.abort();
-  }, [setDeploymentDone, stop]);
 
   useEffect(() => {
     const check = async () => {
       const cd = await fetch(`/admin/getDeployment?id=${id}`);
       const d = await cd.json();
+
+      const l = await fetch(`/admin/getDeployment?id=${id}`);
+      const logs = await l.json();
+
+      console.log(logs);
       console.log(d.readyState, d.readySubstate);
 
       if (d.readyState === "READY" && d.readySubstate === "PROMOTED") {
-        setStop(true);
         setDeploymentDone();
       } else {
         setTimeout(check, 5000);

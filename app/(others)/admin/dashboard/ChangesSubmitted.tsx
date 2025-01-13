@@ -12,7 +12,14 @@ const ChangesSubmitted: React.FC = () => {
     const fetchData = async () => {
       const response = await fetch("/admin/listDeployments");
       const result = await response.json();
-      setDeploymentId(result.deployments[0].uid);
+
+      const status = result.deployments[0].readyState;
+
+      if (status === "READY") {
+        setTimeout(fetchData, 5000);
+      } else {
+        setDeploymentId(result.deployments[0].uid);
+      }
     };
 
     fetchData();
@@ -44,7 +51,7 @@ const ChangesSubmitted: React.FC = () => {
         )}
       </div>
 
-      {deploymentId ? (
+      {deploymentId && !deploymentDone ? (
         <VercelDeploymentEvents
           id={deploymentId}
           setDeploymentDone={() => setDeploymentDone(true)}

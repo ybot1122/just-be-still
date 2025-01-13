@@ -21,8 +21,9 @@ export async function GET(request: Request) {
     id: id,
     limit: 10,
     token: VERCEL_AT,
-    follow: true,
   });
 
-  return new Response(r.body, { status: 200 });
+  const logs = await r.json();
+
+  return new Response(JSON.stringify(logs), { status: 200 });
 }
