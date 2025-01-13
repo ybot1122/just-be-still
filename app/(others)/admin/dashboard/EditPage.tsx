@@ -47,11 +47,11 @@ const EditPage = ({
 
         const val = value?.toString().trim() || "";
 
-        if (field[0] === WidgetType.Paragraph) {
-          const modifiersVal =
-            e.get(`${field[0]}-modifiers$${field[1]}`)?.toString() || "";
-          const modifiers = modifiersVal.split(",") as WidgetModifiers[];
+        const modifiersVal =
+          e.get(`${field[0]}-modifiers$${field[1]}`)?.toString() || "";
+        const modifiers = modifiersVal.split(" ") as WidgetModifiers[];
 
+        if (field[0] === WidgetType.Paragraph) {
           content.push({
             id: field[1],
             widget: {
@@ -67,7 +67,7 @@ const EditPage = ({
             widget: {
               type: WidgetType.AccentParagraph,
               content: val,
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             },
           });
@@ -82,7 +82,7 @@ const EditPage = ({
                   .get(`${WidgetType.Image}-alt$${field[1]}`)
                   ?.toString()
                   .trim() || "",
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             },
           });
@@ -105,7 +105,7 @@ const EditPage = ({
                   .get(`${WidgetType.Carousel}-alt$${field[1]}`)
                   ?.toString()
                   .trim() || "",
-              modifiers: [],
+              modifiers,
               uuid: crypto.randomUUID(),
             })),
           };
@@ -179,13 +179,11 @@ const EditPage = ({
     <form action={submitForm} className="text-left">
       {[...pageData.content, ...newWidgets].map((c) => {
         if (c.type === WidgetType.Paragraph) {
-          return <PageParagraphEditable value={c.content} key={c.uuid} />;
+          return <PageParagraphEditable widget={c} key={c.uuid} />;
         }
 
         if (c.type === WidgetType.AccentParagraph) {
-          return (
-            <PageParagraphEditable value={c.content} key={c.uuid} isAccent />
-          );
+          return <PageParagraphEditable widget={c} key={c.uuid} isAccent />;
         }
 
         if (c.type === WidgetType.Carousel) {

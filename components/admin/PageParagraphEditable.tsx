@@ -1,6 +1,10 @@
 "use client";
 
-import { WidgetModifiers, WidgetType } from "@/content/content";
+import {
+  ParagraphWidget,
+  WidgetModifiers,
+  WidgetType,
+} from "@/content/content";
 import React, { FC, ChangeEvent, useState, useId, useCallback } from "react";
 import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
@@ -14,24 +18,32 @@ import {
 } from "../toolbarIcons/Icons";
 
 interface PageParagraphEditable {
-  value: string;
+  widget: ParagraphWidget;
   placeholder?: string;
   isAccent?: boolean;
 }
 
 const PageParagraphEditable: FC<PageParagraphEditable> = ({
-  value: valueProp,
+  widget,
   placeholder,
   isAccent = false,
 }) => {
   const id = useId();
   const [isRemoved, setIsRemoved] = useState(false);
-  const [value, setValue] = useState(valueProp);
+  const [value, setValue] = useState(widget.content);
   const [modifiers, setModifiers] = useState<Record<WidgetModifiers, boolean>>({
-    [WidgetModifiers.FontBold]: false,
-    [WidgetModifiers.TextCenter]: false,
-    [WidgetModifiers.TextLeft]: true,
-    [WidgetModifiers.TextRight]: false,
+    [WidgetModifiers.FontBold]: widget.modifiers.includes(
+      WidgetModifiers.FontBold,
+    ),
+    [WidgetModifiers.TextCenter]: widget.modifiers.includes(
+      WidgetModifiers.TextCenter,
+    ),
+    [WidgetModifiers.TextLeft]: widget.modifiers.includes(
+      WidgetModifiers.TextLeft,
+    ),
+    [WidgetModifiers.TextRight]: widget.modifiers.includes(
+      WidgetModifiers.TextRight,
+    ),
   });
   const pClass = isAccent ? "pageParagraphAccent" : "pageParagraph";
   const pName = `${isAccent ? "Accent " : ""} Paragraph`;

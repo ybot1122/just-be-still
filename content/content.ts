@@ -15,7 +15,7 @@ export type ImageWidget = {
   modifiers: WidgetModifiers[];
 };
 
-type ParagraphWidget = {
+export type ParagraphWidget = {
   type: WidgetType.Paragraph | WidgetType.AccentParagraph;
   content: string;
   uuid: string;
