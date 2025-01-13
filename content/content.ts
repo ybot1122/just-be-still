@@ -23,6 +23,8 @@ type ParagraphWidget = {
 };
 
 export enum WidgetModifiers {
+  TextCenter = "text-center",
+  TextRight = "text-right",
   TextLeft = "text-left",
   FontBold = "font-bold",
 }
