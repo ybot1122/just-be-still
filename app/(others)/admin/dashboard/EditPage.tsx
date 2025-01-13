@@ -49,7 +49,7 @@ const EditPage = ({
 
         if (field[0] === WidgetType.Paragraph) {
           const modifiersVal =
-            e.get(`${field[0]}-alt$${field[1]}`)?.toString() || "";
+            e.get(`${field[0]}-modifiers$${field[1]}`)?.toString() || "";
           const modifiers = modifiersVal.split(",") as WidgetModifiers[];
 
           content.push({
