@@ -24,7 +24,6 @@ export default async function checkAuth() {
     }
 
     const at = decryptSymmetric(ENCRYPTION_KEY, parts[0], parts[1], parts[2]);
-
     return at === ADMIN_PASSWORD;
   } catch (e) {
     console.error("checkAuth method failing");

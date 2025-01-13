@@ -26,52 +26,50 @@ export async function updatePageContent(
   const commitMessage = `Update ${pageId} content`;
   const content = btoa(newContent);
 
-  if (process.env.NODE_ENV === "development") {
-    // in development mode, save changes to filesystem locally
-    try {
-      await new Promise<void>((resolve) =>
-        setTimeout(async () => {
-          await fs.writeFileSync(`./content/test.json`, atob(content));
-          resolve();
-        }, 2000),
-      );
-    } catch (err) {
-      throw new Error("An error occurred while updating the page");
+  try {
+    const data = await getRepositoryContent({
+      token,
+      owner,
+      repo,
+      path,
+    });
+
+    const sha = data.sha;
+
+    if (!sha) {
+      throw new Error("Tried to update a file that does not exist");
     }
 
-    return true;
-  } else {
-    try {
-      const data = await getRepositoryContent({
-        token,
-        owner,
-        repo,
-        path,
-      });
+    const response = await putRepositoryContent({
+      token,
+      owner,
+      repo,
+      path,
+      commitMessage,
+      content,
+      sha,
+    });
 
-      const sha = data.sha;
-
-      if (!sha) {
-        throw new Error("Tried to update a file that does not exist");
+    if (process.env.NODE_ENV === "development") {
+      // in development mode, save changes to filesystem locally
+      try {
+        await new Promise<void>((resolve) =>
+          setTimeout(async () => {
+            await fs.writeFileSync(`./content/test.json`, atob(content));
+            resolve();
+          }, 2000),
+        );
+      } catch (err) {
+        throw new Error("An error occurred while updating the page locally");
       }
-
-      const response = await putRepositoryContent({
-        token,
-        owner,
-        repo,
-        path,
-        commitMessage,
-        content,
-        sha,
-      });
-
-      if (response.commit) {
-        return true;
-      }
-
-      throw new Error("?");
-    } catch (error) {
-      throw new Error("An error occurred while updating the page");
     }
+
+    if (response.commit) {
+      return true;
+    }
+
+    throw new Error("?");
+  } catch (error) {
+    throw new Error("An error occurred while updating the page");
   }
 }

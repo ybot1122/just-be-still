@@ -1,41 +1,44 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const regex = /"(text)":"((\\"|[^"])*)"/i;
-
-export default function VercelDeploymentEvents({ id }: { id: string }) {
-  const [text, setText] = useState("");
+export default function VercelDeploymentEvents({
+  id,
+  setDeploymentDone,
+}: {
+  id: string;
+  setDeploymentDone: () => void;
+}) {
+  const [text, setText] = useState<
+    { created: number; id: string; text: string }[]
+  >([]);
 
   useEffect(() => {
-    const fetchStream = async () => {
-      const response = await fetch(`/admin/getDeploymentEvents?id=${id}`);
-      const reader = response.body?.getReader();
+    const check = async () => {
+      const cd = await fetch(`/admin/getDeployment?id=${id}`);
+      const d = await cd.json();
 
-      if (reader) {
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          const next = new TextDecoder().decode(value);
-          setText((prev) => prev + next);
-        }
+      const l = await fetch(`/admin/getDeploymentEvents?id=${id}`);
+      const logs = await l.json();
+
+      setText(logs.reverse());
+
+      if (d.readyState === "READY" && d.readySubstate === "PROMOTED") {
+        setDeploymentDone();
+      } else {
+        setTimeout(check, 5000);
       }
     };
-
-    const matchRegex = () => {
-      const matches = text.match(regex);
-      if (matches) {
-        console.log("Matched values:", matches);
-      }
-    };
-
-    matchRegex();
-
-    fetchStream();
-  }, []);
+    setTimeout(check, 5000);
+  }, [id, setDeploymentDone]);
 
   return (
-    <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all">
-      {text}
+    <div className="overflow-y-scroll h-[300px] whitespace-pre-wrap break-all text-left text-sm flex flex-col-reverse border-2 border-dashed border-fores p-5">
+      {text.map((m) => (
+        <div key={m.id} className="flex flex-row my-2">
+          <p className="mr-5">{new Date(m.created).toLocaleTimeString()}</p>
+          <p>{m.text}</p>
+        </div>
+      ))}
     </div>
   );
 }
