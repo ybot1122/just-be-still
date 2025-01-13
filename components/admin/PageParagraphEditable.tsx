@@ -123,14 +123,18 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
           >
             <CenterAlign />
           </BasicButton>
-          <BasicButton
-            onClick={() => chooseAlignment(WidgetModifiers.TextRight)}
-            className={
-              modifiers[WidgetModifiers.TextRight] ? "bg-forest text-white" : ""
-            }
-          >
-            <RightAlign />
-          </BasicButton>
+          {
+            <BasicButton
+              onClick={() => chooseAlignment(WidgetModifiers.TextRight)}
+              className={
+                modifiers[WidgetModifiers.TextRight]
+                  ? "bg-forest text-white"
+                  : ""
+              }
+            >
+              <RightAlign />
+            </BasicButton>
+          }
         </div>
       </EditableLabel>
       <textarea
@@ -144,7 +148,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
             e.preventDefault();
           }
         }}
-        className={`${pClass} py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
+        className={`${pClass} ${activeModifiers} py-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 w-full h-[300px]`}
       />
       <input
         type="hidden"
