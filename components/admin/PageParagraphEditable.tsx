@@ -5,6 +5,13 @@ import React, { FC, ChangeEvent, useState, useId } from "react";
 import WidgetDeleted from "./WidgetDeleted";
 import EditableLabel from "./EditableLabel";
 import FieldError from "./FieldError";
+import BasicButton from "./BasicButton";
+import {
+  BoldIcon,
+  CenterAlign,
+  LeftAlign,
+  RightAlign,
+} from "../toolbarIcons/Icons";
 
 interface PageParagraphEditable {
   value: string;
@@ -51,7 +58,22 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
         htmlFor={id}
         name={pName}
         removeCb={() => setIsRemoved(true)}
-      />
+      >
+        <div className="flex gap-2">
+          <BasicButton>
+            <BoldIcon />
+          </BasicButton>
+          <BasicButton>
+            <LeftAlign />
+          </BasicButton>
+          <BasicButton>
+            <CenterAlign />
+          </BasicButton>
+          <BasicButton>
+            <RightAlign />
+          </BasicButton>
+        </div>
+      </EditableLabel>
       <textarea
         id={id}
         name={`${nodeType}$${id}`}
