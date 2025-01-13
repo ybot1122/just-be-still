@@ -51,7 +51,7 @@ const ChangesSubmitted: React.FC = () => {
         )}
       </div>
 
-      {deploymentId && !deploymentDone ? (
+      {deploymentId ? (
         <VercelDeploymentEvents
           id={deploymentId}
           setDeploymentDone={() => setDeploymentDone(true)}

@@ -19,7 +19,7 @@ export async function GET(request: Request) {
 
   const r = await getDeploymentEvents({
     id: id,
-    limit: 10,
+    limit: -1,
     token: VERCEL_AT,
   });
 
