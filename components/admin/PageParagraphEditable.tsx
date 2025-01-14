@@ -165,6 +165,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
       <input
         type="hidden"
         name={`${nodeType}-modifiers$${id}`}
+        className="text-right"
         value={activeModifiers}
       />
       <FieldError id={error_id} message="This field cannot be empty." />
