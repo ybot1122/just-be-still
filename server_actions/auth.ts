@@ -1,7 +1,7 @@
 "use server";
 
 import { COOKIES_ADMIN_TOKEN, COOKIES_AGE_2_HOURS } from "@/constants/cookies";
-import { encryptSymmetric } from "@/lib/encryptSymmetric";
+import { encryptSymmetric } from "@ybot1122/toby-ui/Lib/encryptSymmetric";
 import { cookies } from "next/headers";
 
 export default async function auth(pass: string) {
@@ -13,8 +13,7 @@ export default async function auth(pass: string) {
 
   try {
     if (pass === ADMIN_PASSWORD) {
-      const at = encryptSymmetric(ENCRYPTION_KEY, pass);
-      const val = `${at.ciphertext}.${at.tag}.${at.iv}`;
+      const val = encryptSymmetric({ key: ENCRYPTION_KEY, plaintext: pass });
 
       await (
         await cookies()

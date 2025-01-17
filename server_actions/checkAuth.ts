@@ -1,7 +1,7 @@
 "use server";
 
 import { COOKIES_ADMIN_TOKEN } from "@/constants/cookies";
-import { decryptSymmetric } from "@/lib/decryptSymmetric";
+import { decryptSymmetric } from "@ybot1122/toby-ui/Lib/decryptSymmetric";
 import { cookies } from "next/headers";
 
 export default async function checkAuth() {
@@ -18,12 +18,10 @@ export default async function checkAuth() {
       return false;
     }
 
-    const parts = auth.value.split(".");
-    if (parts.length !== 3) {
-      return false;
-    }
-
-    const at = decryptSymmetric(ENCRYPTION_KEY, parts[0], parts[1], parts[2]);
+    const at = decryptSymmetric({
+      key: ENCRYPTION_KEY,
+      ciphertext: auth.value,
+    });
     return at === ADMIN_PASSWORD;
   } catch (e) {
     console.error("checkAuth method failing");
