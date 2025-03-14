@@ -17,30 +17,57 @@ const EditPage = ({
   pageData: Page;
   onSubmit: () => void;
 }) => {
-  const [newWidgets, setNewWidgets] = useState<Widget[]>([]);
+  const [newWidgets, setNewWidgets] = useState<Widget[]>([...pageData.content]);
   const [errors, setErrors] = useState<string[]>([]);
 
+  const moveWidget = (index: number, direction: "up" | "down") => {
+    setNewWidgets((prev) => {
+      const newWidgets = [...prev];
+      const [removed] = newWidgets.splice(index, 1);
+      newWidgets.splice(direction === "up" ? index - 1 : index + 1, 0, removed);
+      return newWidgets;
+    });
+  };
   return (
     <form
       action={(e) => submitForm(e, pageId, onSubmit, errors, setErrors)}
       className="text-left"
     >
-      {[...pageData.content, ...newWidgets].map((c) => {
-        if (c.type === WidgetType.Paragraph) {
-          return <PageParagraphEditable widget={c} key={c.uuid} />;
-        }
-
-        if (c.type === WidgetType.AccentParagraph) {
-          return <PageParagraphEditable widget={c} key={c.uuid} isAccent />;
-        }
-
-        if (c.type === WidgetType.Carousel) {
-          return <CarouselEditable key={c.uuid} carousel={c} />;
-        }
-
-        if (c.type === WidgetType.Image) {
-          return <SingleImageEditable original={c} key={c.uuid} />;
-        }
+      {newWidgets.map((c, i) => {
+        return (
+          <div key={c.uuid} className="widget-container">
+            {c.type === WidgetType.Paragraph && (
+              <PageParagraphEditable widget={c} />
+            )}
+            {c.type === WidgetType.AccentParagraph && (
+              <PageParagraphEditable widget={c} isAccent />
+            )}
+            {c.type === WidgetType.Carousel && (
+              <CarouselEditable carousel={c} />
+            )}
+            {c.type === WidgetType.Image && (
+              <SingleImageEditable original={c} />
+            )}
+            <div className="mt-5">
+              <button
+                type="button"
+                onClick={() => moveWidget(i, "up")}
+                disabled={i === 0}
+                className="px-2 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300"
+              >
+                Move Up
+              </button>
+              <button
+                type="button"
+                onClick={() => moveWidget(i, "down")}
+                disabled={i === [...pageData.content, ...newWidgets].length - 1}
+                className="px-2 py-1 bg-blue-500 text-white rounded disabled:bg-gray-300 ml-2"
+              >
+                Move Down
+              </button>
+            </div>
+          </div>
+        );
 
         return null;
       })}
