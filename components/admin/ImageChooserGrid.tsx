@@ -46,12 +46,13 @@ export const ImageChooserUpload: React.FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      if (file.type.startsWith("image/")) {
+      const validFormats = ["image/jpeg", "image/jpg", "image/png"];
+      if (validFormats.includes(file.type)) {
         setSelectedFile(file);
         setError(null);
       } else {
         setSelectedFile(null);
-        setError("Please select a valid image file.");
+        setError("Please select a valid image file (jpg, jpeg, png).");
       }
     }
   };
@@ -59,6 +60,7 @@ export const ImageChooserUpload: React.FC = () => {
   const handleUpload = () => {
     if (selectedFile) {
       setIsLoading(true);
+      setError(null);
       const formData = new FormData();
       formData.append("file", selectedFile);
       uploadImageToCloudinary(formData)
