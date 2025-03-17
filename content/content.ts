@@ -17,7 +17,7 @@ export type ImageWidget = {
 
 export type ParagraphWidget = {
   type: WidgetType.Paragraph | WidgetType.AccentParagraph;
-  content: string;
+  content: string; // Stringified IDom[]
   uuid: string;
   modifiers: WidgetModifiers[];
 };

@@ -6,6 +6,7 @@ import Carousel from "../../../components/Carousel";
 import { WidgetType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 import SingleImage from "@/components/SingleImage";
+import "quill/dist/quill.snow.css";
 
 export default async function Events() {
   const data = await getPageData("events");
@@ -14,7 +15,7 @@ export default async function Events() {
   return (
     <>
       <PageHeader header="Events" />
-      <PageSection>
+      <PageSection centered={false}>
         {content.map((c) => {
           if (c.type === WidgetType.Paragraph) {
             return (
@@ -22,9 +23,8 @@ export default async function Events() {
                 as="div"
                 className={c.modifiers.join(" ")}
                 key={c.uuid}
-              >
-                {c.content}
-              </PageParagraph>
+                rawHtml={c.content}
+              ></PageParagraph>
             );
           }
 
@@ -35,9 +35,8 @@ export default async function Events() {
                 className={c.modifiers.join(" ")}
                 isAccent
                 key={c.uuid}
-              >
-                {c.content}
-              </PageParagraph>
+                rawHtml={c.content}
+              ></PageParagraph>
             );
           }
 

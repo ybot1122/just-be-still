@@ -8,10 +8,38 @@ html {
 
 @layer components {
   .pageParagraph {
-    @apply text-xl md:text-2xl md:leading-loose px-5 m-auto;
+    @apply text-lg md:leading-loose px-5 m-auto;
   }
 
   .pageParagraphAccent { 
-    @apply text-xl md:text-2xl md:leading-loose px-5 m-auto bg-forest text-white py-5;
+    @apply text-lg md:leading-loose px-5 m-auto bg-forest text-white py-5;
+  }
+
+}
+
+.ql-align-center {
+  @apply text-center;
+}
+
+.ql-size-large {
+  @apply text-xl;
+}
+
+.ql-size-huge {
+  @apply text-2xl;
+}
+
+.ql-size-small {
+  @apply text-sm;
+}
+
+
+.pageParagraph a, .pageParagraphAccent a {
+  color: #1a73e8;
+  text-decoration: underline;
+  transition: color 0.3s;
+
+  &:hover {
+    color: #0c47a1;
   }
 }
