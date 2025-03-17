@@ -65,10 +65,19 @@ export async function updatePageContent(
       } catch (err) {
         throw new Error("An error occurred while updating the page locally");
       }
-    }
-
-    if (response.commit) {
-      return true;
+    } else {
+      const response = await putRepositoryContent({
+        token,
+        owner,
+        repo,
+        path,
+        commitMessage,
+        content,
+        sha,
+      });
+      if (response.commit) {
+        return true;
+      }
     }
 
     throw new Error("?");

@@ -8,7 +8,6 @@ import React, {
 } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-import { IDom, parse, stringify } from "html-parse-string";
 import { ToolbarConfig, ToolbarProps } from "quill/modules/toolbar";
 
 interface QuillEditorProps {
