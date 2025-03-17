@@ -22,9 +22,8 @@ export default async function Events() {
                 as="div"
                 className={c.modifiers.join(" ")}
                 key={c.uuid}
-              >
-                {c.content}
-              </PageParagraph>
+                rawHtml={c.content}
+              ></PageParagraph>
             );
           }
 
@@ -35,9 +34,8 @@ export default async function Events() {
                 className={c.modifiers.join(" ")}
                 isAccent
                 key={c.uuid}
-              >
-                {c.content}
-              </PageParagraph>
+                rawHtml={c.content}
+              ></PageParagraph>
             );
           }
 
