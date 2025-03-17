@@ -8,13 +8,12 @@ import React, {
 } from "react";
 import Quill from "quill";
 import "quill/dist/quill.snow.css";
-import { IDom, stringify } from "html-parse-string";
+import { IDom, parse, stringify } from "html-parse-string";
 import { ToolbarConfig, ToolbarProps } from "quill/modules/toolbar";
 
 interface QuillEditorProps {
-  initialVal?: IDom[];
+  initialVal?: string;
   placeholder?: string;
-  inputName: string;
   onChange?: (quill: Quill) => void;
   height?: string;
   SubmitButton?: (quill: MutableRefObject<Quill | undefined>) => ReactElement;
@@ -23,7 +22,6 @@ interface QuillEditorProps {
 const QuillEditor: React.FC<QuillEditorProps> = ({
   height = "200px",
   initialVal,
-  inputName,
   placeholder,
   onChange,
   SubmitButton,
@@ -65,7 +63,7 @@ const QuillEditor: React.FC<QuillEditorProps> = ({
     if (editorRef.current) {
       if (!quillRef.current) {
         if (initialVal) {
-          editorRef.current!.innerHTML = stringify(initialVal);
+          editorRef.current!.innerHTML = initialVal;
         }
         quillRef.current = new Quill(editorRef.current, quill_options);
       }
