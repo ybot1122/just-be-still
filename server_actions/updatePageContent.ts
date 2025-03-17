@@ -62,6 +62,7 @@ export async function updatePageContent(
             resolve();
           }, 2000),
         );
+        return true;
       } catch (err) {
         throw new Error("An error occurred while updating the page locally");
       }

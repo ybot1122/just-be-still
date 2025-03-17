@@ -19,7 +19,7 @@ export default async function Test() {
   return (
     <>
       <PageHeader header="Test" />
-      <PageSection>
+      <PageSection centered={false}>
         {content.map((c) => {
           if (c.type === WidgetType.Paragraph) {
             return (

@@ -14,7 +14,7 @@ export default async function Events() {
   return (
     <>
       <PageHeader header="Events" />
-      <PageSection>
+      <PageSection centered={false}>
         {content.map((c) => {
           if (c.type === WidgetType.Paragraph) {
             return (

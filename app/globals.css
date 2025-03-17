@@ -14,4 +14,19 @@ html {
   .pageParagraphAccent { 
     @apply text-xl md:text-2xl md:leading-loose px-5 m-auto bg-forest text-white py-5;
   }
+
+  .ql-size-huge {
+    @apply text-xl
+  }
+
+  .ql-size-large {
+    @apply text-lg
+  }
+  .ql-size-huge {
+    @apply text-xl
+  }
+  .ql-size-huge {
+    @apply text-xl
+  }
+
 }
