@@ -27,31 +27,8 @@ export async function updatePageContent(
   const content = bytesToBase64(new TextEncoder().encode(newContent));
 
   try {
-    const data = await getRepositoryContent({
-      token,
-      owner,
-      repo,
-      path,
-    });
-
-    const sha = data.sha;
-
-    if (!sha) {
-      throw new Error("Tried to update a file that does not exist");
-    }
-
-    const response = await putRepositoryContent({
-      token,
-      owner,
-      repo,
-      path,
-      commitMessage,
-      content,
-      sha,
-    });
-
     if (process.env.NODE_ENV === "development") {
-      // in development mode, save changes to filesystem locally
+      // in development mode, save changes to 'test.json'  locally
       try {
         await new Promise<void>((resolve) =>
           setTimeout(async () => {
@@ -67,6 +44,19 @@ export async function updatePageContent(
         throw new Error("An error occurred while updating the page locally");
       }
     } else {
+      const data = await getRepositoryContent({
+        token,
+        owner,
+        repo,
+        path,
+      });
+
+      const sha = data.sha;
+
+      if (!sha) {
+        throw new Error("Tried to update a file that does not exist");
+      }
+
       const response = await putRepositoryContent({
         token,
         owner,
