@@ -16,6 +16,7 @@ import {
   LeftAlign,
   RightAlign,
 } from "../toolbarIcons/Icons";
+import QuillEditor from "../QuillEditor";
 
 interface PageParagraphEditable {
   widget: ParagraphWidget;
@@ -168,6 +169,7 @@ const PageParagraphEditable: FC<PageParagraphEditable> = ({
         className="text-right"
         value={activeModifiers}
       />
+      <QuillEditor inputName={`${nodeType}-modifiers$${id}`} />
       <FieldError id={error_id} message="This field cannot be empty." />
     </div>
   );
