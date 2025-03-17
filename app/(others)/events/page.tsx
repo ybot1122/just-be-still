@@ -6,6 +6,7 @@ import Carousel from "../../../components/Carousel";
 import { WidgetType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 import SingleImage from "@/components/SingleImage";
+import "quill/dist/quill.snow.css";
 
 export default async function Events() {
   const data = await getPageData("events");

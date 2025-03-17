@@ -7,6 +7,7 @@ import { WidgetType } from "@/content/content";
 import CarouselImage from "@/components/CarouselImage";
 import SingleImage from "@/components/SingleImage";
 import { redirect } from "next/navigation";
+import "quill/dist/quill.snow.css";
 
 export default async function Test() {
   const data = await getPageData("test");
