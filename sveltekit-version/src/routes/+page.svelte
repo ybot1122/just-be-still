@@ -1,6 +1,12 @@
+<script lang="ts">
+	import HomePageHeroImageSection from '../components/HomePageHeroImageSection/HomePageHeroImageSection.svelte';
+	import logo from '$lib/images/logo.jpg';
+</script>
 
-<main>
-  <h1>Welcome to SvelteKit</h1>
-  <p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-
-</main>
+	<HomePageHeroImageSection>
+    <div class="text-white z-20 my-[150px] tall:my-0">
+      <a href="/">
+        <img src={logo} alt="JustBeStillDesign logo" width={250} height={250} />
+      </a>
+    </div>
+  </HomePageHeroImageSection>
