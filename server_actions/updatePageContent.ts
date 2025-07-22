@@ -69,9 +69,8 @@ export async function updatePageContent(
       if (response.commit) {
         return true;
       }
+      console.log(response);
     }
-
-    console.log(response);
 
     throw new Error("?");
   } catch (error) {
