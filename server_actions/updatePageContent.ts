@@ -71,8 +71,11 @@ export async function updatePageContent(
       }
     }
 
+    console.log(response);
+
     throw new Error("?");
   } catch (error) {
+    console.error(error);
     throw new Error("An error occurred while updating the page");
   }
 }
